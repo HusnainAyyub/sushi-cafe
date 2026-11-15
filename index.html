@@ -1,0 +1,1141 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="color-scheme" content="light dark" />
+<meta name="description" content="Sushi Cafe — premium subscriptions, AI tools, VPNs and private OTP numbers. Order on WhatsApp, pay with Binance Pay, Easypaisa or JazzCash, activated in minutes." />
+<link rel="icon" href="data:," />
+<title>Sushi Cafe — Subscriptions, AI Tools & OTP Numbers</title>
+<style>
+:root{
+  --bg:#ffffff;
+  --bg-alt:#f5f5f7;
+  --card:#ffffff;
+  --card-border:#e3e3e6;
+  --text:#1d1d1f;
+  --text-2:#6e6e73;
+  --text-3:#86868b;
+  --border:#d2d2d7;
+  --accent:#d92d20;
+  --accent-dark:#b42318;
+  --link:#0066cc;
+  --wa:#1faa55;
+  --wa-dark:#178a43;
+  --gold:#b7791f;
+  --chip:#f5f5f7;
+  --nav-bg:rgba(251,251,253,.82);
+  --shadow:0 4px 24px rgba(0,0,0,.06);
+  --shadow-lg:0 24px 70px rgba(0,0,0,.28);
+  --radius:18px;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#000000;
+    --bg-alt:#161617;
+    --card:#1d1d1f;
+    --card-border:#333336;
+    --text:#f5f5f7;
+    --text-2:#a1a1a6;
+    --text-3:#86868b;
+    --border:#38383a;
+    --accent:#ff5147;
+    --accent-dark:#ff7a72;
+    --link:#2997ff;
+    --chip:#2c2c2e;
+    --nav-bg:rgba(22,22,23,.78);
+    --shadow:0 4px 24px rgba(0,0,0,.4);
+    --shadow-lg:0 24px 70px rgba(0,0,0,.7);
+  }
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Helvetica,Arial,sans-serif;
+  background:var(--bg);color:var(--text);
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+  line-height:1.5;font-size:17px;
+}
+h1,h2,h3{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Helvetica,Arial,sans-serif;letter-spacing:-.022em;line-height:1.08;font-weight:700}
+a{color:var(--link);text-decoration:none}
+a:hover{text-decoration:underline}
+button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
+img{max-width:100%}
+.wrap{max-width:1120px;margin:0 auto;padding:0 22px}
+::selection{background:var(--accent);color:#fff}
+
+/* ---------- Nav ---------- */
+.nav{position:sticky;top:0;z-index:60;background:var(--nav-bg);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid var(--card-border)}
+.nav-in{max-width:1120px;margin:0 auto;padding:0 22px;height:52px;display:flex;align-items:center;gap:28px}
+.logo{display:flex;align-items:center;gap:9px;font-weight:700;font-size:19px;letter-spacing:-.02em;color:var(--text);white-space:nowrap}
+.logo:hover{text-decoration:none}
+.logo-mark{width:28px;height:28px;border-radius:8px;background:var(--accent);color:#fff;display:grid;place-items:center;font-size:15px;font-weight:800;flex:none}
+.nav-links{display:flex;gap:24px;margin-left:6px;flex:1;overflow-x:auto;scrollbar-width:none}
+.nav-links::-webkit-scrollbar{display:none}
+.nav-links a{color:var(--text);font-size:13px;opacity:.85;white-space:nowrap;padding:10px 0}
+.nav-links a:hover{opacity:1;text-decoration:none}
+.nav-wa{display:inline-flex;align-items:center;gap:7px;background:var(--wa);color:#fff;font-size:13px;font-weight:600;padding:8px 14px;border-radius:980px;white-space:nowrap;min-height:36px}
+.nav-wa:hover{background:var(--wa-dark);text-decoration:none}
+
+/* ---------- Hero ---------- */
+.hero{padding:84px 0 64px;text-align:center;background:var(--bg)}
+.hero-badge{display:inline-block;font-size:13px;font-weight:600;color:var(--accent);background:var(--chip);border:1px solid var(--card-border);padding:6px 14px;border-radius:980px;margin-bottom:22px}
+.hero h1{font-size:clamp(40px,6.4vw,68px);max-width:820px;margin:0 auto}
+.hero h1 .red{color:var(--accent)}
+.hero p{font-size:clamp(18px,2.4vw,22px);color:var(--text-2);max-width:640px;margin:22px auto 0;line-height:1.45}
+.hero-ctas{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:32px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-size:16px;font-weight:600;padding:13px 26px;border-radius:980px;min-height:48px;transition:transform .15s ease,background .15s ease}
+.btn:hover{text-decoration:none}
+.btn:active{transform:scale(.98)}
+.btn-dark{background:var(--text);color:var(--bg)}
+.btn-wa{background:var(--wa);color:#fff}
+.btn-wa:hover{background:var(--wa-dark)}
+.btn-ghost{background:transparent;color:var(--link);padding:13px 10px}
+.hero-points{display:flex;gap:10px 34px;justify-content:center;flex-wrap:wrap;margin-top:44px;font-size:14px;color:var(--text-2)}
+.hero-points span{display:inline-flex;align-items:center;gap:7px}
+.hero-points svg{color:var(--wa);flex:none}
+
+/* ---------- Stats strip ---------- */
+.stats{background:var(--bg-alt);border-block:1px solid var(--card-border)}
+.stats-in{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;padding:30px 0;text-align:center}
+.stat b{display:block;font-size:30px;letter-spacing:-.02em}
+.stat span{font-size:13.5px;color:var(--text-2)}
+
+/* ---------- Sections ---------- */
+section{padding:76px 0}
+.sec-alt{background:var(--bg-alt)}
+.sec-head{max-width:680px;margin-bottom:38px}
+.sec-head.center{margin-inline:auto;text-align:center}
+.sec-head h2{font-size:clamp(30px,4.4vw,42px)}
+.sec-head p{color:var(--text-2);font-size:18px;margin-top:12px;line-height:1.5}
+
+/* ---------- Catalog controls ---------- */
+.controls{display:flex;flex-direction:column;gap:16px;margin-bottom:30px}
+.search-row{display:flex;gap:12px;align-items:center}
+.search-box{flex:1;display:flex;align-items:center;gap:10px;background:var(--chip);border:1px solid var(--card-border);border-radius:12px;padding:0 16px;min-height:48px}
+.search-box svg{color:var(--text-3);flex:none}
+.search-box input{flex:1;border:none;background:none;font-size:16px;color:var(--text);outline:none;font-family:inherit;min-height:44px}
+.search-box input::placeholder{color:var(--text-3)}
+.tabs{display:flex;gap:8px;flex-wrap:wrap}
+.tab{padding:9px 18px;border-radius:980px;font-size:14.5px;font-weight:500;background:var(--chip);border:1px solid var(--card-border);color:var(--text);min-height:40px}
+.tab.active{background:var(--text);color:var(--bg);border-color:var(--text)}
+.result-count{font-size:14px;color:var(--text-3)}
+
+/* ---------- Product grid ---------- */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:18px}
+.card{background:var(--card);border:1px solid var(--card-border);border-radius:var(--radius);padding:22px;display:flex;flex-direction:column;gap:0;box-shadow:var(--shadow)}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:14px}
+.tile{width:52px;height:52px;border-radius:14px;display:grid;place-items:center;color:#fff;font-weight:800;font-size:19px;letter-spacing:-.01em;flex:none}
+.hot{font-size:11px;font-weight:700;letter-spacing:.04em;color:var(--accent);background:color-mix(in srgb,var(--accent) 10%,transparent);border:1px solid color-mix(in srgb,var(--accent) 25%,transparent);padding:4px 9px;border-radius:980px;white-space:nowrap}
+.card h3{font-size:19px;margin-bottom:3px}
+.card .cat{font-size:12.5px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--text-3);margin-bottom:8px}
+.card .desc{font-size:14.5px;color:var(--text-2);line-height:1.5;flex:1}
+.meta{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0 16px}
+.pill{font-size:12px;font-weight:600;padding:4px 10px;border-radius:980px;background:var(--chip);border:1px solid var(--card-border);color:var(--text-2)}
+.pill.warranty{color:var(--wa-dark);border-color:color-mix(in srgb,var(--wa) 35%,transparent);background:color-mix(in srgb,var(--wa) 8%,transparent)}
+@media (prefers-color-scheme: dark){.pill.warranty{color:#4ade80}}
+.price-row{display:flex;align-items:baseline;gap:9px;margin-bottom:14px}
+.price{font-size:23px;font-weight:700;letter-spacing:-.02em}
+.price small{font-size:13px;font-weight:500;color:var(--text-2)}
+.old-price{font-size:14.5px;color:var(--text-3);text-decoration:line-through}
+.off{font-size:12px;font-weight:700;color:var(--accent)}
+.order-btn{width:100%;background:var(--text);color:var(--bg);font-size:15px;font-weight:600;padding:12px;border-radius:12px;min-height:46px;display:inline-flex;align-items:center;justify-content:center;gap:8px}
+.order-btn:hover{opacity:.88}
+.empty{display:none;text-align:center;padding:56px 20px;color:var(--text-2)}
+.empty b{display:block;font-size:20px;color:var(--text);margin-bottom:6px}
+
+/* ---------- OTP builder ---------- */
+.otp-panel{background:var(--card);border:1px solid var(--card-border);border-radius:24px;box-shadow:var(--shadow);display:grid;grid-template-columns:1.25fr .85fr;overflow:hidden}
+.otp-left{padding:34px}
+.otp-left h3{font-size:24px;margin-bottom:6px}
+.otp-left>p{color:var(--text-2);font-size:15.5px;margin-bottom:24px}
+.field-label{font-size:13px;font-weight:600;letter-spacing:.03em;text-transform:uppercase;color:var(--text-3);margin:20px 0 10px}
+.field-label:first-of-type{margin-top:0}
+.chip-grid{display:flex;flex-wrap:wrap;gap:8px}
+.chip{padding:9px 15px;border-radius:980px;border:1px solid var(--border);font-size:14.5px;font-weight:500;min-height:40px;background:var(--bg)}
+.chip.active{background:var(--text);color:var(--bg);border-color:var(--text)}
+.otp-right{background:var(--bg-alt);border-left:1px solid var(--card-border);padding:34px;display:flex;flex-direction:column}
+.otp-right .field-label{margin-top:0}
+.otp-summary{font-size:16px;line-height:1.65;color:var(--text-2)}
+.otp-summary b{color:var(--text)}
+.otp-price{font-size:38px;font-weight:700;letter-spacing:-.03em;margin:14px 0 4px}
+.otp-price small{font-size:15px;color:var(--text-2);font-weight:500}
+.otp-note{font-size:13.5px;color:var(--text-3);margin-bottom:22px;line-height:1.55}
+.otp-right .order-btn{margin-top:auto}
+.rent-row{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:18px}
+.rent-card{background:var(--card);border:1px solid var(--card-border);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow)}
+.rent-card h3{font-size:19px;margin-bottom:4px}
+.rent-card p{font-size:14.5px;color:var(--text-2);margin-bottom:14px;line-height:1.5}
+.rent-card .price{font-size:21px}
+.rent-card button{margin-top:14px;width:100%;border:1.5px solid var(--text);color:var(--text);font-weight:600;font-size:14.5px;padding:10px;border-radius:12px;min-height:44px}
+.rent-card button:hover{background:var(--text);color:var(--bg)}
+.rent-card.featured{border-color:var(--accent)}
+.rent-tag{font-size:11px;font-weight:700;letter-spacing:.05em;color:var(--accent);text-transform:uppercase}
+
+/* ---------- Steps ---------- */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.step{background:var(--card);border:1px solid var(--card-border);border-radius:var(--radius);padding:26px 22px}
+.step-num{width:34px;height:34px;border-radius:50%;background:var(--text);color:var(--bg);display:grid;place-items:center;font-weight:700;font-size:15px;margin-bottom:16px}
+.step h3{font-size:17.5px;margin-bottom:7px}
+.step p{font-size:14.5px;color:var(--text-2);line-height:1.55}
+
+/* ---------- Payments ---------- */
+.pay-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.pay-card{background:var(--card);border:1px solid var(--card-border);border-radius:var(--radius);padding:26px 22px;box-shadow:var(--shadow)}
+.pay-icon{width:48px;height:48px;border-radius:13px;display:grid;place-items:center;margin-bottom:16px;color:#fff}
+.pay-card h3{font-size:17.5px;margin-bottom:6px}
+.pay-card p{font-size:14.5px;color:var(--text-2);line-height:1.55}
+.pay-note{margin-top:20px;font-size:14.5px;color:var(--text-2);background:var(--card);border:1px solid var(--card-border);border-radius:14px;padding:16px 20px;line-height:1.6}
+.pay-note b{color:var(--text)}
+
+/* ---------- Warranty / why ---------- */
+.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.why-card{padding:8px 4px}
+.why-card svg{color:var(--accent);margin-bottom:14px}
+.why-card h3{font-size:19px;margin-bottom:8px}
+.why-card p{font-size:15.5px;color:var(--text-2);line-height:1.6}
+
+/* ---------- FAQ ---------- */
+.faq{max-width:780px;margin:0 auto}
+.faq-item{border-bottom:1px solid var(--border)}
+.faq-q{width:100%;display:flex;justify-content:space-between;align-items:center;gap:16px;text-align:left;font-size:17px;font-weight:600;padding:20px 4px;min-height:56px;color:var(--text)}
+.faq-q svg{flex:none;color:var(--text-3);transition:transform .25s ease}
+.faq-item.open .faq-q svg{transform:rotate(45deg)}
+.faq-a{display:none;padding:0 4px 22px;font-size:15.5px;color:var(--text-2);line-height:1.65;max-width:680px}
+.faq-item.open .faq-a{display:block}
+
+/* ---------- CTA band ---------- */
+.cta-band{background:var(--text);color:var(--bg);border-radius:28px;padding:56px 34px;text-align:center}
+.cta-band h2{font-size:clamp(28px,4vw,40px);max-width:620px;margin:0 auto}
+.cta-band p{opacity:.72;font-size:17.5px;margin:14px auto 28px;max-width:520px;line-height:1.55}
+
+/* ---------- Footer ---------- */
+footer{background:var(--bg-alt);border-top:1px solid var(--card-border);padding:52px 0 40px;font-size:14px;color:var(--text-2)}
+.foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:30px;margin-bottom:36px}
+.foot-grid h4{font-size:14px;color:var(--text);margin-bottom:12px}
+.foot-grid a{display:block;color:var(--text-2);padding:5px 0;min-height:28px}
+.foot-grid a:hover{color:var(--text)}
+.foot-brand p{margin-top:12px;line-height:1.6;max-width:300px}
+.foot-bottom{border-top:1px solid var(--border);padding-top:22px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;font-size:13px;color:var(--text-3)}
+
+/* ---------- Floating WhatsApp ---------- */
+.wa-float{position:fixed;right:20px;bottom:20px;z-index:70;width:58px;height:58px;border-radius:50%;background:var(--wa);color:#fff;display:grid;place-items:center;box-shadow:0 10px 30px rgba(0,0,0,.28)}
+.wa-float:hover{background:var(--wa-dark);text-decoration:none}
+
+/* ---------- Modal ---------- */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);z-index:90;display:none;align-items:flex-end;justify-content:center}
+.overlay.open{display:flex}
+.modal{background:var(--bg);width:100%;max-width:560px;max-height:92dvh;overflow-y:auto;border-radius:24px 24px 0 0;padding:28px 26px 30px;animation:up .28s cubic-bezier(.32,.72,.28,1)}
+@media(min-width:640px){.overlay{align-items:center;padding:20px}.modal{border-radius:24px}}
+@keyframes up{from{transform:translateY(26px);opacity:0}to{transform:translateY(0);opacity:1}}
+@media (prefers-reduced-motion: reduce){.modal{animation:none}html{scroll-behavior:auto}}
+.modal-head{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;margin-bottom:6px}
+.modal-head h3{font-size:23px}
+.close-btn{width:38px;height:38px;border-radius:50%;background:var(--chip);display:grid;place-items:center;flex:none;color:var(--text-2)}
+.modal-sub{font-size:14.5px;color:var(--text-2);margin-bottom:20px;line-height:1.55}
+.order-summary{background:var(--bg-alt);border:1px solid var(--card-border);border-radius:14px;padding:16px 18px;margin-bottom:20px}
+.order-summary .row{display:flex;justify-content:space-between;gap:14px;font-size:15px;padding:4px 0}
+.order-summary .row span{color:var(--text-2)}
+.order-summary .row.total{border-top:1px solid var(--border);margin-top:8px;padding-top:12px;font-weight:700;font-size:16.5px}
+.order-summary .row.total span{color:var(--text)}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.field{display:flex;flex-direction:column;gap:6px}
+.field.full{grid-column:1/-1}
+.field label{font-size:13.5px;font-weight:600}
+.field input,.field select,.field textarea{font-family:inherit;font-size:16px;color:var(--text);background:var(--bg);border:1px solid var(--border);border-radius:11px;padding:11px 13px;min-height:46px;outline:none;width:100%}
+.field textarea{min-height:74px;resize:vertical}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--link);box-shadow:0 0 0 3px color-mix(in srgb,var(--link) 22%,transparent)}
+.field .hint{font-size:12.5px;color:var(--text-3)}
+.error-msg{display:none;font-size:14px;color:var(--accent);background:color-mix(in srgb,var(--accent) 8%,transparent);border:1px solid color-mix(in srgb,var(--accent) 30%,transparent);border-radius:11px;padding:11px 14px;margin-top:16px;line-height:1.5}
+.modal-actions{display:flex;flex-direction:column;gap:10px;margin-top:22px}
+.modal-actions .btn{width:100%}
+.secure-note{font-size:13px;color:var(--text-3);text-align:center;line-height:1.55;margin-top:6px}
+
+/* ---------- Launch offer / countdown / discount ---------- */
+.offer-strip{margin:38px auto 0;max-width:720px;background:var(--card);border:1px solid var(--card-border);border-radius:20px;box-shadow:var(--shadow);padding:22px 22px 20px;text-align:center}
+.offer-strip .offer-kicker{font-size:12.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+.offer-strip h2,.offer-strip h3{font-size:21px;margin:6px 0 4px}
+.offer-strip p{font-size:14.5px;color:var(--text-2);margin:0 auto;max-width:520px;line-height:1.55}
+.count-grid{display:flex;gap:10px;justify-content:center;margin:16px 0 6px;flex-wrap:wrap}
+.count-cell{min-width:72px;background:var(--bg-alt);border:1px solid var(--card-border);border-radius:14px;padding:10px 8px 8px}
+.count-cell b{display:block;font-size:26px;line-height:1;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.count-cell span{font-size:11.5px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--text-3)}
+.offer-ended{font-size:16px;font-weight:700;color:var(--accent);background:color-mix(in srgb,var(--accent) 8%,transparent);border:1px solid color-mix(in srgb,var(--accent) 25%,transparent);border-radius:12px;padding:12px 16px;margin:14px auto 4px;max-width:520px}
+.offer-link{display:inline-block;margin-top:10px;font-size:15px;font-weight:600}
+.discount-box{background:var(--card);border:1.5px solid var(--accent);border-radius:24px;box-shadow:var(--shadow);padding:34px;display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:center}
+.discount-box h2{font-size:clamp(26px,3.6vw,34px)}
+.discount-box p{color:var(--text-2);font-size:16px;margin-top:10px;line-height:1.6}
+.discount-form{display:flex;flex-direction:column;gap:12px}
+.discount-form label{font-size:13.5px;font-weight:600}
+.discount-row{display:flex;gap:10px}
+.discount-row input{flex:1;font-family:inherit;font-size:16px;color:var(--text);background:var(--bg);border:1px solid var(--border);border-radius:12px;padding:12px 14px;min-height:48px;outline:none;min-width:0}
+.discount-row input:focus{border-color:var(--link);box-shadow:0 0 0 3px color-mix(in srgb,var(--link) 22%,transparent)}
+.discount-row button{background:var(--accent);color:#fff;font-weight:600;font-size:15px;padding:12px 18px;border-radius:12px;min-height:48px;white-space:nowrap}
+.discount-row button:hover{background:var(--accent-dark)}
+.discount-note{font-size:13px;color:var(--text-3);line-height:1.55}
+.discount-error{display:none;font-size:14px;color:var(--accent);background:color-mix(in srgb,var(--accent) 8%,transparent);border:1px solid color-mix(in srgb,var(--accent) 30%,transparent);border-radius:11px;padding:11px 14px;line-height:1.5}
+.code-reveal{display:none;background:var(--bg-alt);border:1px dashed var(--border);border-radius:14px;padding:16px 18px}
+.code-reveal.show{display:block}
+.code-reveal .code-label{font-size:13px;color:var(--text-2);margin-bottom:8px;line-height:1.5}
+.code-line{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.code-value{font-size:22px;font-weight:800;letter-spacing:.08em;background:var(--card);border:1px solid var(--card-border);border-radius:10px;padding:8px 14px}
+.copy-code-btn{border:1.5px solid var(--text);color:var(--text);font-weight:600;font-size:14px;padding:9px 16px;border-radius:10px;min-height:42px}
+.copy-code-btn:hover{background:var(--text);color:var(--bg)}
+.code-applied{font-size:13.5px;color:var(--wa-dark);font-weight:600;margin-top:8px}
+@media (prefers-color-scheme: dark){.code-applied{color:#4ade80}}
+.pay-countdown{margin-bottom:22px}
+.discount-applied-row{color:var(--wa-dark)}
+@media (prefers-color-scheme: dark){.discount-applied-row{color:#4ade80}}
+.code-feedback{font-size:13.5px;font-weight:600;min-height:18px}
+.code-feedback.ok{color:var(--wa-dark)}
+@media (prefers-color-scheme: dark){.code-feedback.ok{color:#4ade80}}
+.code-feedback.bad{color:var(--accent)}
+@media(max-width:700px){.discount-box{grid-template-columns:1fr;padding:24px}.discount-row{flex-direction:column}.discount-row button{width:100%}.count-cell{min-width:64px}}
+
+/* ---------- Toast ---------- */
+.toast{position:fixed;left:50%;bottom:26px;transform:translate(-50%,90px);background:var(--text);color:var(--bg);font-size:15px;font-weight:500;padding:14px 22px;border-radius:14px;z-index:120;transition:transform .35s cubic-bezier(.32,.72,.28,1);max-width:calc(100vw - 40px);text-align:center;box-shadow:var(--shadow-lg)}
+.toast.show{transform:translate(-50%,0)}
+
+/* ---------- Responsive ---------- */
+@media(max-width:900px){
+  .steps,.pay-grid{grid-template-columns:repeat(2,1fr)}
+  .why-grid{grid-template-columns:1fr}
+  .otp-panel{grid-template-columns:1fr}
+  .otp-right{border-left:none;border-top:1px solid var(--card-border)}
+  .stats-in{grid-template-columns:repeat(2,1fr)}
+  .foot-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:560px){
+  body{font-size:16px}
+  section{padding:54px 0}
+  .hero{padding:56px 0 46px}
+  .grid{grid-template-columns:1fr}
+  .steps,.pay-grid,.rent-row{grid-template-columns:1fr}
+  .form-grid{grid-template-columns:1fr}
+  .nav-links{display:none}
+  .otp-left,.otp-right{padding:24px}
+  .cta-band{padding:42px 22px}
+  .wa-float{bottom:16px;right:16px}
+}
+</style>
+</head>
+<body>
+
+<!-- ===================== NAV ===================== -->
+<header class="nav">
+  <div class="nav-in">
+    <a class="logo" href="#top"><span class="logo-mark">S</span>Sushi&nbsp;Cafe</a>
+    <nav class="nav-links">
+      <a href="#catalog">Subscriptions</a>
+      <a href="#otp">OTP Numbers</a>
+      <a href="#how">How it works</a>
+      <a href="#payment">Payment</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <a class="nav-wa" href="https://wa.me/966593140752?text=Hi%20Sushi%20Cafe%2C%20I%20need%20help%20choosing%20a%20plan." target="_blank" rel="noopener">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22c5.46 0 9.9-4.45 9.9-9.91C21.95 6.45 17.5 2 12.04 2zm0 18.03a8.1 8.1 0 0 1-4.13-1.13l-.3-.18-3.12.82.83-3.04-.19-.31a8.08 8.08 0 0 1-1.24-4.28c0-4.47 3.64-8.11 8.15-8.11 4.47 0 8.11 3.64 8.11 8.11 0 4.47-3.64 8.12-8.11 8.12zm4.45-6.08c-.24-.12-1.44-.71-1.69-.79-.25-.09-.43-.14-.61.13-.18.27-.7.86-.86 1.04-.16.18-.32.2-.59.07-.27-.13-1.15-.42-2.19-1.35-.81-.72-1.35-1.61-1.51-1.88-.16-.27-.02-.42.12-.55.12-.12.27-.32.4-.48.13-.16.18-.27.27-.45.09-.18.04-.34-.02-.48-.07-.13-.61-1.47-.83-2.01-.22-.53-.44-.46-.61-.47h-.52c-.18 0-.47.07-.72.34-.25.27-.95.93-.95 2.27 0 1.34.98 2.64 1.11 2.82.14.18 1.92 2.93 4.65 4.1.65.28 1.16.45 1.55.57.65.21 1.25.18 1.72.11.52-.08 1.61-.65 1.97-1.31.36-.66.36-1.22.25-1.34-.11-.12-.25-.19-.49-.31z"/></svg>
+      WhatsApp Us
+    </a>
+  </div>
+</header>
+
+<!-- ===================== HERO ===================== -->
+<div class="hero" id="top">
+  <div class="wrap">
+    <span class="hero-badge">Subscriptions · AI Tools · OTP Numbers</span>
+    <h1>Every subscription you need. <span class="red">Served fresh.</span></h1>
+    <p>ChatGPT Plus, Netflix, Spotify, VPNs, design tools and private OTP numbers from 180+ countries — ordered in under a minute on WhatsApp, activated by a real person.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-dark" href="#catalog">Browse the menu</a>
+      <a class="btn btn-wa" href="https://wa.me/966593140752?text=Hi%20Sushi%20Cafe%2C%20I%20want%20to%20place%20an%20order." target="_blank" rel="noopener">Order on WhatsApp</a>
+    </div>
+    <div class="hero-points">
+      <span><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Activation in 5–30 minutes</span>
+      <span><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Warranty on every plan</span>
+      <span><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Binance Pay, Easypaisa &amp; JazzCash</span>
+      <span><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>No OTP? No charge</span>
+    </div>
+    <div class="offer-strip" id="heroOffer">
+      <div class="offer-kicker">Launch offer — 5% off your first order</div>
+      <h2>Offer ends Sunday 22 November 2026, 11:59 PM PKT</h2>
+      <p>Enter your email below to unlock your discount code. The code applies automatically to your first order.</p>
+      <div class="count-grid countdown-grid" data-countdown aria-live="polite">
+        <div class="count-cell"><b data-cd="days">–</b><span>Days</span></div>
+        <div class="count-cell"><b data-cd="hours">–</b><span>Hours</span></div>
+        <div class="count-cell"><b data-cd="mins">–</b><span>Minutes</span></div>
+        <div class="count-cell"><b data-cd="secs">–</b><span>Seconds</span></div>
+      </div>
+      <div class="offer-ended countdown-ended" style="display:none">This launch offer has ended.</div>
+      <a class="offer-link" href="#discount">Get 5% off — enter your email ↓</a>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== STATS ===================== -->
+<div class="stats">
+  <div class="wrap stats-in">
+    <div class="stat"><b>20</b><span>Subscriptions &amp; tools listed</span></div>
+    <div class="stat"><b>180+</b><span>Countries for OTP numbers</span></div>
+    <div class="stat"><b>500+</b><span>Apps supported for OTP</span></div>
+    <div class="stat"><b>25-day</b><span>Replacement on monthly plans</span></div>
+  </div>
+</div>
+
+<!-- ===================== DISCOUNT / EMAIL CAPTURE ===================== -->
+<section id="discount" style="padding-top:56px;padding-bottom:8px">
+  <div class="wrap">
+    <div class="discount-box">
+      <div>
+        <h2>Get 5% off your first order</h2>
+        <p>Drop your email here and we’ll show your discount code right away. Use code <b>SUSHI5</b> at checkout — or let us apply it for you. Your email is included in your WhatsApp order so we can match your discount when you order.</p>
+        <p style="font-size:14px;margin-top:12px">Launch offer ends <b>Sunday 22 November 2026, 11:59 PM PKT</b>. One code per customer, first order only.</p>
+      </div>
+      <div>
+        <form class="discount-form" id="discountForm" novalidate>
+          <label for="discountEmail">Your email address</label>
+          <div class="discount-row">
+            <input id="discountEmail" type="email" placeholder="you@example.com" autocomplete="email" />
+            <button type="submit">Get my 5% off</button>
+          </div>
+          <div class="discount-error" id="discountError"></div>
+          <p class="discount-note">No spam. Your email is only carried into the WhatsApp order you place from this page, so the discount can be honoured on that order.</p>
+        </form>
+        <div class="code-reveal" id="codeReveal" aria-live="polite">
+          <div class="code-label">Your 5% off code — it’s already applied to your next order on this page:</div>
+          <div class="code-line">
+            <span class="code-value">SUSHI5</span>
+            <button class="copy-code-btn" type="button" id="copyCodeBtn">Copy code</button>
+          </div>
+          <div class="code-applied" id="codeAppliedNote">✓ Code applied — you’ll see 5% off in the order window.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CATALOG ===================== -->
+<section id="catalog">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>The menu</h2>
+      <p>AI tools, streaming, VPNs and creative apps — the full catalog from one store. Every price is in PKR, every plan shows its warranty before you pay.</p>
+      <p style="margin-top:14px;font-size:15px;background:var(--chip);border:1px solid var(--card-border);border-radius:12px;padding:12px 16px;line-height:1.55"><b style="color:var(--text)">Final price, no surprises:</b> the price you see is the price you pay. No extra charges are added at checkout or in the WhatsApp order — the total in your order is your final total.</p>
+    </div>
+    <div class="controls">
+      <div class="search-row">
+        <div class="search-box">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+          <input type="search" id="searchInput" placeholder="Search Netflix, ChatGPT, VPN…" aria-label="Search products" />
+        </div>
+      </div>
+      <div class="tabs" id="tabs" role="tablist" aria-label="Filter by category"></div>
+      <div class="result-count" id="resultCount"></div>
+    </div>
+    <div class="grid" id="grid"></div>
+    <div class="empty" id="emptyState">
+      <b>Nothing on the menu matches that.</b>
+      Try a different search — or ask us on WhatsApp, we stock more than what's listed.
+    </div>
+  </div>
+</section>
+
+<!-- ===================== OTP ===================== -->
+<section id="otp" class="sec-alt">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>OTP numbers, served private</h2>
+      <p>Real non-VoIP numbers for WhatsApp, Telegram, Google and 500+ apps. The number is yours alone for the session — nobody else sees your code. If no code arrives in 15 minutes, you pay nothing.</p>
+    </div>
+
+    <div class="otp-panel">
+      <div class="otp-left">
+        <h3>Build your OTP order</h3>
+        <p>Pick an app and a country. Your private number is assigned the moment your order is confirmed on WhatsApp.</p>
+        <div class="field-label">App — popular picks</div>
+        <div class="chip-grid" id="appChips"></div>
+        <div class="field-label">Country — popular picks</div>
+        <div class="chip-grid" id="countryChips"></div>
+        <p style="font-size:14px;color:var(--text-2);margin-top:18px;line-height:1.55">Don't see yours? We cover 500+ apps and numbers from 180+ countries — <a href="https://wa.me/966593140752?text=Hi%20Sushi%20Cafe%2C%20I%20need%20an%20OTP%20number%20for%20an%20app%2Fcountry%20not%20listed." target="_blank" rel="noopener">ask on WhatsApp</a> and we'll quote it on the spot.</p>
+      </div>
+      <div class="otp-right">
+        <div class="field-label">Your order</div>
+        <div class="otp-summary" id="otpSummary"></div>
+        <div class="otp-price" id="otpPrice"></div>
+        <p class="otp-note">Final price shown — that's all you pay. One-time verification · code window 15 minutes · full refund to your balance if the code never arrives.</p>
+        <button class="order-btn" id="otpOrderBtn" type="button">Order this number</button>
+      </div>
+    </div>
+
+    <div class="rent-row">
+      <div class="rent-card">
+        <h3>Rental — 1 Month</h3>
+        <p>Your own dedicated number for repeat logins, 2FA and a permanent Telegram or WhatsApp session.</p>
+        <div class="price">Rs 1,949 <small>/ month</small></div>
+        <button type="button" data-rent="Rental Number — 1 Month" data-rent-price="1949">Rent for 1 month</button>
+      </div>
+      <div class="rent-card featured">
+        <span class="rent-tag">Most rented</span>
+        <h3>Rental — 3 Months</h3>
+        <p>Same dedicated number for a full quarter. Best for business accounts that get verified often.</p>
+        <div class="price">Rs 4,799 <small>/ 3 months</small></div>
+        <button type="button" data-rent="Rental Number — 3 Months" data-rent-price="4799">Rent for 3 months</button>
+      </div>
+      <div class="rent-card">
+        <h3>Rental — 12 Months</h3>
+        <p>A year of the same number, renewable anytime before expiry. Set it once, forget about it.</p>
+        <div class="price">Rs 15,599 <small>/ year</small></div>
+        <button type="button" data-rent="Rental Number — 12 Months" data-rent-price="15599">Rent for 12 months</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== HOW IT WORKS ===================== -->
+<section id="how">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>How ordering works</h2>
+      <p>No account, no checkout forms. Four steps and a real person on the other side of the chat.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3>Pick your plan</h3>
+        <p>Choose a subscription or build an OTP order, check the duration and warranty, then tap Order.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h3>Confirm on WhatsApp</h3>
+        <p>Your order opens in WhatsApp with all the details filled in, and you get an order number like SC-1042. We confirm it in the chat.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3>Pay your way</h3>
+        <p>Pay the exact amount by Binance Pay, Easypaisa or JazzCash — details are shared in the chat — and send the payment screenshot.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <h3>We activate it</h3>
+        <p>Once payment is verified, we activate your plan or assign your number — usually within 5 to 30 minutes — and confirm on WhatsApp.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PAYMENT ===================== -->
+<section id="payment" class="sec-alt">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Pay from anywhere</h2>
+      <p>International payments land in Pakistan without a card. Pay in PKR locally, or in USD from anywhere in the world.</p>
+    </div>
+    <div class="offer-strip pay-countdown" style="margin:0 auto 26px;max-width:760px">
+      <div class="offer-kicker">Launch offer — 5% off with SUSHI5</div>
+      <h3>Time left to order with 5% off</h3>
+      <p>Ends Sunday 22 November 2026, 11:59 PM PKT. Enter your email above or use code SUSHI5 in the order window.</p>
+      <div class="count-grid countdown-grid" data-countdown aria-live="polite">
+        <div class="count-cell"><b data-cd="days">–</b><span>Days</span></div>
+        <div class="count-cell"><b data-cd="hours">–</b><span>Hours</span></div>
+        <div class="count-cell"><b data-cd="mins">–</b><span>Minutes</span></div>
+        <div class="count-cell"><b data-cd="secs">–</b><span>Seconds</span></div>
+      </div>
+      <div class="offer-ended countdown-ended" style="display:none">This launch offer has ended.</div>
+    </div>
+    <div class="pay-grid">
+      <div class="pay-card">
+        <div class="pay-icon" style="background:#f0b90b">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="#1d1d1f"><path d="M12 7.7 9.7 10 8.3 8.6 12 4.9l3.7 3.7L14.3 10zM7.7 12 10 9.7l1.4 1.4L7.7 14.8 4 11.1zM16.3 12l-2.3-2.3 1.4-1.4 3.7 3.7-3.7 3.7-1.4-1.4zM12 16.3l2.3-2.3 1.4 1.4L12 19.1l-3.7-3.7 1.4-1.4zM9.9 12l2.1-2.1 2.1 2.1-2.1 2.1zM12 12"/></svg>
+        </div>
+        <h3>Binance Pay</h3>
+        <p>Pay in USDT or USD from any country, fee-free between Binance users. Our Pay ID and QR code are shared in your WhatsApp order chat.</p>
+      </div>
+      <div class="pay-card">
+        <div class="pay-icon" style="background:#4cb050">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2.5"/><path d="M12 18h.01"/></svg>
+        </div>
+        <h3>Easypaisa</h3>
+        <p>Send PKR straight from your Easypaisa app or any bank app via Raast. Account details arrive with your order confirmation.</p>
+      </div>
+      <div class="pay-card">
+        <div class="pay-icon" style="background:#ed1c24">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2.5"/><path d="M12 18h.01"/></svg>
+        </div>
+        <h3>JazzCash</h3>
+        <p>Prefer JazzCash? Same flow — pay in PKR, send the screenshot in the same WhatsApp chat, and we verify it on the spot.</p>
+      </div>
+      <div class="pay-card">
+        <div class="pay-icon" style="background:#26a17b">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.2h5M12 9.2v6.4M9.8 12.2h4.4"/></svg>
+        </div>
+        <h3>USDT Transfer</h3>
+        <p>Direct USDT (TRC20) wallet transfer for customers outside Binance. The wallet address is shared per order, so payments never get mixed up.</p>
+      </div>
+    </div>
+    <div class="pay-note"><b>How payment works:</b> place your order on WhatsApp first — we reply with the exact payment details and QR for your order, you pay and send the screenshot, and activation starts the moment it's verified. <b>Every price on this site is final</b> — the total in your order message is exactly what you pay, with nothing added later. Never share your PIN, password or any OTP with us; we will never ask for them.</div>
+  </div>
+</section>
+
+<!-- ===================== WHY ===================== -->
+<section id="why">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Why Sushi Cafe</h2>
+      <p>Three stores' worth of services, one WhatsApp number, and rules written down before you pay — not after something goes wrong.</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-3.6 8-10V5.2L12 2 4 5.2V12c0 6.4 8 10 8 10z"/><path d="m9 11.5 2 2 4-4.5"/></svg>
+        <h3>Warranty, stated up front</h3>
+        <p>Every plan lists its warranty on the card. Monthly tools carry a 25-day replacement window: if it stops working, we replace it first — and if we can't, we refund the remaining days.</p>
+      </div>
+      <div class="why-card">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+        <h3>Private by default</h3>
+        <p>OTP numbers are assigned to you alone — no public inbox where strangers read your codes. Subscription plans marked “your account” are activated on your own email, not a stranger's.</p>
+      </div>
+      <div class="why-card">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-12.4 7.5L3 21l2-5.6A8.5 8.5 0 1 1 21 11.5z"/></svg>
+        <h3>A person, not a ticket queue</h3>
+        <p>Every order gets a number and a WhatsApp thread. Stuck at midnight? Message the same chat with your order number and a person picks it up — support runs 24/7.</p>
+      </div>
+    </div>
+
+    <div class="cta-band" style="margin-top:56px">
+      <h2>Not sure which plan fits?</h2>
+      <p>Tell us what you need it for — studying, work, a second account — and we'll point you at the right one before you spend anything.</p>
+      <a class="btn btn-wa" href="https://wa.me/966593140752?text=Hi%20Sushi%20Cafe%2C%20I%27m%20not%20sure%20which%20plan%20I%20need." target="_blank" rel="noopener">Ask on WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FAQ ===================== -->
+<section id="faq" class="sec-alt">
+  <div class="wrap">
+    <div class="sec-head center">
+      <h2>Questions, answered</h2>
+    </div>
+    <div class="faq" id="faqList">
+      <div class="faq-item">
+        <button class="faq-q" type="button">How do I place an order?<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+        <div class="faq-a">Tap Order on any plan, fill in your name and WhatsApp number, and hit “Confirm on WhatsApp”. Your order opens in WhatsApp with an order number — we confirm it there, share payment details, and activate once your payment screenshot is verified.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" type="button">Which payment methods do you accept?<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+        <div class="faq-a">Binance Pay and USDT (TRC20) for international customers, and Easypaisa or JazzCash in PKR inside Pakistan. No card needed. Payment details and the Binance QR are shared inside your order chat so every payment is tied to your order number.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" type="button">How fast is activation?<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+        <div class="faq-a">Most subscriptions are activated within 5 to 30 minutes of payment verification. OTP numbers are assigned as soon as your order is confirmed, and the code normally lands within seconds of you requesting it in the app.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" type="button">Will the subscription be on my own account?<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+        <div class="faq-a">It depends on the plan, and the card tells you before you pay. “Your account” plans are activated on your own email. “Shared profile” plans (like Netflix) give you a private profile on a shared account. “Account provided” plans come with login details from us.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" type="button">What does the warranty actually cover?<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+        <div class="faq-a">Warranty covers the activation for the stated period — a 1-month plan carries 25 days. If your tool stops working inside that window, message us with your order number: we replace it first, and if a replacement isn't possible we refund the remaining days. Plans marked “No warranty” are the exception, and they're always labelled before you order.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" type="button">Are the OTP numbers private and non-VoIP?<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+        <div class="faq-a">Yes. Numbers come from real carrier SIM pools, not VoIP ranges, so they pass verification on WhatsApp, Telegram, Google and banking apps. Each number is leased to you alone for the session — your codes are never shown in a public inbox.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" type="button">What if my OTP never arrives?<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+        <div class="faq-a">Then you don't pay. If no code arrives within the 15-minute window, tell us in the chat and the order is cancelled with a full refund. You only ever pay for a code you actually received.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" type="button">Can I rent a number long-term?<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+        <div class="faq-a">Yes — dedicated rental numbers run for 1, 3 or 12 months and can be renewed before expiry so you never lose the number. They're the right pick for business accounts and recurring 2FA.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a class="logo" href="#top" style="color:var(--text)"><span class="logo-mark">S</span>Sushi&nbsp;Cafe</a>
+        <p>Premium subscriptions, AI tools and private OTP numbers — ordered on WhatsApp and activated by hand, so nothing gets lost in an automated checkout.</p>
+      </div>
+      <div>
+        <h4>Shop</h4>
+        <a href="#catalog">AI Tools</a>
+        <a href="#catalog">Streaming</a>
+        <a href="#catalog">VPN &amp; Privacy</a>
+        <a href="#catalog">Design &amp; Creative</a>
+        <a href="#otp">OTP Numbers</a>
+      </div>
+      <div>
+        <h4>Help</h4>
+        <a href="#how">How it works</a>
+        <a href="#payment">Payment methods</a>
+        <a href="#faq">FAQ</a>
+        <a href="#why">Warranty policy</a>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <a href="https://wa.me/966593140752" target="_blank" rel="noopener">Saudi / International: +966 593 140 752</a>
+        <a href="https://wa.me/923399609528" target="_blank" rel="noopener">Pakistan: +92 339 9609528</a>
+        <a href="#top">WhatsApp only — replies 24/7</a>
+        <a href="#catalog">Support hours: round the clock</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Sushi Cafe. All rights reserved.</span>
+      <span>All prices in PKR are final — what you see is what you pay. Binance Pay &amp; USDT accepted worldwide.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Floating WhatsApp -->
+<a class="wa-float" href="https://wa.me/966593140752?text=Hi%20Sushi%20Cafe%2C%20I%20have%20a%20question." target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+  <svg width="29" height="29" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22c5.46 0 9.9-4.45 9.9-9.91C21.95 6.45 17.5 2 12.04 2zm0 18.03a8.1 8.1 0 0 1-4.13-1.13l-.3-.18-3.12.82.83-3.04-.19-.31a8.08 8.08 0 0 1-1.24-4.28c0-4.47 3.64-8.11 8.15-8.11 4.47 0 8.11 3.64 8.11 8.11 0 4.47-3.64 8.12-8.11 8.12zm4.45-6.08c-.24-.12-1.44-.71-1.69-.79-.25-.09-.43-.14-.61.13-.18.27-.7.86-.86 1.04-.16.18-.32.2-.59.07-.27-.13-1.15-.42-2.19-1.35-.81-.72-1.35-1.61-1.51-1.88-.16-.27-.02-.42.12-.55.12-.12.27-.32.4-.48.13-.16.18-.27.27-.45.09-.18.04-.34-.02-.48-.07-.13-.61-1.47-.83-2.01-.22-.53-.44-.46-.61-.47h-.52c-.18 0-.47.07-.72.34-.25.27-.95.93-.95 2.27 0 1.34.98 2.64 1.11 2.82.14.18 1.92 2.93 4.65 4.1.65.28 1.16.45 1.55.57.65.21 1.25.18 1.72.11.52-.08 1.61-.65 1.97-1.31.36-.66.36-1.22.25-1.34-.11-.12-.25-.19-.49-.31z"/></svg>
+</a>
+
+<!-- ===================== ORDER MODAL ===================== -->
+<div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal">
+    <div class="modal-head">
+      <h3 id="modalTitle">Place your order</h3>
+      <button class="close-btn" id="closeModal" type="button" aria-label="Close">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <p class="modal-sub">Fill this in and your order opens in WhatsApp, addressed to Sushi Cafe, with everything pre-written. We confirm, share payment details, and activate. The total below is your final price — no extra charges added later.</p>
+    <div class="order-summary" id="orderSummary"></div>
+    <form id="orderForm" novalidate>
+      <div class="form-grid">
+        <div class="field">
+          <label for="fName">Your name *</label>
+          <input id="fName" type="text" placeholder="e.g. Ahmed Khan" autocomplete="name" />
+        </div>
+        <div class="field">
+          <label for="fPhone">Your WhatsApp number *</label>
+          <input id="fPhone" type="tel" placeholder="+92 3XX XXXXXXX" autocomplete="tel" />
+        </div>
+        <div class="field full">
+          <label for="fEmail">Email for delivery</label>
+          <input id="fEmail" type="email" placeholder="you@example.com — where the plan gets activated" autocomplete="email" />
+          <span class="hint">Needed for “your account” plans. Leave blank if the plan provides an account.</span>
+        </div>
+        <div class="field full">
+          <label for="fCode">Discount code <span style="color:var(--text-3);font-weight:400">(optional)</span></label>
+          <input id="fCode" type="text" placeholder="e.g. SUSHI5 for 5% off" autocomplete="off" style="text-transform:uppercase" />
+          <span class="hint">Use SUSHI5 for 5% off your first order. If you entered your email above, it’s already filled in.</span>
+          <span class="code-feedback" id="codeFeedback" aria-live="polite"></span>
+        </div>
+        <div class="field full">
+          <label for="fPay">How will you pay?</label>
+          <select id="fPay">
+            <option>Binance Pay (USDT / USD)</option>
+            <option>Easypaisa (PKR)</option>
+            <option>JazzCash (PKR)</option>
+            <option>USDT Transfer (TRC20)</option>
+            <option>Not sure yet — advise me</option>
+          </select>
+        </div>
+        <div class="field full">
+          <label for="fNote">Anything we should know? <span style="color:var(--text-3);font-weight:400">(optional)</span></label>
+          <textarea id="fNote" placeholder="e.g. Activate after 6pm, need it on a second email…"></textarea>
+        </div>
+        <div class="field full">
+          <label for="fDest">Send this order to</label>
+          <select id="fDest">
+            <option value="966593140752" selected>Saudi / International — +966 593 140 752</option>
+            <option value="923399609528">Pakistan — +92 339 9609528</option>
+          </select>
+          <span class="hint">Pick whichever number you prefer — your full order, discount and email go to the one you choose.</span>
+        </div>
+      </div>
+      <div class="error-msg" id="errorMsg"></div>
+      <div class="modal-actions">
+        <button class="btn btn-wa" type="submit">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22c5.46 0 9.9-4.45 9.9-9.91C21.95 6.45 17.5 2 12.04 2zm4.45-6.08c-.24-.12-1.44-.71-1.69-.79-.25-.09-.43-.14-.61.13-.18.27-.7.86-.86 1.04-.16.18-.32.2-.59.07-.27-.13-1.15-.42-2.19-1.35-.81-.72-1.35-1.61-1.51-1.88-.16-.27-.02-.42.12-.55.12-.12.27-.32.4-.48.13-.16.18-.27.27-.45.09-.18.04-.34-.02-.48-.07-.13-.61-1.47-.83-2.01-.22-.53-.44-.46-.61-.47h-.52c-.18 0-.47.07-.72.34-.25.27-.95.93-.95 2.27 0 1.34.98 2.64 1.11 2.82.14.18 1.92 2.93 4.65 4.1.65.28 1.16.45 1.55.57.65.21 1.25.18 1.72.11.52-.08 1.61-.65 1.97-1.31.36-.66.36-1.22.25-1.34-.11-.12-.25-.19-.49-.31z"/></svg>
+          Confirm order on WhatsApp
+        </button>
+        <button class="btn btn-ghost" type="button" id="copyBtn">Copy order details instead</button>
+        <p class="secure-note" id="destNote">This opens WhatsApp to Saudi / International +966 593 140 752 with your order pre-written — nothing is sent until you tap send there. Payment details and the Binance QR are shared in that chat.</p>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+var WA_NUMBER = "966593140752";
+var WA_NUMBER_PK = "923399609528";
+function selectedWaNumber(){
+  var el = document.getElementById("fDest");
+  var v = el ? el.value : WA_NUMBER;
+  return (v === WA_NUMBER_PK) ? WA_NUMBER_PK : WA_NUMBER;
+}
+function selectedWaLabel(){
+  return selectedWaNumber() === WA_NUMBER_PK ? "Pakistan +92 339 9609528" : "Saudi / International +966 593 140 752";
+}
+
+/* ---------------- Catalog data ---------------- */
+var CATEGORIES = ["All","AI Tools","Streaming","VPN & Privacy","Design & Creative","Productivity","Social & Accounts"];
+/* Final selling prices shown to customers. */
+var PRODUCTS = [
+  {name:"ChatGPT Plus", cat:"AI Tools", initials:"G", color:"#10a37f", desc:"GPT-5 access, image generation, deep research and priority speed — activated on your own OpenAI account.", duration:"1 Month", price:2940, old:3999, warranty:"Full Warranty", delivery:"Your account", hot:true},
+  {name:"Claude Pro", cat:"AI Tools", initials:"C", color:"#c96442", desc:"Anthropic's Claude with higher limits, projects and early access to new models. On your own account.", duration:"1 Month", price:3180, old:4200, warranty:"Full Warranty", delivery:"Your account", hot:false},
+  {name:"Gemini Advanced", cat:"AI Tools", initials:"G", color:"#1a73e8", desc:"Google's Gemini Advanced with 2TB Google One storage bundled in. Activated on your Gmail.", duration:"1 Month", price:2405, old:2999, warranty:"Full Warranty", delivery:"Your account", hot:false},
+  {name:"Perplexity Pro", cat:"AI Tools", initials:"P", color:"#1f6f6b", desc:"AI search with unlimited Pro queries, file uploads and model switching between GPT, Claude and Sonar.", duration:"1 Month", price:2599, old:3400, warranty:"Full Warranty", delivery:"Your account", hot:false},
+  {name:"Netflix Premium 4K", cat:"Streaming", initials:"N", color:"#b00610", desc:"Your own private profile on a 4K UHD account — PIN-locked, watch history stays yours alone.", duration:"1 Month", price:714, old:1100, warranty:"Full Warranty", delivery:"Shared profile", hot:true},
+  {name:"Spotify Premium", cat:"Streaming", initials:"S", color:"#1db954", desc:"Ad-free music, offline downloads and full quality — upgraded on your own Spotify account.", duration:"1 Month", price:599, old:750, warranty:"Full Warranty", delivery:"Your account", hot:true},
+  {name:"YouTube Premium", cat:"Streaming", initials:"Y", color:"#cc0000", desc:"No ads, background play and YouTube Music included. Activated on your own Google account.", duration:"1 Month", price:649, old:899, warranty:"Full Warranty", delivery:"Your account", hot:false},
+  {name:"Disney+", cat:"Streaming", initials:"D", color:"#113ccf", desc:"Disney, Pixar, Marvel, Star Wars and National Geographic in one plan, up to 4K where available.", duration:"1 Month", price:844, old:1299, warranty:"Full Warranty", delivery:"Account provided", hot:false},
+  {name:"HBO Max", cat:"Streaming", initials:"H", color:"#4b2bb5", desc:"HBO originals, Warner Bros films and Max exclusives, full HD streaming on your own profile.", duration:"1 Month", price:1169, old:1600, warranty:"Full Warranty", delivery:"Shared profile", hot:false},
+  {name:"IPTV Premium", cat:"Streaming", initials:"TV", color:"#37474f", desc:"Live channels, movies and sports in HD/FHD with a stable server and all major sports packages included.", duration:"12 Months", price:7798, old:8999, warranty:"Full Warranty", delivery:"Account provided", hot:true},
+  {name:"NordVPN", cat:"VPN & Privacy", initials:"N", color:"#4685ff", desc:"Fast servers in 60+ countries, up to 10 devices at once, no-logs policy and threat protection built in.", duration:"1 Month", price:1039, old:1499, warranty:"Full Warranty", delivery:"Account provided", hot:false},
+  {name:"Surfshark VPN", cat:"VPN & Privacy", initials:"S", color:"#17808e", desc:"Unlimited devices on one account, clean web ad-blocking and servers in 100 countries.", duration:"1 Month", price:779, old:1199, warranty:"Full Warranty", delivery:"Account provided", hot:true},
+  {name:"Proton VPN Plus", cat:"VPN & Privacy", initials:"P", color:"#5b4bc4", desc:"Swiss privacy, Secure Core servers and the fastest tier — for people who take privacy seriously.", duration:"1 Month", price:1169, old:1699, warranty:"Full Warranty", delivery:"Account provided", hot:false},
+  {name:"ExpressVPN", cat:"VPN & Privacy", initials:"E", color:"#a6192e", desc:"Consistently the fastest VPN for streaming — unblocks Netflix, BBC iPlayer and more on 8 devices.", duration:"1 Month", price:1429, old:1999, warranty:"Full Warranty", delivery:"Account provided", hot:false},
+  {name:"CapCut Pro", cat:"Design & Creative", initials:"C", color:"#111111", desc:"All Pro effects, transitions, auto-captions and cloud storage unlocked on your own CapCut account.", duration:"1 Month", price:845, old:1200, warranty:"Full Warranty", delivery:"Your account", hot:true},
+  {name:"Canva Pro", cat:"Design & Creative", initials:"C", color:"#7d2ae8", desc:"Premium templates, background remover, brand kit and 100M+ stock assets on your own Canva team seat.", duration:"1 Month", price:499, old:699, warranty:"Full Warranty", delivery:"Your account", hot:true},
+  {name:"Figma Professional", cat:"Design & Creative", initials:"F", color:"#1e1e1e", desc:"Full Figma + Dev Mode seat with unlimited projects, version history and shared libraries.", duration:"1 Month", price:1949, old:2600, warranty:"Full Warranty", delivery:"Your account", hot:false},
+  {name:"Adobe Creative Cloud", cat:"Design & Creative", initials:"A", color:"#eb1000", desc:"Photoshop, Premiere Pro, Illustrator, After Effects and 20+ apps with 100GB cloud storage.", duration:"1 Month", price:3599, old:5500, warranty:"Full Warranty", delivery:"Your account", hot:false},
+  {name:"Microsoft 365 Personal", cat:"Productivity", initials:"M", color:"#d83b01", desc:"Word, Excel, PowerPoint and Outlook plus 1TB OneDrive — activated on your Microsoft account.", duration:"12 Months", price:5999, old:9500, warranty:"Full Warranty", delivery:"Your account", hot:false},
+  {name:"TikTok Account — USA / UK", cat:"Social & Accounts", initials:"T", color:"#010101", desc:"Fresh USA or UK region TikTok account, full access, ready to post. Details handed over in the chat.", duration:"One-time", price:1949, old:2500, warranty:"Login Warranty", delivery:"Account provided", hot:true}
+];
+
+/* ---------------- Render catalog ---------------- */
+var grid = document.getElementById("grid");
+var tabsEl = document.getElementById("tabs");
+var searchInput = document.getElementById("searchInput");
+var resultCount = document.getElementById("resultCount");
+var emptyState = document.getElementById("emptyState");
+var activeCat = "All";
+
+function fmt(n){ return "Rs " + n.toLocaleString("en-PK"); }
+
+CATEGORIES.forEach(function(c){
+  var b = document.createElement("button");
+  b.type = "button"; b.className = "tab" + (c === "All" ? " active" : "");
+  b.textContent = c; b.setAttribute("role","tab");
+  b.addEventListener("click", function(){
+    activeCat = c;
+    tabsEl.querySelectorAll(".tab").forEach(function(t){ t.classList.toggle("active", t.textContent === c); });
+    renderGrid();
+  });
+  tabsEl.appendChild(b);
+});
+
+function renderGrid(){
+  var q = searchInput.value.trim().toLowerCase();
+  var list = PRODUCTS.filter(function(p){
+    var inCat = activeCat === "All" || p.cat === activeCat;
+    var inSearch = !q || (p.name + " " + p.cat + " " + p.desc).toLowerCase().indexOf(q) !== -1;
+    return inCat && inSearch;
+  });
+  grid.innerHTML = "";
+  list.forEach(function(p){
+    var off = p.old ? Math.round((1 - p.price / p.old) * 100) : 0;
+    var card = document.createElement("article");
+    card.className = "card";
+    card.innerHTML =
+      '<div class="card-top"><div class="tile" style="background:' + p.color + '">' + p.initials + '</div>' +
+      (p.hot ? '<span class="hot">HOT DEAL</span>' : '') + '</div>' +
+      '<div class="cat">' + p.cat + '</div>' +
+      '<h3>' + p.name + '</h3>' +
+      '<p class="desc">' + p.desc + '</p>' +
+      '<div class="meta"><span class="pill">' + p.duration + '</span>' +
+      '<span class="pill warranty">' + p.warranty + '</span>' +
+      '<span class="pill">' + p.delivery + '</span></div>' +
+      '<div class="price-row"><span class="price">' + fmt(p.price) + '</span>' +
+      (p.old ? '<span class="old-price">' + fmt(p.old) + '</span><span class="off">−' + off + '%</span>' : '') + '</div>';
+    var btn = document.createElement("button");
+    btn.type = "button"; btn.className = "order-btn"; btn.textContent = "Order now";
+    btn.addEventListener("click", function(){
+      openOrder({ title: p.name, detail: p.duration + " · " + p.delivery + " · " + p.warranty, price: p.price });
+    });
+    card.appendChild(btn);
+    grid.appendChild(card);
+  });
+  resultCount.textContent = list.length + (list.length === 1 ? " plan" : " plans") + (activeCat !== "All" ? " in " + activeCat : "") + (q ? ' matching "' + searchInput.value.trim() + '"' : "");
+  emptyState.style.display = list.length ? "none" : "block";
+}
+searchInput.addEventListener("input", renderGrid);
+renderGrid();
+
+/* ---------------- OTP builder ---------------- */
+var OTP_APPS = [
+  {name:"WhatsApp", base:120},{name:"Telegram", base:90},{name:"Google / Gmail", base:110},
+  {name:"TikTok", base:80},{name:"Instagram", base:100},{name:"Facebook", base:70},
+  {name:"Discord", base:90},{name:"Amazon", base:130}
+];
+var OTP_COUNTRIES = [
+  {name:"United States", code:"+1", mult:1.6},{name:"United Kingdom", code:"+44", mult:1.4},
+  {name:"Pakistan", code:"+92", mult:0.4},{name:"India", code:"+91", mult:0.35},
+  {name:"Canada", code:"+1", mult:1.5},{name:"UAE", code:"+971", mult:1.2},
+  {name:"Germany", code:"+49", mult:1.1},{name:"Indonesia", code:"+62", mult:0.5}
+];
+var selApp = OTP_APPS[0], selCountry = OTP_COUNTRIES[0];
+
+function buildChips(el, items, getLabel, isActive, onPick){
+  el.innerHTML = "";
+  items.forEach(function(item){
+    var b = document.createElement("button");
+    b.type = "button"; b.className = "chip" + (isActive(item) ? " active" : "");
+    b.textContent = getLabel(item);
+    b.addEventListener("click", function(){ onPick(item); });
+    el.appendChild(b);
+  });
+}
+function withCommission(cost){
+  if (cost < 500) return cost + 150;
+  if (cost <= 2000) return Math.round(cost * 1.3);
+  return Math.round(cost * 1.2);
+}
+function otpCost(){ return Math.max(30, Math.round(selApp.base * selCountry.mult / 5) * 5); }
+function otpPriceCalc(){ return withCommission(otpCost()); }
+function renderOtp(){
+  buildChips(document.getElementById("appChips"), OTP_APPS,
+    function(a){ return a.name; }, function(a){ return a === selApp; },
+    function(a){ selApp = a; renderOtp(); });
+  buildChips(document.getElementById("countryChips"), OTP_COUNTRIES,
+    function(c){ return c.name + " (" + c.code + ")"; }, function(c){ return c === selCountry; },
+    function(c){ selCountry = c; renderOtp(); });
+  document.getElementById("otpSummary").innerHTML =
+    "OTP for <b>" + selApp.name + "</b><br>Number from <b>" + selCountry.name + " (" + selCountry.code + ")</b><br>Private, non-VoIP line — yours alone";
+  document.getElementById("otpPrice").innerHTML = fmt(otpPriceCalc()) + " <small>per OTP</small>";
+}
+renderOtp();
+document.getElementById("otpOrderBtn").addEventListener("click", function(){
+  openOrder({
+    title: "OTP Number — " + selApp.name,
+    detail: selCountry.name + " (" + selCountry.code + ") · One-time OTP · No code, no charge",
+    price: otpPriceCalc()
+  });
+});
+document.querySelectorAll("[data-rent]").forEach(function(btn){
+  btn.addEventListener("click", function(){
+    openOrder({
+      title: btn.getAttribute("data-rent"),
+      detail: "Dedicated private number · Renewable before expiry",
+      price: parseInt(btn.getAttribute("data-rent-price"), 10)
+    });
+  });
+});
+
+/* ---------------- Launch countdown ---------------- */
+var OFFER_END = new Date("2026-11-22T23:59:00+05:00").getTime();
+function pad2(n){ return (n < 10 ? "0" : "") + n; }
+function updateCountdowns(){
+  var diff = OFFER_END - Date.now();
+  var grids = document.querySelectorAll("[data-countdown]");
+  var endeds = document.querySelectorAll(".countdown-ended");
+  if (diff <= 0){
+    grids.forEach(function(g){ g.style.display = "none"; });
+    endeds.forEach(function(e){ e.style.display = "block"; });
+    return;
+  }
+  var totalSecs = Math.floor(diff / 1000);
+  var d = Math.floor(totalSecs / 86400);
+  var h = Math.floor((totalSecs % 86400) / 3600);
+  var m = Math.floor((totalSecs % 3600) / 60);
+  var s = totalSecs % 60;
+  grids.forEach(function(g){
+    var dd = g.querySelector('[data-cd="days"]');
+    var hh = g.querySelector('[data-cd="hours"]');
+    var mm = g.querySelector('[data-cd="mins"]');
+    var ss = g.querySelector('[data-cd="secs"]');
+    if (dd) dd.textContent = d;
+    if (hh) hh.textContent = pad2(h);
+    if (mm) mm.textContent = pad2(m);
+    if (ss) ss.textContent = pad2(s);
+  });
+}
+updateCountdowns();
+setInterval(updateCountdowns, 1000);
+
+/* ---------------- Discount / email capture ---------------- */
+var visitorEmail = "";
+var discountUnlocked = false;
+function isValidEmail(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
+function currentCode(){
+  var el = document.getElementById("fCode");
+  var v = el ? el.value.trim().toUpperCase() : "";
+  if (v) return v;
+  return discountUnlocked ? "SUSHI5" : "";
+}
+function discountInfo(){
+  if (!currentOrder) return { applied:false, amount:0, final:0, code:"" };
+  var code = currentCode();
+  var applied = code === "SUSHI5";
+  var amount = applied ? Math.round(currentOrder.price * 0.05) : 0;
+  return { applied: applied, amount: amount, final: currentOrder.price - amount, code: code };
+}
+document.getElementById("discountForm").addEventListener("submit", function(e){
+  e.preventDefault();
+  var input = document.getElementById("discountEmail");
+  var errEl = document.getElementById("discountError");
+  var v = input.value.trim();
+  if (!isValidEmail(v)){
+    errEl.textContent = "Please enter a valid email address to get your 5% off code.";
+    errEl.style.display = "block";
+    return;
+  }
+  errEl.style.display = "none";
+  visitorEmail = v;
+  discountUnlocked = true;
+  document.getElementById("codeReveal").classList.add("show");
+  var modalEmail = document.getElementById("fEmail");
+  if (modalEmail && !modalEmail.value.trim()) modalEmail.value = v;
+  var modalCode = document.getElementById("fCode");
+  if (modalCode) modalCode.value = "SUSHI5";
+  showToast("Code SUSHI5 unlocked — 5% off is applied to your next order.");
+  if (currentOrder) renderSummary();
+});
+document.getElementById("copyCodeBtn").addEventListener("click", function(){
+  function done(){ showToast("Code SUSHI5 copied — it’s already applied on this page too."); }
+  if (navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText("SUSHI5").then(done, function(){ fallbackCopy("SUSHI5"); done(); });
+  } else { fallbackCopy("SUSHI5"); done(); }
+});
+
+/* ---------------- Order modal ---------------- */
+var overlay = document.getElementById("overlay");
+var orderSummary = document.getElementById("orderSummary");
+var errorMsg = document.getElementById("errorMsg");
+var currentOrder = null;
+
+function newOrderId(){
+  return "SC-" + Math.floor(1000 + Math.random() * 9000);
+}
+function renderSummary(){
+  if (!currentOrder) return;
+  var info = discountInfo();
+  var fb = document.getElementById("codeFeedback");
+  var html =
+    '<div class="row"><span>Order</span><b>' + currentOrder.id + '</b></div>' +
+    '<div class="row"><span>Item</span><b style="text-align:right">' + currentOrder.title + '</b></div>' +
+    '<div class="row"><span>Details</span><span style="text-align:right">' + currentOrder.detail + '</span></div>';
+  if (info.applied){
+    html +=
+      '<div class="row"><span>Original price</span><span>' + fmt(currentOrder.price) + '</span></div>' +
+      '<div class="row discount-applied-row"><span>Discount — SUSHI5 (5% off)</span><span>− ' + fmt(info.amount) + '</span></div>' +
+      '<div class="row total"><span>Total to pay</span><span>' + fmt(info.final) + '</span></div>';
+    if (fb){ fb.textContent = "✓ SUSHI5 applied — 5% off. You save " + fmt(info.amount) + "."; fb.className = "code-feedback ok"; }
+  } else {
+    html += '<div class="row total"><span>Total</span><span>' + fmt(currentOrder.price) + '</span></div>';
+    var code = currentCode();
+    if (fb){
+      if (code){ fb.textContent = "That code isn’t recognised — check it and try SUSHI5."; fb.className = "code-feedback bad"; }
+      else { fb.textContent = ""; fb.className = "code-feedback"; }
+    }
+  }
+  orderSummary.innerHTML = html;
+}
+document.getElementById("fCode").addEventListener("input", function(){ renderSummary(); });
+function openOrder(order){
+  order.id = newOrderId();
+  currentOrder = order;
+  var emailEl = document.getElementById("fEmail");
+  if (visitorEmail && emailEl && !emailEl.value.trim()) emailEl.value = visitorEmail;
+  var codeEl = document.getElementById("fCode");
+  if (discountUnlocked && codeEl && !codeEl.value.trim()) codeEl.value = "SUSHI5";
+  renderSummary();
+  errorMsg.style.display = "none";
+  overlay.classList.add("open");
+  document.body.style.overflow = "hidden";
+  setTimeout(function(){ document.getElementById("fName").focus(); }, 60);
+}
+function closeOrder(){
+  overlay.classList.remove("open");
+  document.body.style.overflow = "";
+}
+document.getElementById("closeModal").addEventListener("click", closeOrder);
+overlay.addEventListener("click", function(e){ if (e.target === overlay) closeOrder(); });
+document.addEventListener("keydown", function(e){ if (e.key === "Escape") closeOrder(); });
+
+function buildMessage(){
+  var name = document.getElementById("fName").value.trim();
+  var phone = document.getElementById("fPhone").value.trim();
+  var email = document.getElementById("fEmail").value.trim() || visitorEmail;
+  var pay = document.getElementById("fPay").value;
+  var note = document.getElementById("fNote").value.trim();
+  var info = discountInfo();
+  var lines = [
+    "New Order — Sushi Cafe",
+    "Order ID: " + currentOrder.id,
+    "Item: " + currentOrder.title,
+    "Details: " + currentOrder.detail
+  ];
+  if (info.applied){
+    lines.push("Original price: " + fmt(currentOrder.price));
+    lines.push("Discount code: SUSHI5 (5% off)");
+    lines.push("Discount amount: − " + fmt(info.amount));
+    lines.push("Final total: " + fmt(info.final));
+  } else {
+    if (info.code) lines.push("Discount code entered: " + info.code + " (not applied)");
+    lines.push("Total: " + fmt(currentOrder.price));
+  }
+  lines.push("Name: " + name);
+  lines.push("My WhatsApp: " + phone);
+  if (email) lines.push("Email: " + email);
+  lines.push("Payment method: " + pay);
+  if (note) lines.push("Note: " + note);
+  lines.push("Please confirm my order and share the payment details.");
+  return lines.join("\n");
+}
+function validate(){
+  var name = document.getElementById("fName").value.trim();
+  var phone = document.getElementById("fPhone").value.trim();
+  if (name.length < 2){ return "Please enter your name so we know who the order is for."; }
+  if (phone.replace(/\D/g, "").length < 9){ return "Please enter a valid WhatsApp number — activation updates are sent there."; }
+  return "";
+}
+document.getElementById("fDest").addEventListener("change", function(){
+  document.getElementById("destNote").textContent = "This opens WhatsApp to " + selectedWaLabel() + " with your order pre-written — nothing is sent until you tap send there. Payment details and the Binance QR are shared in that chat.";
+});
+document.getElementById("orderForm").addEventListener("submit", function(e){
+  e.preventDefault();
+  var err = validate();
+  if (err){ errorMsg.textContent = err; errorMsg.style.display = "block"; return; }
+  var url = "https://wa.me/" + selectedWaNumber() + "?text=" + encodeURIComponent(buildMessage());
+  window.open(url, "_blank");
+  showToast("Order " + currentOrder.id + " opened in WhatsApp (" + selectedWaLabel() + ") — just tap send there and we'll confirm.");
+  closeOrder();
+});
+document.getElementById("copyBtn").addEventListener("click", function(){
+  var err = validate();
+  if (err){ errorMsg.textContent = err; errorMsg.style.display = "block"; return; }
+  var text = buildMessage();
+  function done(){ showToast("Order details copied — paste them into WhatsApp " + selectedWaLabel() + "."); }
+  if (navigator.clipboard && navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(done, function(){ fallbackCopy(text); done(); });
+  } else { fallbackCopy(text); done(); }
+});
+function fallbackCopy(text){
+  var ta = document.createElement("textarea");
+  ta.value = text; ta.style.position = "fixed"; ta.style.opacity = "0";
+  document.body.appendChild(ta); ta.select();
+  try { document.execCommand("copy"); } catch(e) {}
+  document.body.removeChild(ta);
+}
+
+/* ---------------- FAQ ---------------- */
+document.querySelectorAll(".faq-item").forEach(function(item){
+  item.querySelector(".faq-q").addEventListener("click", function(){
+    var wasOpen = item.classList.contains("open");
+    document.querySelectorAll(".faq-item").forEach(function(i){ i.classList.remove("open"); });
+    if (!wasOpen) item.classList.add("open");
+  });
+});
+
+/* ---------------- Toast ---------------- */
+var toastTimer = null;
+function showToast(msg){
+  var t = document.getElementById("toast");
+  t.textContent = msg;
+  t.classList.add("show");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(function(){ t.classList.remove("show"); }, 4200);
+}
+</script>
+</body>
+</html>
