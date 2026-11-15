@@ -317,6 +317,50 @@ footer{background:var(--bg-alt);border-top:1px solid var(--card-border);padding:
   .cta-band{padding:42px 22px}
   .wa-float{bottom:16px;right:16px}
 }
+
+/* ---------- Accounts / admin ---------- */
+.auth-btn{font-size:13px;font-weight:600;padding:8px 14px;border-radius:980px;border:1.5px solid var(--text);color:var(--text);white-space:nowrap;min-height:36px}
+.auth-btn:hover{background:var(--text);color:var(--bg)}
+.user-chip{display:none;align-items:center;gap:8px;white-space:nowrap}
+.user-chip.show{display:inline-flex}
+.user-chip .who{font-size:13px;font-weight:600;max-width:150px;overflow:hidden;text-overflow:ellipsis}
+.user-chip button{font-size:12.5px;font-weight:600;padding:6px 10px;border-radius:980px;background:var(--chip);border:1px solid var(--card-border);min-height:30px}
+.auth-tabs{display:flex;gap:8px;margin-bottom:18px}
+.auth-tab{flex:1;padding:10px;border-radius:11px;font-size:14.5px;font-weight:600;background:var(--chip);border:1px solid var(--card-border);min-height:44px}
+.auth-tab.active{background:var(--text);color:var(--bg);border-color:var(--text)}
+.auth-pane{display:none}
+.auth-pane.active{display:block}
+.auth-pane .field{margin-bottom:12px}
+.auth-note{display:none;font-size:14px;color:var(--accent);background:color-mix(in srgb,var(--accent) 8%,transparent);border:1px solid color-mix(in srgb,var(--accent) 30%,transparent);border-radius:11px;padding:11px 14px;margin-bottom:16px;line-height:1.5}
+.auth-msg{font-size:14px;margin-top:12px;line-height:1.5;min-height:20px}
+.auth-msg.err{color:var(--accent)}
+.auth-msg.ok{color:var(--wa-dark)}
+.google-btn{width:100%;border:1.5px solid var(--border);border-radius:12px;padding:12px;font-size:15px;font-weight:600;min-height:48px;background:var(--bg)}
+.google-btn:hover{background:var(--chip)}
+.order-item{border:1px solid var(--card-border);border-radius:14px;padding:16px 18px;margin-bottom:12px;background:var(--bg)}
+.order-item .row{display:flex;justify-content:space-between;gap:12px;font-size:14.5px;padding:2px 0}
+.order-item .row b{text-align:right}
+.badge{font-size:11.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:4px 10px;border-radius:980px;white-space:nowrap}
+.badge.pending{color:#b7791f;background:#fef3c7}
+.badge.paid{color:#1d4ed8;background:#dbeafe}
+.badge.activated{color:#15803d;background:#dcfce7}
+.badge.failed{color:#b42318;background:#fee2e2}
+@media (prefers-color-scheme: dark){.badge.pending{color:#fcd34d;background:#451a03}.badge.paid{color:#93c5fd;background:#1e3a5f}.badge.activated{color:#86efac;background:#14532d}.badge.failed{color:#fca5a5;background:#450a0a}}
+.admin-wrap{display:none;padding:56px 0}
+.admin-wrap.show{display:block}
+.stat-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:22px}
+@media(max-width:700px){.stat-cards{grid-template-columns:repeat(2,1fr)}}
+.stat-card{background:var(--card);border:1px solid var(--card-border);border-radius:16px;padding:18px;box-shadow:var(--shadow)}
+.stat-card b{display:block;font-size:26px;letter-spacing:-.02em}
+.stat-card span{font-size:13.5px;color:var(--text-2)}
+.admin-controls{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px}
+.admin-controls input,.admin-controls select{font-family:inherit;font-size:15px;color:var(--text);background:var(--bg);border:1px solid var(--border);border-radius:11px;padding:10px 13px;min-height:44px}
+.admin-controls input{flex:1;min-width:200px}
+.admin-table-wrap{overflow-x:auto;background:var(--card);border:1px solid var(--card-border);border-radius:16px;box-shadow:var(--shadow)}
+table.admin-table{width:100%;border-collapse:collapse;font-size:14px;min-width:760px}
+.admin-table th,.admin-table td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--card-border);vertical-align:top}
+.admin-table th{font-size:12.5px;text-transform:uppercase;letter-spacing:.04em;color:var(--text-3)}
+.admin-table select{font-family:inherit;font-size:13.5px;color:var(--text);background:var(--bg);border:1px solid var(--border);border-radius:9px;padding:7px 9px;min-height:36px}
 </style>
 </head>
 <body>
@@ -332,6 +376,13 @@ footer{background:var(--bg-alt);border-top:1px solid var(--card-border);padding:
       <a href="#payment">Payment</a>
       <a href="#faq">FAQ</a>
     </nav>
+    <button class="auth-btn" id="signInBtn" type="button">Sign in</button>
+    <span class="user-chip" id="userChip">
+      <span class="who" id="userName"></span>
+      <button type="button" id="myOrdersBtn">My Orders</button>
+      <a href="#admin" id="adminNavLink" style="display:none;font-size:12.5px;font-weight:600">Admin</a>
+      <button type="button" id="signOutBtn">Sign out</button>
+    </span>
     <a class="nav-wa" href="https://wa.me/966593140752?text=Hi%20Sushi%20Cafe%2C%20I%20need%20help%20choosing%20a%20plan." target="_blank" rel="noopener">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22c5.46 0 9.9-4.45 9.9-9.91C21.95 6.45 17.5 2 12.04 2zm0 18.03a8.1 8.1 0 0 1-4.13-1.13l-.3-.18-3.12.82.83-3.04-.19-.31a8.08 8.08 0 0 1-1.24-4.28c0-4.47 3.64-8.11 8.15-8.11 4.47 0 8.11 3.64 8.11 8.11 0 4.47-3.64 8.12-8.11 8.12zm4.45-6.08c-.24-.12-1.44-.71-1.69-.79-.25-.09-.43-.14-.61.13-.18.27-.7.86-.86 1.04-.16.18-.32.2-.59.07-.27-.13-1.15-.42-2.19-1.35-.81-.72-1.35-1.61-1.51-1.88-.16-.27-.02-.42.12-.55.12-.12.27-.32.4-.48.13-.16.18-.27.27-.45.09-.18.04-.34-.02-.48-.07-.13-.61-1.47-.83-2.01-.22-.53-.44-.46-.61-.47h-.52c-.18 0-.47.07-.72.34-.25.27-.95.93-.95 2.27 0 1.34.98 2.64 1.11 2.82.14.18 1.92 2.93 4.65 4.1.65.28 1.16.45 1.55.57.65.21 1.25.18 1.72.11.52-.08 1.61-.65 1.97-1.31.36-.66.36-1.22.25-1.34-.11-.12-.25-.19-.49-.31z"/></svg>
       WhatsApp Us
@@ -762,6 +813,100 @@ footer{background:var(--bg-alt);border-top:1px solid var(--card-border);padding:
   </div>
 </div>
 
+
+<!-- ===================== SIGN-IN MODAL ===================== -->
+<div class="overlay" id="authOverlay" role="dialog" aria-modal="true" aria-labelledby="authTitle">
+  <div class="modal">
+    <div class="modal-head">
+      <h3 id="authTitle">Sign in to Sushi Cafe</h3>
+      <button class="close-btn" id="closeAuth" type="button" aria-label="Close">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <p class="modal-sub">Sign in to place orders and see your order history. Your orders are saved to your account only.</p>
+    <div class="auth-note" id="authSetupNote">Accounts are being set up — order on WhatsApp for now. Sign-in will work once the store is connected.</div>
+    <div class="auth-tabs" role="tablist">
+      <button class="auth-tab active" type="button" data-auth-tab="google">Google</button>
+      <button class="auth-tab" type="button" data-auth-tab="email">Email</button>
+      <button class="auth-tab" type="button" data-auth-tab="phone">Phone</button>
+    </div>
+    <div class="auth-pane active" id="authPaneGoogle">
+      <button class="google-btn" type="button" id="googleSignInBtn">Continue with Google</button>
+      <p class="auth-msg" id="googleMsg"></p>
+    </div>
+    <div class="auth-pane" id="authPaneEmail">
+      <div class="field"><label for="authEmail">Email</label><input id="authEmail" type="email" placeholder="you@example.com" autocomplete="email" /></div>
+      <div class="field"><label for="authPassword">Password</label><input id="authPassword" type="password" placeholder="At least 6 characters" autocomplete="current-password" /></div>
+      <div class="modal-actions" style="margin-top:6px">
+        <button class="btn btn-dark" type="button" id="emailLoginBtn">Log in</button>
+        <button class="btn btn-ghost" type="button" id="emailSignupBtn">Create account</button>
+      </div>
+      <p class="auth-msg" id="emailMsg"></p>
+    </div>
+    <div class="auth-pane" id="authPanePhone">
+      <div class="field"><label for="authPhone">Phone number</label><input id="authPhone" type="tel" placeholder="+92 3XX XXXXXXX" autocomplete="tel" /></div>
+      <div class="modal-actions" style="margin-top:6px">
+        <button class="btn btn-dark" type="button" id="sendSmsBtn">Send SMS code</button>
+      </div>
+      <div id="recaptchaContainer"></div>
+      <div class="field" id="smsCodeField" style="display:none;margin-top:14px"><label for="authSmsCode">SMS code</label><input id="authSmsCode" type="text" inputmode="numeric" placeholder="6-digit code" /></div>
+      <div class="modal-actions" style="margin-top:6px">
+        <button class="btn btn-dark" type="button" id="verifySmsBtn" style="display:none">Verify code &amp; sign in</button>
+      </div>
+      <p class="auth-msg" id="phoneMsg"></p>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== MY ORDERS MODAL ===================== -->
+<div class="overlay" id="ordersOverlay" role="dialog" aria-modal="true" aria-labelledby="ordersTitle">
+  <div class="modal">
+    <div class="modal-head">
+      <h3 id="ordersTitle">My Orders</h3>
+      <button class="close-btn" id="closeOrders" type="button" aria-label="Close">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <p class="modal-sub">Only your orders, newest first. Status updates when the store confirms or activates your order.</p>
+    <div id="myOrdersList"><p style="font-size:15px;color:var(--text-2)">Loading your orders…</p></div>
+  </div>
+</div>
+
+<!-- ===================== ADMIN DASHBOARD (hidden, #admin only) ===================== -->
+<section class="admin-wrap" id="adminSection">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Admin dashboard</h2>
+      <p id="adminSub">All orders, newest first. Change an order's status and the customer sees it in My Orders.</p>
+    </div>
+    <div id="adminGate" style="display:none"><p style="font-size:16px;color:var(--text-2);line-height:1.6">Admin only. Sign in with an admin account to view this panel.</p></div>
+    <div id="adminBody" style="display:none">
+      <div class="stat-cards">
+        <div class="stat-card"><b id="statTotal">0</b><span>Total orders</span></div>
+        <div class="stat-card"><b id="statPending">0</b><span>Pending</span></div>
+        <div class="stat-card"><b id="statPaid">0</b><span>Paid</span></div>
+        <div class="stat-card"><b id="statActivated">0</b><span>Activated</span></div>
+        <div class="stat-card"><b id="statFailed">0</b><span>Failed</span></div>
+        <div class="stat-card"><b id="statRevenue">Rs 0</b><span>Revenue (paid + activated)</span></div>
+      </div>
+      <div class="admin-controls">
+        <input type="search" id="adminSearch" placeholder="Search order ID, name or email…" aria-label="Search orders" />
+        <select id="adminStatusFilter" aria-label="Filter by status">
+          <option value="all">All statuses</option>
+          <option value="pending">Pending</option>
+          <option value="paid">Paid</option>
+          <option value="activated">Activated</option>
+          <option value="failed">Failed</option>
+        </select>
+      </div>
+      <div class="admin-table-wrap"><table class="admin-table">
+        <thead><tr><th>Order</th><th>Customer</th><th>Item</th><th>Total</th><th>Date</th><th>Status</th></tr></thead>
+        <tbody id="adminTableBody"><tr><td colspan="6">Loading orders…</td></tr></tbody>
+      </table></div>
+    </div>
+  </div>
+</section>
+
 <div class="toast" id="toast" role="status"></div>
 
 <script>
@@ -1032,6 +1177,11 @@ function renderSummary(){
 }
 document.getElementById("fCode").addEventListener("input", function(){ renderSummary(); });
 function openOrder(order){
+  if (window.SCAuth && window.SCAuth.requireSignIn && window.SCAuth.requireSignIn()){
+    window.SCAuth.pendingOrder = order;
+    window.SCAuth.openSignIn();
+    return;
+  }
   order.id = newOrderId();
   currentOrder = order;
   var emailEl = document.getElementById("fEmail");
@@ -1092,13 +1242,41 @@ function validate(){
 document.getElementById("fDest").addEventListener("change", function(){
   document.getElementById("destNote").textContent = "This opens WhatsApp to " + selectedWaLabel() + " with your order pre-written — nothing is sent until you tap send there. Payment details and the Binance QR are shared in that chat.";
 });
-document.getElementById("orderForm").addEventListener("submit", function(e){
+document.getElementById("orderForm").addEventListener("submit", async function(e){
   e.preventDefault();
   var err = validate();
   if (err){ errorMsg.textContent = err; errorMsg.style.display = "block"; return; }
+  var info = discountInfo();
+  var saved = false;
+  if (window.SCAuth && window.SCAuth.saveOrder){
+    var rec = {
+      id: currentOrder.id,
+      userId: (window.SCAuth.currentUser && window.SCAuth.currentUser.uid) || "guest",
+      userEmail: (document.getElementById("fEmail").value.trim() || visitorEmail || (window.SCAuth.currentUser && window.SCAuth.currentUser.email) || ""),
+      userName: document.getElementById("fName").value.trim(),
+      userPhone: document.getElementById("fPhone").value.trim(),
+      item: currentOrder.title,
+      detail: currentOrder.detail,
+      price: currentOrder.price,
+      originalPrice: currentOrder.price,
+      discountAmount: info.applied ? info.amount : 0,
+      discountCode: info.applied ? "SUSHI5" : (info.code || ""),
+      finalTotal: info.applied ? info.final : currentOrder.price,
+      paymentMethod: document.getElementById("fPay").value,
+      whatsappDest: selectedWaLabel(),
+      status: "pending"
+    };
+    try { saved = await window.SCAuth.saveOrder(rec); } catch (err2) { saved = false; }
+  }
   var url = "https://wa.me/" + selectedWaNumber() + "?text=" + encodeURIComponent(buildMessage());
   window.open(url, "_blank");
-  showToast("Order " + currentOrder.id + " opened in WhatsApp (" + selectedWaLabel() + ") — just tap send there and we'll confirm.");
+  if (window.SCAuth && !window.SCAuth.configured){
+    showToast("Order " + currentOrder.id + " opened in WhatsApp (" + selectedWaLabel() + ") — just tap send there and we'll confirm. Accounts are being set up, so this order was not saved to an account.");
+  } else if (!saved){
+    showToast("Order " + currentOrder.id + " opened in WhatsApp (" + selectedWaLabel() + ") — just tap send there and we'll confirm. Note: the order was not saved to your account, please keep your order number.");
+  } else {
+    showToast("Order " + currentOrder.id + " saved and opened in WhatsApp (" + selectedWaLabel() + ") — just tap send there and we'll confirm.");
+  }
   closeOrder();
 });
 document.getElementById("copyBtn").addEventListener("click", function(){
@@ -1136,6 +1314,286 @@ function showToast(msg){
   clearTimeout(toastTimer);
   toastTimer = setTimeout(function(){ t.classList.remove("show"); }, 4200);
 }
+</script>
+
+<script type="module">
+/* ===================== Firebase accounts + admin ===================== */
+/* CONFIG TO FILL — paste your own Firebase web app config here (Firebase
+   console > Project settings > Your apps > Web app). Leave empty until
+   then: the site keeps working and orders go through on WhatsApp. */
+var FIREBASE_CONFIG = {
+  apiKey: "AIzaSyDhl11-VbMYuXtsNl_AJ6uvz-R3t31VUTs",
+  authDomain: "affable-sky-507918-k5.firebaseapp.com",
+  projectId: "affable-sky-507918-k5",
+  storageBucket: "affable-sky-507918-k5.firebasestorage.app",
+  messagingSenderId: "535198062519",
+  appId: "1:535198062519:web:b89dfc9693ec97bb76fa32"
+};
+var ADMIN_EMAILS = ["husnainayyub05@gmail.com", "sushicafe.pk@gmail.com"];
+
+var SCAuth = {
+  configured: !!FIREBASE_CONFIG.apiKey,
+  currentUser: null,
+  isAdmin: false,
+  pendingOrder: null,
+  _fb: null
+};
+window.SCAuth = SCAuth;
+
+function scToast(msg){ if (typeof showToast === "function") showToast(msg); }
+function scSetupNote(){
+  var n = document.getElementById("authSetupNote");
+  if (n) n.style.display = SCAuth.configured ? "none" : "block";
+  ["googleSignInBtn", "emailLoginBtn", "emailSignupBtn", "sendSmsBtn", "verifySmsBtn"].forEach(function(id){
+    var el = document.getElementById(id);
+    if (el) el.disabled = !SCAuth.configured;
+  });
+}
+function scSetMsg(id, text, ok){
+  var el = document.getElementById(id);
+  if (el){ el.textContent = text || ""; el.className = "auth-msg" + (text ? (ok ? " ok" : " err") : ""); }
+}
+SCAuth.openSignIn = function(){
+  scSetupNote();
+  if (!SCAuth.configured) scToast("Accounts are being set up — order on WhatsApp for now.");
+  document.getElementById("authOverlay").classList.add("open");
+  document.body.style.overflow = "hidden";
+};
+function scCloseSignIn(){
+  document.getElementById("authOverlay").classList.remove("open");
+  document.body.style.overflow = "";
+}
+SCAuth.requireSignIn = function(){
+  if (!SCAuth.configured) return false; /* guest checkout until Firebase is set up */
+  return !SCAuth.currentUser;
+};
+SCAuth.saveOrder = async function(rec){
+  if (!SCAuth.configured || !SCAuth._fb) return false;
+  try {
+    var fb = SCAuth._fb;
+    await fb.setDoc(fb.doc(fb.db, "orders", rec.id), Object.assign({}, rec, { createdAt: fb.serverTimestamp() }));
+    return true;
+  } catch (err) { console.warn("Order save failed:", err); return false; }
+};
+
+/* ---------- Auth UI wiring (works even before Firebase loads) ---------- */
+document.getElementById("signInBtn").addEventListener("click", SCAuth.openSignIn);
+document.getElementById("closeAuth").addEventListener("click", scCloseSignIn);
+document.getElementById("authOverlay").addEventListener("click", function(e){ if (e.target === this) scCloseSignIn(); });
+document.querySelectorAll("[data-auth-tab]").forEach(function(btn){
+  btn.addEventListener("click", function(){
+    document.querySelectorAll("[data-auth-tab]").forEach(function(b){ b.classList.toggle("active", b === btn); });
+    document.querySelectorAll(".auth-pane").forEach(function(p){ p.classList.remove("active"); });
+    document.getElementById("authPane" + btn.dataset.authTab.charAt(0).toUpperCase() + btn.dataset.authTab.slice(1)).classList.add("active");
+  });
+});
+document.getElementById("signOutBtn").addEventListener("click", async function(){
+  if (SCAuth._fb){ try { await SCAuth._fb.signOut(SCAuth._fb.auth); } catch (e) {} }
+  scToast("Signed out.");
+});
+document.getElementById("myOrdersBtn").addEventListener("click", function(){
+  document.getElementById("ordersOverlay").classList.add("open");
+  document.body.style.overflow = "hidden";
+  scRenderMyOrders();
+});
+document.getElementById("closeOrders").addEventListener("click", function(){
+  document.getElementById("ordersOverlay").classList.remove("open");
+  document.body.style.overflow = "";
+});
+document.getElementById("ordersOverlay").addEventListener("click", function(e){ if (e.target === this){ this.classList.remove("open"); document.body.style.overflow = ""; } });
+document.addEventListener("keydown", function(e){
+  if (e.key === "Escape"){ scCloseSignIn(); document.getElementById("ordersOverlay").classList.remove("open"); document.body.style.overflow = ""; }
+});
+
+/* ---------- Orders rendering ---------- */
+function scFmtDate(ts){
+  if (!ts) return "—";
+  try { var d = ts.toDate ? ts.toDate() : new Date(ts); return d.toLocaleString("en-PK", { day: "numeric", month: "short", year: "numeric", hour: "numeric", minute: "2-digit" }); }
+  catch (e) { return "—"; }
+}
+function scBadge(status){
+  return '<span class="badge ' + (status || "pending") + '">' + (status || "pending") + '</span>';
+}
+function scOrderCard(o){
+  return '<div class="order-item">' +
+    '<div class="row"><span>' + (o.id || "") + '</span>' + scBadge(o.status) + '</div>' +
+    '<div class="row"><span>Item</span><b>' + (o.item || "") + '</b></div>' +
+    '<div class="row"><span>Date</span><b>' + scFmtDate(o.createdAt) + '</b></div>' +
+    '<div class="row"><span>Total</span><b>Rs ' + Number(o.finalTotal || o.price || 0).toLocaleString("en-PK") + '</b></div>' +
+    '</div>';
+}
+var myOrdersUnsub = null;
+function scRenderMyOrders(){
+  var list = document.getElementById("myOrdersList");
+  if (!SCAuth.configured){ list.innerHTML = "<p style='font-size:15px;color:var(--text-2)'>Accounts are being set up — order on WhatsApp for now. Your past WhatsApp orders are not shown here yet.</p>"; return; }
+  if (!SCAuth.currentUser){ list.innerHTML = "<p style='font-size:15px;color:var(--text-2)'>Sign in to see your orders.</p>"; return; }
+  if (myOrdersUnsub) return; /* live listener already running */
+  var fb = SCAuth._fb;
+  myOrdersUnsub = fb.onSnapshot(fb.query(fb.collection(fb.db, "orders"), fb.where("userId", "==", SCAuth.currentUser.uid)), function(snap){
+    var rows = [];
+    snap.forEach(function(d){ rows.push(d.data()); });
+    rows.sort(function(a, b){ var ta = a.createdAt && a.createdAt.seconds ? a.createdAt.seconds : 0; var tb = b.createdAt && b.createdAt.seconds ? b.createdAt.seconds : 0; return tb - ta; });
+    if (!rows.length){ list.innerHTML = "<p style='font-size:15px;color:var(--text-2)'>No orders yet. Your first order will show up here once you place it.</p>"; return; }
+    list.innerHTML = rows.map(scOrderCard).join("");
+  }, function(err){ list.innerHTML = "<p style='font-size:15px;color:var(--accent)'>Could not load your orders. Please try again.</p>"; });
+}
+
+/* ---------- Admin ---------- */
+var adminUnsub = null, adminRows = [];
+function scIsAdmin(){ return !!(SCAuth.currentUser && SCAuth.currentUser.email && ADMIN_EMAILS.indexOf(SCAuth.currentUser.email.toLowerCase()) !== -1); }
+function scRenderAdmin(){
+  var body = document.getElementById("adminBody"), gate = document.getElementById("adminGate");
+  if (!SCAuth.configured){ gate.style.display = "block"; body.style.display = "none"; gate.innerHTML = "<p style='font-size:16px;color:var(--text-2);line-height:1.6'>Accounts are being set up — the admin panel will work once Firebase is connected.</p>"; return; }
+  if (!SCAuth.currentUser){ gate.style.display = "block"; body.style.display = "none"; gate.innerHTML = "<p style='font-size:16px;color:var(--text-2);line-height:1.6'>Admin only. Please sign in with an admin account to view this panel.</p>"; return; }
+  if (!scIsAdmin()){ gate.style.display = "block"; body.style.display = "none"; gate.innerHTML = "<p style='font-size:16px;color:var(--text-2);line-height:1.6'>Admin only. This account does not have admin access.</p>"; return; }
+  gate.style.display = "none"; body.style.display = "block";
+  if (adminUnsub) return;
+  var fb = SCAuth._fb;
+  adminUnsub = fb.onSnapshot(fb.query(fb.collection(fb.db, "orders"), fb.orderBy("createdAt", "desc")), function(snap){
+    adminRows = [];
+    snap.forEach(function(d){ adminRows.push(d.data()); });
+    scDrawAdminTable();
+  }, function(err){ document.getElementById("adminTableBody").innerHTML = "<tr><td colspan='6'>Could not load orders. Please try again.</td></tr>"; });
+}
+function scDrawAdminTable(){
+  var q = (document.getElementById("adminSearch").value || "").toLowerCase();
+  var f = document.getElementById("adminStatusFilter").value;
+  var rows = adminRows.filter(function(o){
+    var okStatus = f === "all" || o.status === f;
+    var hay = ((o.id || "") + " " + (o.userName || "") + " " + (o.userEmail || "")).toLowerCase();
+    return okStatus && (!q || hay.indexOf(q) !== -1);
+  });
+  var counts = { pending: 0, paid: 0, activated: 0, failed: 0 };
+  var revenue = 0;
+  adminRows.forEach(function(o){ if (counts[o.status] !== undefined) counts[o.status]++; if (o.status === "paid" || o.status === "activated") revenue += Number(o.finalTotal || o.price || 0); });
+  document.getElementById("statTotal").textContent = adminRows.length;
+  document.getElementById("statPending").textContent = counts.pending;
+  document.getElementById("statPaid").textContent = counts.paid;
+  document.getElementById("statActivated").textContent = counts.activated;
+  document.getElementById("statFailed").textContent = counts.failed;
+  document.getElementById("statRevenue").textContent = "Rs " + revenue.toLocaleString("en-PK");
+  var tb = document.getElementById("adminTableBody");
+  if (!rows.length){ tb.innerHTML = "<tr><td colspan='6'>No orders match that search.</td></tr>"; return; }
+  tb.innerHTML = rows.map(function(o){
+    var opts = ["pending", "paid", "activated", "failed"].map(function(st){
+      return "<option value='" + st + "'" + (o.status === st ? " selected" : "") + ">" + st + "</option>";
+    }).join("");
+    return "<tr><td><b>" + (o.id || "") + "</b><br><span style='color:var(--text-3)'>" + (o.paymentMethod || "") + "</span></td>" +
+      "<td>" + (o.userName || "—") + "<br><span style='color:var(--text-3)'>" + (o.userEmail || "") + "<br>" + (o.userPhone || "") + "</span></td>" +
+      "<td>" + (o.item || "") + "<br><span style='color:var(--text-3)'>" + (o.detail || "") + "</span></td>" +
+      "<td>Rs " + Number(o.finalTotal || o.price || 0).toLocaleString("en-PK") + "</td>" +
+      "<td>" + scFmtDate(o.createdAt) + "</td>" +
+      "<td><select data-order-id='" + (o.id || "") + "' aria-label='Status for " + (o.id || "") + "'>" + opts + "</select></td></tr>";
+  }).join("");
+  tb.querySelectorAll("select[data-order-id]").forEach(function(sel){
+    sel.addEventListener("change", async function(){
+      var fb = SCAuth._fb;
+      try { await fb.updateDoc(fb.doc(fb.db, "orders", sel.dataset.orderId), { status: sel.value }); scToast("Order " + sel.dataset.orderId + " set to " + sel.value + "."); }
+      catch (err) { scToast("Could not update that order — please try again."); scDrawAdminTable(); }
+    });
+  });
+}
+document.getElementById("adminSearch").addEventListener("input", scDrawAdminTable);
+document.getElementById("adminStatusFilter").addEventListener("change", scDrawAdminTable);
+function scRouteAdmin(){
+  var sec = document.getElementById("adminSection");
+  if (window.location.hash === "#admin"){
+    sec.classList.add("show");
+    scRenderAdmin();
+    sec.scrollIntoView({ behavior: "smooth" });
+  } else {
+    sec.classList.remove("show");
+  }
+}
+window.addEventListener("hashchange", scRouteAdmin);
+
+/* ---------- Firebase init (only when configured) ---------- */
+function scOnAuth(user){
+  SCAuth.currentUser = user || null;
+  SCAuth.isAdmin = scIsAdmin();
+  var chip = document.getElementById("userChip"), btn = document.getElementById("signInBtn");
+  if (user){
+    btn.style.display = "none"; chip.classList.add("show");
+    document.getElementById("userName").textContent = user.displayName || user.email || user.phoneNumber || "My account";
+    document.getElementById("adminNavLink").style.display = SCAuth.isAdmin ? "" : "none";
+    var nameEl = document.getElementById("fName"), emailEl = document.getElementById("fEmail");
+    if (nameEl && !nameEl.value.trim() && user.displayName) nameEl.value = user.displayName;
+    if (emailEl && !emailEl.value.trim() && user.email) emailEl.value = user.email;
+    scCloseSignIn();
+    if (SCAuth.pendingOrder){ var po = SCAuth.pendingOrder; SCAuth.pendingOrder = null; setTimeout(function(){ openOrder(po); }, 50); }
+  } else {
+    btn.style.display = ""; chip.classList.remove("show");
+    document.getElementById("adminNavLink").style.display = "none";
+    if (myOrdersUnsub){ myOrdersUnsub(); myOrdersUnsub = null; }
+    if (adminUnsub){ adminUnsub(); adminUnsub = null; }
+  }
+  scRouteAdmin();
+}
+async function scInitFirebase(){
+  scSetupNote();
+  if (!SCAuth.configured){ scOnAuth(null); scRouteAdmin(); return; }
+  try {
+    var appMod = await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js");
+    var authMod = await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js");
+    var fsMod = await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js");
+    var app = appMod.initializeApp(FIREBASE_CONFIG);
+    var auth = authMod.getAuth(app);
+    var db = fsMod.getFirestore(app);
+    SCAuth._fb = {
+      auth: auth, db: db,
+      signOut: authMod.signOut,
+      collection: fsMod.collection, doc: fsMod.doc, setDoc: fsMod.setDoc, updateDoc: fsMod.updateDoc,
+      query: fsMod.query, where: fsMod.where, orderBy: fsMod.orderBy, onSnapshot: fsMod.onSnapshot,
+      serverTimestamp: fsMod.serverTimestamp
+    };
+    /* Google */
+    document.getElementById("googleSignInBtn").addEventListener("click", async function(){
+      scSetMsg("googleMsg", "");
+      try { await authMod.signInWithPopup(auth, new authMod.GoogleAuthProvider()); scSetMsg("googleMsg", "Signed in with Google.", true); }
+      catch (err) { scSetMsg("googleMsg", "Google sign-in failed: " + (err.message || err.code || "please try again.")); }
+    });
+    /* Email */
+    document.getElementById("emailLoginBtn").addEventListener("click", async function(){
+      var em = document.getElementById("authEmail").value.trim(), pw = document.getElementById("authPassword").value;
+      scSetMsg("emailMsg", "");
+      try { await authMod.signInWithEmailAndPassword(auth, em, pw); scSetMsg("emailMsg", "Signed in.", true); }
+      catch (err) { scSetMsg("emailMsg", "Log-in failed: " + (err.message || err.code || "check your email and password.")); }
+    });
+    document.getElementById("emailSignupBtn").addEventListener("click", async function(){
+      var em = document.getElementById("authEmail").value.trim(), pw = document.getElementById("authPassword").value;
+      scSetMsg("emailMsg", "");
+      try { await authMod.createUserWithEmailAndPassword(auth, em, pw); scSetMsg("emailMsg", "Account created — you are signed in.", true); }
+      catch (err) { scSetMsg("emailMsg", "Sign-up failed: " + (err.message || err.code || "try a different email or a stronger password.")); }
+    });
+    /* Phone */
+    var phoneVerifier = null, phoneConfirm = null;
+    document.getElementById("sendSmsBtn").addEventListener("click", async function(){
+      var phone = document.getElementById("authPhone").value.trim();
+      scSetMsg("phoneMsg", "");
+      try {
+        if (!phoneVerifier) phoneVerifier = new authMod.RecaptchaVerifier(auth, "recaptchaContainer", { size: "invisible" });
+        phoneConfirm = await authMod.signInWithPhoneNumber(auth, phone, phoneVerifier);
+        document.getElementById("smsCodeField").style.display = "block";
+        document.getElementById("verifySmsBtn").style.display = "block";
+        scSetMsg("phoneMsg", "SMS code sent to " + phone + ".", true);
+      } catch (err) { scSetMsg("phoneMsg", "Could not send the SMS code: " + (err.message || err.code || "check the number.")); }
+    });
+    document.getElementById("verifySmsBtn").addEventListener("click", async function(){
+      var code = document.getElementById("authSmsCode").value.trim();
+      if (!phoneConfirm){ scSetMsg("phoneMsg", "Send the SMS code first."); return; }
+      try { await phoneConfirm.confirm(code); scSetMsg("phoneMsg", "Phone verified — you are signed in.", true); }
+      catch (err) { scSetMsg("phoneMsg", "Wrong code: " + (err.message || err.code || "please try again.")); }
+    });
+    authMod.onAuthStateChanged(auth, scOnAuth);
+  } catch (err) {
+    console.warn("Firebase could not start:", err);
+    SCAuth.configured = false;
+    scSetupNote();
+    scOnAuth(null);
+  }
+}
+scInitFirebase();
+scRouteAdmin();
 </script>
 </body>
 </html>
