@@ -344,8 +344,11 @@ footer{background:var(--bg-alt);border-top:1px solid var(--card-border);padding:
 .badge.pending{color:#b7791f;background:#fef3c7}
 .badge.paid{color:#1d4ed8;background:#dbeafe}
 .badge.activated{color:#15803d;background:#dcfce7}
+.badge.confirmed{color:#1d4ed8;background:#dbeafe}
+.badge.completed{color:#15803d;background:#dcfce7}
+.badge.cancelled{color:#b42318;background:#fee2e2}
 .badge.failed{color:#b42318;background:#fee2e2}
-@media (prefers-color-scheme: dark){.badge.pending{color:#fcd34d;background:#451a03}.badge.paid{color:#93c5fd;background:#1e3a5f}.badge.activated{color:#86efac;background:#14532d}.badge.failed{color:#fca5a5;background:#450a0a}}
+@media (prefers-color-scheme: dark){.badge.pending{color:#fcd34d;background:#451a03}.badge.paid{color:#93c5fd;background:#1e3a5f}.badge.activated{color:#86efac;background:#14532d}.badge.confirmed{color:#93c5fd;background:#1e3a5f}.badge.completed{color:#86efac;background:#14532d}.badge.cancelled{color:#fca5a5;background:#450a0a}.badge.failed{color:#fca5a5;background:#450a0a}}
 .admin-wrap{display:none;padding:56px 0}
 .admin-wrap.show{display:block}
 .stat-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:22px}
@@ -361,6 +364,12 @@ table.admin-table{width:100%;border-collapse:collapse;font-size:14px;min-width:7
 .admin-table th,.admin-table td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--card-border);vertical-align:top}
 .admin-table th{font-size:12.5px;text-transform:uppercase;letter-spacing:.04em;color:var(--text-3)}
 .admin-table select{font-family:inherit;font-size:13.5px;color:var(--text);background:var(--bg);border:1px solid var(--border);border-radius:9px;padding:7px 9px;min-height:36px}
+.success-panel{background:var(--card);border:1px solid var(--card-border);border-radius:16px;padding:20px;box-shadow:var(--shadow);margin-bottom:22px}
+.success-head{font-size:15px;color:var(--text-2);line-height:1.6;margin:4px 0 14px}
+.success-head b{color:var(--text)}
+.order-tabs{margin:0 0 14px}
+.cancel-btn{font-family:inherit;font-size:13.5px;font-weight:600;color:#b42318;background:transparent;border:1.5px solid #b42318;border-radius:980px;padding:7px 16px;min-height:38px;margin-top:10px}
+.cancel-btn:hover{background:#fee2e2}
 /* ---------- Currency, theme, favorites, sort, track, referrals, coupons ---------- */
 html[data-theme="dark"]{--bg:#000000;--bg-alt:#161617;--card:#1d1d1f;--card-border:#333336;--text:#f5f5f7;--text-2:#a1a1a6;--text-3:#86868b;--border:#38383a;--accent:#ff5147;--accent-dark:#ff7a72;--link:#2997ff;--chip:#2c2c2e;--nav-bg:rgba(22,22,23,.78);--shadow:0 4px 24px rgba(0,0,0,.4);--shadow-lg:0 24px 70px rgba(0,0,0,.7)}
 html[data-theme="light"]{--bg:#ffffff;--bg-alt:#f5f5f7;--card:#ffffff;--card-border:#e3e3e6;--text:#1d1d1f;--text-2:#6e6e73;--text-3:#86868b;--border:#d2d2d7;--accent:#d92d20;--accent-dark:#b42318;--link:#0066cc;--chip:#f5f5f7;--nav-bg:rgba(251,251,253,.82);--shadow:0 4px 24px rgba(0,0,0,.06);--shadow-lg:0 24px 70px rgba(0,0,0,.28)}
@@ -368,6 +377,9 @@ html[data-theme="dark"] .pill.warranty{color:#4ade80}
 html[data-theme="dark"] .badge.pending{color:#fcd34d;background:#451a03}
 html[data-theme="dark"] .badge.paid{color:#93c5fd;background:#1e3a5f}
 html[data-theme="dark"] .badge.activated{color:#86efac;background:#14532d}
+html[data-theme="dark"] .badge.confirmed{color:#93c5fd;background:#1e3a5f}
+html[data-theme="dark"] .badge.completed{color:#86efac;background:#14532d}
+html[data-theme="dark"] .badge.cancelled{color:#fca5a5;background:#450a0a}
 html[data-theme="dark"] .badge.failed{color:#fca5a5;background:#450a0a}
 .currency-select,.sort-select{font-family:inherit;font-size:13px;font-weight:600;color:var(--text);background:var(--chip);border:1px solid var(--card-border);border-radius:980px;padding:7px 10px;min-height:36px;white-space:nowrap}
 .fav-btn{font-size:19px;line-height:1;color:var(--accent);padding:4px 6px;border-radius:8px;min-height:32px}
@@ -877,8 +889,7 @@ html[data-theme="dark"] .badge.failed{color:#fca5a5;background:#450a0a}
       </div>
       <div>
         <h4>Contact</h4>
-        <a href="https://wa.me/966593140752" target="_blank" rel="noopener">Saudi / International: +966 593 140 752</a>
-        <a href="https://wa.me/923399609528" target="_blank" rel="noopener">Pakistan: +92 339 9609528</a>
+        <a href="https://wa.me/966593140752" target="_blank" rel="noopener">WhatsApp: +966 593 140 752</a>
         <a href="https://wa.me/966593140752?text=Hi%20Sushi%20Cafe%2C%20I%20need%20support." target="_blank" rel="noopener">Support: WhatsApp only, replies 24/7</a>
       </div>
     </div>
@@ -954,12 +965,7 @@ html[data-theme="dark"] .badge.failed{color:#fca5a5;background:#450a0a}
           <textarea id="fNote" placeholder="e.g. Activate after 6pm, need it on a second email…"></textarea>
         </div>
         <div class="field full">
-          <label for="fDest">Send this order to</label>
-          <select id="fDest">
-            <option value="966593140752" selected>Saudi / International, +966 593 140 752</option>
-            <option value="923399609528">Pakistan, +92 339 9609528</option>
-          </select>
-          <span class="hint">Pick whichever number you prefer, your full order, discount and email go to the one you choose.</span>
+          <span style="font-size:14.5px;font-weight:600">Send this order to: WhatsApp +966 593 140 752</span>
         </div>
       </div>
       <div class="error-msg" id="errorMsg"></div>
@@ -1017,9 +1023,16 @@ html[data-theme="dark"] .badge.failed{color:#fca5a5;background:#450a0a}
       </button>
     </div>
     <p class="modal-sub">Only your orders, newest first. Status updates when the store confirms or activates your order.</p>
+    <div class="tabs order-tabs" id="myOrdersTabs" role="tablist" aria-label="Filter my orders">
+      <button class="tab active" type="button" data-myfilter="all">All</button>
+      <button class="tab" type="button" data-myfilter="successful">Successful</button>
+      <button class="tab" type="button" data-myfilter="pending">Pending</button>
+      <button class="tab" type="button" data-myfilter="failed">Failed / Cancelled</button>
+    </div>
+    <p class="success-head" id="myOrdersSummary" style="display:none"></p>
     <div class="refer-box" id="referSection" style="display:none">
       <h4>Refer and earn</h4>
-      <p>Share your code with a friend. They get 5% off their first order with code REF5, and you earn Rs 200 credit once their first order is paid or activated.</p>
+      <p>Share your code with a friend. They get 5% off their first order with code REF5, and you earn Rs 200 credit once their first order is confirmed or completed.</p>
       <div><span class="refer-code" id="referCodeValue"></span>
       <button class="copy-code-btn" type="button" id="copyReferBtn">Copy code</button>
       <button class="copy-code-btn" type="button" id="shareReferBtn">Share on WhatsApp</button></div>
@@ -1041,10 +1054,10 @@ html[data-theme="dark"] .badge.failed{color:#fca5a5;background:#450a0a}
       <div class="stat-cards">
         <div class="stat-card"><b id="statTotal">0</b><span>Total orders</span></div>
         <div class="stat-card"><b id="statPending">0</b><span>Pending</span></div>
-        <div class="stat-card"><b id="statPaid">0</b><span>Paid</span></div>
-        <div class="stat-card"><b id="statActivated">0</b><span>Activated</span></div>
-        <div class="stat-card"><b id="statFailed">0</b><span>Failed</span></div>
-        <div class="stat-card"><b id="statRevenue">Rs 0</b><span>Revenue (paid + activated)</span></div>
+        <div class="stat-card"><b id="statConfirmed">0</b><span>Confirmed</span></div>
+        <div class="stat-card"><b id="statCompleted">0</b><span>Completed</span></div>
+        <div class="stat-card"><b id="statCancelled">0</b><span>Cancelled</span></div>
+        <div class="stat-card"><b id="statRevenue">Rs 0</b><span>Revenue (confirmed + completed)</span></div>
       </div>
       <div class="stat-cards" style="margin-top:14px">
         <div class="stat-card"><b id="statReferrals">0</b><span>Referred sign-ups</span></div>
@@ -1062,14 +1075,33 @@ html[data-theme="dark"] .badge.failed{color:#fca5a5;background:#450a0a}
         </div>
         <div id="couponList" style="font-size:14px;line-height:1.7;color:var(--text-2)">No coupons loaded yet.</div>
       </div>
+      <div class="success-panel" id="successPanel">
+        <h3 style="font-size:18px;margin-bottom:4px">Successful orders</h3>
+        <p class="success-head">Confirmed or completed orders only. Pending and cancelled orders are not counted here.</p>
+        <div class="stat-cards" style="margin-bottom:14px">
+          <div class="stat-card"><b id="statSuccessTotal">0</b><span>Successful orders</span></div>
+          <div class="stat-card"><b id="statSuccessConfirmed">0</b><span>Confirmed</span></div>
+          <div class="stat-card"><b id="statSuccessCompleted">0</b><span>Completed</span></div>
+          <div class="stat-card"><b id="statSuccessRevenue">Rs 0</b><span>Revenue from successful orders</span></div>
+        </div>
+        <div class="tabs" style="margin-bottom:14px" id="successTabs" role="tablist" aria-label="Filter successful orders">
+          <button class="tab active" type="button" data-successfilter="all">All successful</button>
+          <button class="tab" type="button" data-successfilter="confirmed">Confirmed only</button>
+          <button class="tab" type="button" data-successfilter="completed">Completed only</button>
+        </div>
+        <div class="admin-table-wrap"><table class="admin-table">
+          <thead><tr><th>Order</th><th>Customer</th><th>Item</th><th>Total</th><th>Date</th><th>Status</th></tr></thead>
+          <tbody id="successTableBody"><tr><td colspan="6">No successful orders yet.</td></tr></tbody>
+        </table></div>
+      </div>
       <div class="admin-controls">
         <input type="search" id="adminSearch" placeholder="Search order ID, name or email…" aria-label="Search orders" />
         <select id="adminStatusFilter" aria-label="Filter by status">
           <option value="all">All statuses</option>
           <option value="pending">Pending</option>
-          <option value="paid">Paid</option>
-          <option value="activated">Activated</option>
-          <option value="failed">Failed</option>
+          <option value="confirmed">Confirmed</option>
+          <option value="completed">Completed</option>
+          <option value="cancelled">Cancelled</option>
         </select>
       </div>
       <div class="admin-table-wrap"><table class="admin-table">
@@ -1084,14 +1116,11 @@ html[data-theme="dark"] .badge.failed{color:#fca5a5;background:#450a0a}
 
 <script>
 var WA_NUMBER = "966593140752";
-var WA_NUMBER_PK = "923399609528";
 function selectedWaNumber(){
-  var el = document.getElementById("fDest");
-  var v = el ? el.value : WA_NUMBER;
-  return (v === WA_NUMBER_PK) ? WA_NUMBER_PK : WA_NUMBER;
+  return WA_NUMBER;
 }
 function selectedWaLabel(){
-  return selectedWaNumber() === WA_NUMBER_PK ? "Pakistan +92 339 9609528" : "Saudi / International +966 593 140 752";
+  return "Saudi / International +966 593 140 752";
 }
 
 /* ---------------- Currency: base prices are PKR, default display USD ---------------- */
@@ -1750,9 +1779,6 @@ function validate(){
   if (phone.replace(/\D/g, "").length < 9){ return "Please enter a valid WhatsApp number, activation updates are sent there."; }
   return "";
 }
-document.getElementById("fDest").addEventListener("change", function(){
-  document.getElementById("destNote").textContent = "This opens WhatsApp to " + selectedWaLabel() + " with your order pre-written, nothing is sent until you tap send there. Payment details and the Binance QR are shared in that chat.";
-});
 document.getElementById("orderForm").addEventListener("submit", function(e){
   e.preventDefault();
   var err = validate();
@@ -1934,14 +1960,80 @@ function scBadge(status){
   return '<span class="badge ' + (status || "pending") + '">' + (status || "pending") + '</span>';
 }
 function scOrderCard(o){
-  return '<div class="order-item">' +
-    '<div class="row"><span>' + (o.id || "") + '</span>' + scBadge(o.status) + '</div>' +
+  var card = '<div class="order-item">' +
+    '<div class="row"><span>' + (o.id || "") + '</span>' + scBadge(scDisplayStatus(o)) + '</div>' +
     '<div class="row"><span>Item</span><b>' + (o.item || "") + '</b></div>' +
     '<div class="row"><span>Date</span><b>' + scFmtDate(o.createdAt) + '</b></div>' +
-    '<div class="row"><span>Total</span><b>' + fmt(o.finalTotal || o.price || 0) + ' (' + fmtPKR(o.finalTotal || o.price || 0) + ')</b></div>' +
-    '</div>';
+    '<div class="row"><span>Total</span><b>' + fmt(o.finalTotal || o.price || 0) + ' (' + fmtPKR(o.finalTotal || o.price || 0) + ')</b></div>';
+  if (o.status === "pending") card += '<button class="cancel-btn" type="button" data-cancel-order="' + (o.id || "") + '">Cancel order</button>';
+  return card + '</div>';
 }
-var myOrdersUnsub = null, myOrdersRows = [];
+/* Cancel: only the signed-in owner, only while the order is still Pending.
+   The button only renders on pending orders, and the handler re-checks
+   ownership and status against Firestore at the moment of cancelling. */
+async function scCancelMyOrder(orderId){
+  var order = myOrdersRows.filter(function(o){ return o.id === orderId; })[0] || null;
+  if (!order || !SCAuth.currentUser || order.userId !== SCAuth.currentUser.uid || order.status !== "pending"){
+    scToast("This order can no longer be cancelled."); return;
+  }
+  if (!window.confirm("Cancel order " + orderId + "? Cancelling cannot be undone.")) return;
+  try {
+    var fb = SCAuth._fb;
+    var ref = fb.doc(fb.db, "orders", orderId);
+    var snap = await fb.getDoc(ref);
+    if (!snap.exists()){ scToast("This order can no longer be cancelled."); return; }
+    var fresh = snap.data();
+    if (!fresh || fresh.userId !== SCAuth.currentUser.uid || fresh.status !== "pending"){
+      scToast("This order can no longer be cancelled."); scDrawMyOrders(); return;
+    }
+    await fb.updateDoc(ref, { status: "cancelled" });
+    scToast("Order cancelled.");
+  } catch (err) { scToast("Could not cancel that order, please try again."); }
+}
+document.getElementById("myOrdersList").addEventListener("click", function(e){
+  var btn = e.target.closest ? e.target.closest("button[data-cancel-order]") : null;
+  if (!btn) return;
+  scCancelMyOrder(btn.dataset.cancelOrder);
+});
+var myOrdersUnsub = null, myOrdersRows = [], myOrdersFilter = "all";
+/* Order statuses are Pending, Confirmed, Completed, Cancelled, set by admin only.
+   Legacy statuses in Firestore map to the new names for display only:
+   paid means Confirmed, activated means Completed, failed means Cancelled.
+   Nothing in Firestore is rewritten by this mapping. */
+function scDisplayStatus(o){
+  if (!o) return "pending";
+  if (o.status === "paid") return "confirmed";
+  if (o.status === "activated") return "completed";
+  if (o.status === "failed") return "cancelled";
+  return o.status || "pending";
+}
+function scIsSuccessful(o){ return o && (o.status === "paid" || o.status === "activated" || o.status === "confirmed" || o.status === "completed"); }
+function scIsFailedOrCancelled(o){ return o && (o.status === "failed" || o.status === "cancelled"); }
+function scDrawMyOrders(){
+  var list = document.getElementById("myOrdersList");
+  var summary = document.getElementById("myOrdersSummary");
+  var rows = myOrdersRows.filter(function(o){
+    if (myOrdersFilter === "successful") return scIsSuccessful(o);
+    if (myOrdersFilter === "pending") return o.status === "pending";
+    if (myOrdersFilter === "failed") return scIsFailedOrCancelled(o);
+    return true;
+  });
+  if (myOrdersFilter === "successful"){
+    var total = 0;
+    rows.forEach(function(o){ total += Number(o.finalTotal || o.price || 0); });
+    summary.textContent = rows.length + (rows.length === 1 ? " successful order, " : " successful orders, ") + fmt(total) + " total spent";
+    summary.style.display = "block";
+  } else if (summary) { summary.style.display = "none"; }
+  if (!myOrdersRows.length){ list.innerHTML = "<p style='font-size:15px;color:var(--text-2)'>No orders yet. Your first order will show up here once you place it.</p>"; return; }
+  if (!rows.length){
+    var msg = "No orders in this view yet.";
+    if (myOrdersFilter === "successful") msg = "No successful orders yet. Orders show here once they are confirmed or completed.";
+    if (myOrdersFilter === "pending") msg = "No pending orders.";
+    if (myOrdersFilter === "failed") msg = "No failed or cancelled orders.";
+    list.innerHTML = "<p style='font-size:15px;color:var(--text-2)'>" + msg + "</p>"; return;
+  }
+  list.innerHTML = rows.map(scOrderCard).join("");
+}
 function scRenderReferSection(){
   var sec = document.getElementById("referSection");
   if (!sec) return;
@@ -1954,8 +2046,8 @@ function scRenderReferSection(){
 }
 function scRenderMyOrders(){
   var list = document.getElementById("myOrdersList");
-  if (!SCAuth.configured){ list.innerHTML = "<p style='font-size:15px;color:var(--text-2)'>Accounts are being set up, order on WhatsApp for now. Your past WhatsApp orders are not shown here yet.</p>"; return; }
-  if (!SCAuth.currentUser){ list.innerHTML = "<p style='font-size:15px;color:var(--text-2)'>Sign in to see your orders.</p>"; return; }
+  if (!SCAuth.configured){ list.innerHTML = "<p style='font-size:15px;color:var(--text-2)'>Accounts are being set up, order on WhatsApp for now. Your past WhatsApp orders are not shown here yet.</p>"; var s1 = document.getElementById("myOrdersSummary"); if (s1) s1.style.display = "none"; return; }
+  if (!SCAuth.currentUser){ list.innerHTML = "<p style='font-size:15px;color:var(--text-2)'>Sign in to see your orders.</p>"; var s2 = document.getElementById("myOrdersSummary"); if (s2) s2.style.display = "none"; return; }
   if (myOrdersUnsub) return; /* live listener already running */
   var fb = SCAuth._fb;
   myOrdersUnsub = fb.onSnapshot(fb.query(fb.collection(fb.db, "orders"), fb.where("userId", "==", SCAuth.currentUser.uid)), function(snap){
@@ -1964,10 +2056,16 @@ function scRenderMyOrders(){
     rows.sort(function(a, b){ var ta = a.createdAt && a.createdAt.seconds ? a.createdAt.seconds : 0; var tb = b.createdAt && b.createdAt.seconds ? b.createdAt.seconds : 0; return tb - ta; });
     myOrdersRows = rows;
     scRenderReferSection();
-    if (!rows.length){ list.innerHTML = "<p style='font-size:15px;color:var(--text-2)'>No orders yet. Your first order will show up here once you place it.</p>"; return; }
-    list.innerHTML = rows.map(scOrderCard).join("");
+    scDrawMyOrders();
   }, function(err){ list.innerHTML = "<p style='font-size:15px;color:var(--accent)'>Could not load your orders. Please try again.</p>"; });
 }
+document.getElementById("myOrdersTabs").addEventListener("click", function(e){
+  var btn = e.target.closest ? e.target.closest("button[data-myfilter]") : null;
+  if (!btn) return;
+  myOrdersFilter = btn.dataset.myfilter;
+  document.querySelectorAll("#myOrdersTabs .tab").forEach(function(t){ t.classList.toggle("active", t === btn); });
+  scDrawMyOrders();
+});
 
 /* ---------- Admin ---------- */
 var adminUnsub = null, adminRows = [];
@@ -1992,24 +2090,25 @@ function scDrawAdminTable(){
   var q = (document.getElementById("adminSearch").value || "").toLowerCase();
   var f = document.getElementById("adminStatusFilter").value;
   var rows = adminRows.filter(function(o){
-    var okStatus = f === "all" || o.status === f;
+    var okStatus = f === "all" || scDisplayStatus(o) === f;
     var hay = ((o.id || "") + " " + (o.userName || "") + " " + (o.userEmail || "")).toLowerCase();
     return okStatus && (!q || hay.indexOf(q) !== -1);
   });
-  var counts = { pending: 0, paid: 0, activated: 0, failed: 0 };
+  var counts = { pending: 0, confirmed: 0, completed: 0, cancelled: 0 };
   var revenue = 0;
-  adminRows.forEach(function(o){ if (counts[o.status] !== undefined) counts[o.status]++; if (o.status === "paid" || o.status === "activated") revenue += Number(o.finalTotal || o.price || 0); });
+  adminRows.forEach(function(o){ var ds = scDisplayStatus(o); if (counts[ds] !== undefined) counts[ds]++; if (scIsSuccessful(o)) revenue += Number(o.finalTotal || o.price || 0); });
   document.getElementById("statTotal").textContent = adminRows.length;
   document.getElementById("statPending").textContent = counts.pending;
-  document.getElementById("statPaid").textContent = counts.paid;
-  document.getElementById("statActivated").textContent = counts.activated;
-  document.getElementById("statFailed").textContent = counts.failed;
+  document.getElementById("statConfirmed").textContent = counts.confirmed;
+  document.getElementById("statCompleted").textContent = counts.completed;
+  document.getElementById("statCancelled").textContent = counts.cancelled;
   document.getElementById("statRevenue").textContent = fmt(revenue);
+  scDrawSuccessTable(revenue);
   var tb = document.getElementById("adminTableBody");
   if (!rows.length){ tb.innerHTML = "<tr><td colspan='6'>No orders match that search.</td></tr>"; return; }
   tb.innerHTML = rows.map(function(o){
-    var opts = ["pending", "paid", "activated", "failed"].map(function(st){
-      return "<option value='" + st + "'" + (o.status === st ? " selected" : "") + ">" + st + "</option>";
+    var opts = ["pending", "confirmed", "completed", "cancelled"].map(function(st){
+      return "<option value='" + st + "'" + (scDisplayStatus(o) === st ? " selected" : "") + ">" + st + "</option>";
     }).join("");
     return "<tr><td><b>" + (o.id || "") + "</b><br><span style='color:var(--text-3)'>" + (o.paymentMethod || "") + "</span></td>" +
       "<td>" + (o.userName || ",") + "<br><span style='color:var(--text-3)'>" + (o.userEmail || "") + "<br>" + (o.userPhone || "") + "</span></td>" +
@@ -2025,8 +2124,9 @@ function scDrawAdminTable(){
       try {
         var orderBefore = adminRows.filter(function(o){ return o.id === sel.dataset.orderId; })[0] || null;
         await fb.updateDoc(fb.doc(fb.db, "orders", sel.dataset.orderId), { status: newStatus });
-        /* Referral credit: only once, only when a referred first order is first marked paid or activated. */
-        if (orderBefore && orderBefore.referredBy && !orderBefore.creditGrantedForOrder && (newStatus === "paid" || newStatus === "activated")){
+        /* Referral credit: only once, only when a referred first order is first marked successful.
+           Legacy statuses paid and activated count the same as confirmed and completed. */
+        if (orderBefore && orderBefore.referredBy && !orderBefore.creditGrantedForOrder && (newStatus === "paid" || newStatus === "activated" || newStatus === "confirmed" || newStatus === "completed")){
           try { await scGrantReferralCredit(orderBefore); } catch (e) { console.warn("Referral credit failed:", e); }
         }
         scToast("Order " + sel.dataset.orderId + " set to " + newStatus + ".");
@@ -2035,8 +2135,42 @@ function scDrawAdminTable(){
     });
   });
 }
+var successFilter = "all";
+function scDrawSuccessTable(revenue){
+  var body = document.getElementById("successTableBody");
+  if (!body) return;
+  var successful = adminRows.filter(scIsSuccessful);
+  var confirmedCount = 0, completedCount = 0;
+  successful.forEach(function(o){ if (scDisplayStatus(o) === "confirmed") confirmedCount++; if (scDisplayStatus(o) === "completed") completedCount++; });
+  document.getElementById("statSuccessTotal").textContent = successful.length;
+  document.getElementById("statSuccessConfirmed").textContent = confirmedCount;
+  document.getElementById("statSuccessCompleted").textContent = completedCount;
+  document.getElementById("statSuccessRevenue").textContent = fmt(revenue);
+  var rows = successful.filter(function(o){ return successFilter === "all" || scDisplayStatus(o) === successFilter; });
+  if (!rows.length){
+    var msg = "No successful orders yet.";
+    if (successFilter === "confirmed") msg = "No confirmed orders yet.";
+    if (successFilter === "completed") msg = "No completed orders yet.";
+    body.innerHTML = "<tr><td colspan='6'>" + msg + "</td></tr>"; return;
+  }
+  body.innerHTML = rows.map(function(o){
+    return "<tr><td><b>" + (o.id || "") + "</b><br><span style='color:var(--text-3)'>" + (o.paymentMethod || "") + "</span></td>" +
+      "<td>" + (o.userName || ",") + "<br><span style='color:var(--text-3)'>" + (o.userEmail || "") + "<br>" + (o.userPhone || "") + "</span></td>" +
+      "<td>" + (o.item || "") + "<br><span style='color:var(--text-3)'>" + (o.detail || "") + "</span></td>" +
+      "<td>" + fmt(o.finalTotal || o.price || 0) + "</td>" +
+      "<td>" + scFmtDate(o.createdAt) + "</td>" +
+      "<td>" + scBadge(scDisplayStatus(o)) + "</td></tr>";
+  }).join("");
+}
 document.getElementById("adminSearch").addEventListener("input", scDrawAdminTable);
 document.getElementById("adminStatusFilter").addEventListener("change", scDrawAdminTable);
+document.getElementById("successTabs").addEventListener("click", function(e){
+  var btn = e.target.closest ? e.target.closest("button[data-successfilter]") : null;
+  if (!btn) return;
+  successFilter = btn.dataset.successfilter;
+  document.querySelectorAll("#successTabs .tab").forEach(function(t){ t.classList.toggle("active", t === btn); });
+  scDrawAdminTable();
+});
 function scRouteAdmin(){
   var sec = document.getElementById("adminSection");
   if (window.location.hash === "#admin"){
@@ -2155,14 +2289,14 @@ SCAuth.validateCode = async function(code){
   if (!code) return { ok: false, pct: 0, reason: "Enter a code." };
   if (!SCAuth.currentUser) return { ok: false, pct: 0, reason: "Sign in to use a discount code. SUSHI5 works once per customer, on your first order." };
   var uid = SCAuth.currentUser.uid;
-  /* Any non-failed order already placed means this is no longer a first order. */
+  /* Any non-failed, non-cancelled order already placed means this is no longer a first order. */
   var hasPriorOrder = false, hasDiscountedOrder = false;
   if (SCAuth.configured && SCAuth._fb){
     try {
       var snap = await SCAuth._fb.getDocs(SCAuth._fb.query(SCAuth._fb.collection(SCAuth._fb.db, "orders"), SCAuth._fb.where("userId", "==", uid)));
       snap.forEach(function(d){
         var o = d.data() || {};
-        if (o.status !== "failed"){
+        if (o.status !== "failed" && o.status !== "cancelled"){
           hasPriorOrder = true;
           if (o.discountCode) hasDiscountedOrder = true;
         }
@@ -2288,7 +2422,7 @@ async function scTrackOrder(){
     if (!snap.exists()){ resEl.textContent = "No order found with ID " + id + "."; return; }
     var o = snap.data() || {};
     if ((o.userEmail || "").toLowerCase() !== email){ resEl.textContent = "No order found for that ID and email."; return; }
-    resEl.innerHTML = "<b>" + (o.id || id) + "</b> " + scBadge(o.status) + "<br>Item: " + (o.item || "") + "<br>Total: " + fmt(o.finalTotal || o.price || 0) + " (" + fmtPKR(o.finalTotal || o.price || 0) + ")<br>Date: " + scFmtDate(o.createdAt);
+    resEl.innerHTML = "<b>" + (o.id || id) + "</b> " + scBadge(scDisplayStatus(o)) + "<br>Item: " + (o.item || "") + "<br>Total: " + fmt(o.finalTotal || o.price || 0) + " (" + fmtPKR(o.finalTotal || o.price || 0) + ")<br>Date: " + scFmtDate(o.createdAt);
   } catch (e) { resEl.textContent = "Could not look up that order, please try again."; }
 }
 
