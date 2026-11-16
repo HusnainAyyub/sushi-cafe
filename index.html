@@ -527,7 +527,7 @@ html[data-theme="dark"] .badge.failed{color:#fca5a5;background:#450a0a}
   <div class="wrap">
     <div class="sec-head">
       <h2>OTP numbers, served private</h2>
-      <p>Premium international numbers, 8 apps, 7 countries. OTPs from Rs 90. The number is yours alone for the session, nobody else sees your code. If no code arrives in 15 minutes, you pay nothing.</p>
+      <p>Premium international numbers, 8 apps, 7 countries. OTPs from Rs 110. The number is yours alone for the session, nobody else sees your code. If no code arrives in 15 minutes, you pay nothing.</p>
     </div>
 
     <div class="otp-panel">
@@ -816,7 +816,7 @@ html[data-theme="dark"] .badge.failed{color:#fca5a5;background:#450a0a}
     <div class="foot-bottom">
       <span>© 2026 Sushi Cafe. All rights reserved.</span>
       <span>Prices are converted from PKR at approx rates. The final total is confirmed on WhatsApp in PKR / USDT.</span>
-      <span>Prices checked 16 Nov 2026 from GetOTP, DigiToolsHub and SMMVIX. OTP and rental prices move with live stock. Commission: 30 percent up to Rs 2,000, 20 percent above, minimum Rs 50.</span>
+      <span>Prices checked 16 Nov 2026 from GetOTP, DigiToolsHub and SMMVIX. OTP and rental prices move with live stock. Commission: 30 percent up to Rs 2,000, 20 percent above, minimum Rs 70.</span>
     </div>
   </div>
 </footer>
@@ -1021,7 +1021,7 @@ function selectedWaLabel(){
 }
 
 /* ---------------- Currency: base prices are PKR, default display USD ---------------- */
-/* Rental final prices: USA 1745/4840/19355, Canada 1530/4235/16935, UK 2420/7260/29030. Bases checked 16 Nov 2026 on GetOTP, commission is 30 percent up to Rs 2,000, 20 percent above, minimum Rs 50. */
+/* Rental final prices: USA 1745/4840/19355, Canada 1530/4235/16935, UK 2420/7260/29030. Bases checked 16 Nov 2026 on GetOTP, commission is 30 percent up to Rs 2,000, 20 percent above, minimum Rs 70. */
 /* Rates per 1 USD, dated 16 Nov 2026, approximate. Final totals are confirmed on WhatsApp in PKR / USDT. */
 var CURRENCIES = {
   USD: { symbol: "$", rate: 1 }, PKR: { symbol: "Rs ", rate: 281 }, SAR: { symbol: "SR ", rate: 3.75 },
@@ -1129,7 +1129,7 @@ var PRODUCTS = [
   {name:"IPTV Opplex", cat:"Streaming", initials:"TV", color:"#37474f", desc:"IPTV with live channels, movies and sports in HD, account provided.", duration:"1 Month", price:2340, base:1799, warranty:"Full Warranty", delivery:"Account provided", hot:false}, // base Rs 1799, DigiToolsHub
   {name:"Chaupal", cat:"Streaming", initials:"C", color:"#37474f", desc:"Chaupal Punjabi streaming, movies and shows, account provided.", duration:"1 Month", price:2340, base:1799, warranty:"Full Warranty", delivery:"Account provided", hot:false}, // base Rs 1799, DigiToolsHub
   {name:"ALT Balaji", cat:"Streaming", initials:"A", color:"#37474f", desc:"ALT Balaji streaming, shows and movies, account provided.", duration:"duration not stated", price:1885, base:1450, warranty:"Full Warranty", delivery:"Account provided", hot:false}, // base Rs 1450, DigiToolsHub
-  {name:"Canva Pro, 1 Month", cat:"Design & Creative", initials:"C", color:"#7d2ae8", desc:"Premium templates, background remover, brand kit and stock assets on your own Canva account.", duration:"1 Month", price:170, base:120, warranty:"Full Warranty", delivery:"Your account", hot:true}, // base Rs 120, SMMVIX
+  {name:"Canva Pro, 1 Month", cat:"Design & Creative", initials:"C", color:"#7d2ae8", desc:"Premium templates, background remover, brand kit and stock assets on your own Canva account.", duration:"1 Month", price:190, base:120, warranty:"Full Warranty", delivery:"Your account", hot:true}, // base Rs 120, SMMVIX
   {name:"Canva Pro, 1 Year", cat:"Design & Creative", initials:"C", color:"#7d2ae8", desc:"Premium templates, background remover, brand kit and stock assets on your own Canva account.", duration:"1 Year", price:1950, base:1499, warranty:"Full Warranty", delivery:"Your account", hot:false}, // base Rs 1499, DigiToolsHub
   {name:"CapCut Pro, 1 Month", cat:"Design & Creative", initials:"C", color:"#111111", desc:"All Pro effects, transitions, auto-captions and cloud storage on your own CapCut account.", duration:"1 Month", price:950, base:730, warranty:"Full Warranty", delivery:"Your account", hot:true}, // base Rs 730, SMMVIX
   {name:"CapCut Pro, 7 Days", cat:"Design & Creative", initials:"C", color:"#111111", desc:"CapCut Pro for 7 days, all Pro effects and auto-captions on your own account.", duration:"7 Days", price:325, base:250, warranty:"Full Warranty", delivery:"Your account", hot:false}, // base Rs 250, DigiToolsHub
@@ -1240,33 +1240,33 @@ renderRentPrices();
 
 /* ---------------- OTP builder ---------------- */
 /* OTP pricing, PKR, final selling price only. Base prices checked live 16 Nov 2026 on GetOTP.
-   Commission: 30 percent on a base up to Rs 2,000, 20 percent above Rs 2,000, minimum Rs 50,
+   Commission: 30 percent on a base up to Rs 2,000, 20 percent above Rs 2,000, minimum Rs 70,
    final price rounded to the nearest Rs 5. 24 OTP options, 8 apps, 7 countries. */
 var OTP_OPTIONS = [
   {name:"WhatsApp", country:"Pakistan", code:"+92", base:567, price:735}, // base Rs 567, GetOTP
-  {name:"Telegram", country:"Pakistan", code:"+92", base:211, price:275}, // base Rs 211, GetOTP
-  {name:"Google", country:"Pakistan", code:"+92", base:65, price:115}, // base Rs 65, GetOTP
-  {name:"TikTok", country:"Pakistan", code:"+92", base:71, price:120}, // base Rs 71, GetOTP
-  {name:"Instagram", country:"Pakistan", code:"+92", base:39, price:90}, // base Rs 39, GetOTP
-  {name:"Facebook", country:"Pakistan", code:"+92", base:70, price:120}, // base Rs 70, GetOTP
-  {name:"Discord", country:"Pakistan", code:"+92", base:71, price:120}, // base Rs 71, GetOTP
-  {name:"Amazon", country:"Pakistan", code:"+92", base:104, price:155}, // base Rs 104, GetOTP
+  {name:"Telegram", country:"Pakistan", code:"+92", base:211, price:280}, // base Rs 211, GetOTP
+  {name:"Google", country:"Pakistan", code:"+92", base:65, price:135}, // base Rs 65, GetOTP
+  {name:"TikTok", country:"Pakistan", code:"+92", base:71, price:140}, // base Rs 71, GetOTP
+  {name:"Instagram", country:"Pakistan", code:"+92", base:39, price:110}, // base Rs 39, GetOTP
+  {name:"Facebook", country:"Pakistan", code:"+92", base:70, price:140}, // base Rs 70, GetOTP
+  {name:"Discord", country:"Pakistan", code:"+92", base:71, price:140}, // base Rs 71, GetOTP
+  {name:"Amazon", country:"Pakistan", code:"+92", base:104, price:175}, // base Rs 104, GetOTP
   {name:"WhatsApp", country:"India", code:"+91", base:661, price:860}, // base Rs 661, GetOTP
-  {name:"Google", country:"India", code:"+91", base:97, price:145}, // base Rs 97, GetOTP
-  {name:"Amazon", country:"India", code:"+91", base:58, price:110}, // base Rs 58, GetOTP
+  {name:"Google", country:"India", code:"+91", base:97, price:165}, // base Rs 97, GetOTP
+  {name:"Amazon", country:"India", code:"+91", base:58, price:130}, // base Rs 58, GetOTP
   {name:"WhatsApp", country:"United States", code:"+1", base:726, price:945}, // base Rs 726, GetOTP
-  {name:"Google", country:"United States", code:"+1", base:146, price:195}, // base Rs 146, GetOTP
+  {name:"Google", country:"United States", code:"+1", base:146, price:215}, // base Rs 146, GetOTP
   {name:"WhatsApp", country:"United Kingdom", code:"+44", base:672, price:875}, // base Rs 672, GetOTP
-  {name:"Google", country:"United Kingdom", code:"+44", base:135, price:185}, // base Rs 135, GetOTP
+  {name:"Google", country:"United Kingdom", code:"+44", base:135, price:205}, // base Rs 135, GetOTP
   {name:"WhatsApp", country:"Canada", code:"+1", base:650, price:845}, // base Rs 650, GetOTP
-  {name:"Google", country:"Canada", code:"+1", base:95, price:145}, // base Rs 95, GetOTP
+  {name:"Google", country:"Canada", code:"+1", base:95, price:165}, // base Rs 95, GetOTP
   {name:"WhatsApp", country:"Germany", code:"+49", base:1888, price:2455}, // base Rs 1888, GetOTP
   {name:"Telegram", country:"Germany", code:"+49", base:1360, price:1770}, // base Rs 1360, GetOTP
   {name:"Google", country:"Germany", code:"+49", base:303, price:395}, // base Rs 303, GetOTP
-  {name:"Amazon", country:"Germany", code:"+49", base:182, price:235}, // base Rs 182, GetOTP
-  {name:"TikTok", country:"Germany", code:"+49", base:76, price:125}, // base Rs 76, GetOTP
+  {name:"Amazon", country:"Germany", code:"+49", base:182, price:250}, // base Rs 182, GetOTP
+  {name:"TikTok", country:"Germany", code:"+49", base:76, price:145}, // base Rs 76, GetOTP
   {name:"WhatsApp", country:"Indonesia", code:"+62", base:353, price:460}, // base Rs 353, GetOTP
-  {name:"Google", country:"Indonesia", code:"+62", base:58, price:110} // base Rs 58, GetOTP
+  {name:"Google", country:"Indonesia", code:"+62", base:58, price:130} // base Rs 58, GetOTP
 ];
 var selOtp = OTP_OPTIONS[0];
 
@@ -1282,7 +1282,7 @@ function buildChips(el, items, getLabel, isActive, onPick){
 }
 function withCommission(cost){
   var pct = cost <= 2000 ? 0.30 : 0.20;
-  var commission = Math.max(cost * pct, 50);
+  var commission = Math.max(cost * pct, 70);
   return Math.floor((cost + commission) / 5 + 0.5) * 5;
 }
 function otpPriceCalc(){ return selOtp.price; }
