@@ -1470,6 +1470,8 @@ function renderSummary(){
     '<div class="row"><span>Order</span><b>' + currentOrder.id + '</b></div>' +
     '<div class="row"><span>Item</span><b style="text-align:right">' + currentOrder.title + '</b></div>' +
     '<div class="row"><span>Details</span><span style="text-align:right">' + currentOrder.detail + '</span></div>';
+  var prof = (document.getElementById("fProfile") || {}).value || "";
+  if (prof.trim()) html += '<div class="row"><span>Profile</span><b style="text-align:right">' + prof.trim().replace(/</g, "&lt;") + '</b></div>';
   if (info.applied){
     html +=
       '<div class="row"><span>Original price</span><span>' + fmt(currentOrder.price) + '</span></div>' +
@@ -1490,6 +1492,7 @@ function renderSummary(){
   orderSummary.innerHTML = html;
 }
 document.getElementById("fCode").addEventListener("input", function(){ scValidateDiscount(); });
+document.getElementById("fProfile").addEventListener("input", function(){ renderSummary(); });
 document.getElementById("fCurrency").addEventListener("change", function(){ setCurrency(this.value); });
 function openOrder(order){
   if (window.SCAuth && window.SCAuth.requireSignIn && window.SCAuth.requireSignIn()){
