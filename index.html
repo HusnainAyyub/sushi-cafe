@@ -385,6 +385,42 @@ html[data-theme="dark"] .badge.failed{color:#fca5a5;background:#450a0a}
 .coupon-form{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0;align-items:center}
 .coupon-form input{font-family:inherit;font-size:14.5px;color:var(--text);background:var(--bg);border:1px solid var(--border);border-radius:11px;padding:10px 13px;min-height:44px}
 .coupon-form label{font-size:13.5px;font-weight:600;display:inline-flex;gap:6px;align-items:center}
+
+/* ---------- Sidebar + catalog sections ---------- */
+.menu-btn{display:none}
+.catalog-wrap{display:grid;grid-template-columns:236px minmax(0,1fr);gap:30px;align-items:start}
+.sidebar{position:sticky;top:66px;background:var(--card);border:1px solid var(--card-border);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow)}
+.sidebar h3{font-size:15px;margin-bottom:12px}
+.side-search{display:flex;align-items:center;gap:8px;background:var(--chip);border:1px solid var(--card-border);border-radius:11px;padding:0 12px;min-height:44px;margin-bottom:14px}
+.side-search input{flex:1;border:none;background:none;font-size:14.5px;color:var(--text);outline:none;font-family:inherit;min-height:40px;min-width:0}
+.side-nav{display:flex;flex-direction:column;gap:4px}
+.side-link{display:flex;justify-content:space-between;align-items:center;gap:10px;width:100%;text-align:left;font-size:14.5px;font-weight:500;color:var(--text);padding:10px 12px;border-radius:10px;min-height:42px}
+.side-link:hover{background:var(--chip);text-decoration:none}
+.side-link.active{background:var(--text);color:var(--bg);font-weight:600}
+.side-link .count{font-size:12px;font-weight:700;background:var(--chip);border:1px solid var(--card-border);border-radius:980px;padding:2px 9px;white-space:nowrap}
+.side-link.active .count{background:transparent;border-color:currentColor;color:inherit}
+.side-note{font-size:12.5px;color:var(--text-3);line-height:1.55;margin-top:14px}
+.sidebar-close{display:none}
+.sidebar-backdrop{display:none}
+.catalog-main{min-width:0}
+.cat-section{padding:34px 0 8px;border-top:1px solid var(--card-border)}
+.cat-section:first-child{padding-top:6px;border-top:none}
+.cat-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:6px}
+.cat-head h3{font-size:clamp(22px,3vw,28px)}
+.cat-count{font-size:12.5px;font-weight:700;color:var(--text);background:var(--chip);border:1px solid var(--card-border);border-radius:980px;padding:3px 11px;white-space:nowrap}
+.cat-desc{font-size:15px;color:var(--text-2);line-height:1.55;margin-bottom:18px;max-width:640px}
+.clear-search-btn{display:none;font-size:13.5px;font-weight:600;color:var(--accent);border:1.5px solid var(--accent);border-radius:980px;padding:8px 16px;min-height:40px;white-space:nowrap}
+.clear-search-btn.show{display:inline-block}
+.search-match-note{font-size:14px;color:var(--text-2);line-height:1.55;margin-top:10px}
+.search-match-note a{font-weight:600}
+@media(max-width:900px){
+  .menu-btn{display:inline-flex}
+  .catalog-wrap{grid-template-columns:1fr;gap:0}
+  .sidebar{position:fixed;top:0;left:0;bottom:0;width:min(300px,85vw);z-index:110;border-radius:0;overflow-y:auto;transform:translateX(-102%);transition:transform .25s ease;padding:20px}
+  .sidebar.open{transform:translateX(0)}
+  .sidebar-close{display:block;width:100%;text-align:right;font-size:14px;font-weight:600;color:var(--text-2);padding:4px 0 12px}
+  .sidebar-backdrop.show{display:block;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:105}
+}
 </style>
 </head>
 <body>
@@ -392,6 +428,7 @@ html[data-theme="dark"] .badge.failed{color:#fca5a5;background:#450a0a}
 <!-- ===================== NAV ===================== -->
 <header class="nav">
   <div class="nav-in">
+    <button class="auth-btn menu-btn" id="menuBtn" type="button" aria-label="Open menu">Menu</button>
     <a class="logo" href="#top"><span class="logo-mark">S</span>Sushi&nbsp;Cafe</a>
     <nav class="nav-links">
       <a href="#catalog">Subscriptions</a>
@@ -494,7 +531,29 @@ html[data-theme="dark"] .badge.failed{color:#fca5a5;background:#450a0a}
 
 <!-- ===================== CATALOG ===================== -->
 <section id="catalog">
-  <div class="wrap">
+  <div class="wrap catalog-wrap">
+    <aside class="sidebar" id="sidebar" aria-label="Browse sections">
+      <button class="sidebar-close" id="sidebarClose" type="button">Close</button>
+      <h3>Browse</h3>
+      <div class="side-search">
+        <input type="search" id="sidebarSearch" placeholder="Search all options..." aria-label="Search all options" />
+      </div>
+      <nav class="side-nav" id="sideNav">
+        <button type="button" class="side-link active" data-cat="All">All Products <span class="count">78</span></button>
+        <button type="button" class="side-link" data-cat="AI Tools">AI Tools <span class="count">27</span></button>
+        <button type="button" class="side-link" data-cat="Streaming">Streaming <span class="count">10</span></button>
+        <button type="button" class="side-link" data-cat="Design &amp; Creative">Design and Creative <span class="count">10</span></button>
+        <button type="button" class="side-link" data-cat="VPN &amp; Privacy">VPN and Privacy <span class="count">9</span></button>
+        <button type="button" class="side-link" data-cat="Social &amp; Accounts">Social and TikTok IDs <span class="count">4</span></button>
+        <button type="button" class="side-link" data-cat="Social Media Growth">Social Media Growth <span class="count">18</span></button>
+        <button type="button" class="side-link" data-cat="Favorites">Favorites <span class="count" id="favCount">0</span></button>
+        <button type="button" class="side-link" data-target="otp">OTP Numbers <span class="count">24</span></button>
+        <button type="button" class="side-link" data-target="rentals">Rental Numbers <span class="count">9</span></button>
+      </nav>
+      <p class="side-note">Search covers products, OTP numbers and rental numbers. Pick a section to see only that kind of service.</p>
+    </aside>
+    <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+    <div class="catalog-main">
     <div class="sec-head">
       <h2>The menu</h2>
       <p>AI tools, streaming, VPNs, creative apps and social media growth, the full catalog from one store. Prices are shown in your chosen currency, converted from PKR at approx rates. Every plan shows its warranty before you pay.</p>
@@ -506,6 +565,7 @@ html[data-theme="dark"] .badge.failed{color:#fca5a5;background:#450a0a}
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
           <input type="search" id="searchInput" placeholder="Search Netflix, ChatGPT, VPN…" aria-label="Search products" />
         </div>
+        <button class="clear-search-btn" id="clearSearch" type="button">Clear search</button>
       </div>
       <div class="tabs" id="tabs" role="tablist" aria-label="Filter by category"></div>
       <div class="sort-row"><label for="sortSelect">Sort</label>
@@ -514,10 +574,11 @@ html[data-theme="dark"] .badge.failed{color:#fca5a5;background:#450a0a}
       <p class="currency-note" id="currencyNote">Prices in USD by default. Converted from PKR at approx rates dated 16 Nov 2026. Final total is confirmed on WhatsApp in PKR / USDT.</p>
       <div class="result-count" id="resultCount"></div>
     </div>
-    <div class="grid" id="grid"></div>
+    <div id="grid"></div>
     <div class="empty" id="emptyState">
       <b>Nothing on the menu matches that.</b>
       Try a different search, or ask us on WhatsApp, we stock more than what's listed.
+    </div>
     </div>
   </div>
 </section>
@@ -547,8 +608,16 @@ html[data-theme="dark"] .badge.failed{color:#fca5a5;background:#450a0a}
       </div>
     </div>
 
-    <h3 style="margin-top:34px">Rental numbers</h3>
-    <p style="font-size:14.5px;color:var(--text-2);margin-bottom:18px">Dedicated numbers from the USA, Canada and the UK. Prices checked 16 Nov 2026 from GetOTP, OTP and rental prices move with live stock.</p>
+  </div>
+</section>
+
+<!-- ===================== RENTALS ===================== -->
+<section id="rentals" class="sec-alt">
+  <div class="wrap">
+    <div class="sec-head">
+      <h2>Rental numbers</h2>
+      <p>Dedicated numbers from the USA, Canada and the UK. Prices checked 16 Nov 2026 from GetOTP, OTP and rental prices move with live stock.</p>
+    </div>
     <div class="rent-row">
       <div class="rent-card">
         <h3>USA Rental, 1 Month</h3>
@@ -1199,73 +1268,173 @@ var PRODUCTS = [
 var grid = document.getElementById("grid");
 var tabsEl = document.getElementById("tabs");
 var searchInput = document.getElementById("searchInput");
+var sidebarSearch = document.getElementById("sidebarSearch");
+var clearSearchBtn = document.getElementById("clearSearch");
 var resultCount = document.getElementById("resultCount");
 var emptyState = document.getElementById("emptyState");
 var activeCat = "All";
-
+var SECTION_ORDER = [
+  {cat:"AI Tools", desc:"ChatGPT, Claude, Gemini, Perplexity and more, activated on your own account."},
+  {cat:"Streaming", desc:"Netflix, Spotify, YouTube Premium, Prime Video and more, one screen or a full account."},
+  {cat:"Design & Creative", desc:"Canva, CapCut, Figma and creative tools for work and content."},
+  {cat:"VPN & Privacy", desc:"VPNs and privacy tools for every device."},
+  {cat:"Social & Accounts", desc:"TikTok IDs and social accounts, USA, UK, Germany and France."},
+  {cat:"Social Media Growth", desc:"Followers, likes, views and watch time. Prices are per 1000 followers, likes or views unless stated."}
+];
+function searchQuery(){
+  return (searchInput ? searchInput.value : "").trim().toLowerCase();
+}
+function otpMatches(q){
+  if (typeof OTP_OPTIONS === "undefined" || !OTP_OPTIONS) return 24;
+  if (!q) return OTP_OPTIONS.length;
+  return OTP_OPTIONS.filter(function(o){ return (o.name + " " + o.country + " otp number").toLowerCase().indexOf(q) !== -1; }).length;
+}
+function rentMatches(q){
+  if (!q) return 9;
+  var names = ["USA Rental Number, 1 Month","USA Rental Number, 3 Months","USA Rental Number, 12 Months","Canada Rental Number, 1 Month","Canada Rental Number, 3 Months","Canada Rental Number, 12 Months","UK Rental Number, 1 Month","UK Rental Number, 3 Months","UK Rental Number, 12 Months"];
+  return names.filter(function(n){ return n.toLowerCase().indexOf(q) !== -1; }).length;
+}
+function setCat(c, scroll){
+  activeCat = c;
+  tabsEl.querySelectorAll(".tab").forEach(function(t){ t.classList.toggle("active", t.textContent === c); });
+  document.querySelectorAll("#sideNav .side-link[data-cat]").forEach(function(l){ l.classList.toggle("active", l.getAttribute("data-cat") === c); });
+  renderGrid();
+  if (scroll){
+    var el = document.getElementById("catalog");
+    if (el) el.scrollIntoView();
+  }
+  closeSidebar();
+}
 CATEGORIES.forEach(function(c){
   var b = document.createElement("button");
   b.type = "button"; b.className = "tab" + (c === "All" ? " active" : "");
   b.textContent = c; b.setAttribute("role","tab");
-  b.addEventListener("click", function(){
-    activeCat = c;
-    tabsEl.querySelectorAll(".tab").forEach(function(t){ t.classList.toggle("active", t.textContent === c); });
-    renderGrid();
-  });
+  b.addEventListener("click", function(){ setCat(c, false); });
   tabsEl.appendChild(b);
 });
 (function(){
   var fb = document.createElement("button");
   fb.type = "button"; fb.className = "tab"; fb.textContent = "Favorites"; fb.setAttribute("role", "tab");
-  fb.addEventListener("click", function(){
-    activeCat = "Favorites";
-    tabsEl.querySelectorAll(".tab").forEach(function(t){ t.classList.toggle("active", t === fb); });
-    renderGrid();
-  });
+  fb.addEventListener("click", function(){ setCat("Favorites", false); });
   tabsEl.appendChild(fb);
 })();
-
-function renderGrid(){
-  var q = searchInput.value.trim().toLowerCase();
-  var list = PRODUCTS.filter(function(p){
-    var inCat = activeCat === "All" || p.cat === activeCat || (activeCat === "Favorites" && isFav(p.name));
-    var inSearch = !q || (p.name + " " + p.cat + " " + p.desc).toLowerCase().indexOf(q) !== -1;
-    return inCat && inSearch;
+document.querySelectorAll("#sideNav .side-link[data-cat]").forEach(function(l){
+  l.addEventListener("click", function(){ setCat(l.getAttribute("data-cat"), true); });
+});
+document.querySelectorAll("#sideNav .side-link[data-target]").forEach(function(l){
+  l.addEventListener("click", function(){
+    document.querySelectorAll("#sideNav .side-link").forEach(function(x){ x.classList.remove("active"); });
+    l.classList.add("active");
+    var el = document.getElementById(l.getAttribute("data-target"));
+    if (el) el.scrollIntoView();
+    closeSidebar();
   });
+});
+function openSidebar(){ var sb = document.getElementById("sidebar"); var bd = document.getElementById("sidebarBackdrop"); if (sb) sb.classList.add("open"); if (bd) bd.classList.add("show"); }
+function closeSidebar(){ var sb = document.getElementById("sidebar"); var bd = document.getElementById("sidebarBackdrop"); if (sb) sb.classList.remove("open"); if (bd) bd.classList.remove("show"); }
+var menuBtn = document.getElementById("menuBtn");
+if (menuBtn) menuBtn.addEventListener("click", openSidebar);
+var sidebarClose = document.getElementById("sidebarClose");
+if (sidebarClose) sidebarClose.addEventListener("click", closeSidebar);
+var sidebarBackdrop = document.getElementById("sidebarBackdrop");
+if (sidebarBackdrop) sidebarBackdrop.addEventListener("click", closeSidebar);
+function syncSearch(fromSidebar){
+  var q = fromSidebar ? sidebarSearch.value : searchInput.value;
+  if (searchInput.value !== q) searchInput.value = q;
+  if (sidebarSearch.value !== q) sidebarSearch.value = q;
+  renderGrid();
+}
+function makeCard(p){
+  var off = p.old ? Math.round((1 - p.price / p.old) * 100) : 0;
+  var card = document.createElement("article");
+  card.className = "card";
+  card.innerHTML =
+    '<div class="card-top"><div class="tile" style="background:' + p.color + '">' + p.initials + '</div>' +
+    (p.hot ? '<span class="hot">HOT DEAL</span>' : '') +
+    '<button type="button" class="fav-btn" data-fav="' + p.name.replace(/"/g, "") + '" aria-label="Save ' + p.name.replace(/"/g, "") + ' to favorites">' + (isFav(p.name) ? "♥" : "♡") + '</button></div>' +
+    '<div class="cat">' + p.cat + '</div>' +
+    '<h3>' + p.name + '</h3>' +
+    '<p class="desc">' + p.desc + '</p>' +
+    '<div class="meta"><span class="pill">' + p.duration + '</span>' +
+    '<span class="pill warranty">' + p.warranty + '</span>' +
+    '<span class="pill">' + p.delivery + '</span></div>' +
+    '<div class="price-row"><span class="price">' + fmt(p.price) + '</span>' +
+    (p.old ? '<span class="old-price">' + fmt(p.old) + '</span><span class="off">−' + off + '%</span>' : '') + '</div>';
+  var btn = document.createElement("button");
+  btn.type = "button"; btn.className = "order-btn"; btn.textContent = "Order now";
+  btn.addEventListener("click", function(){
+    openOrder({ title: p.name, detail: p.duration + " · " + p.delivery + " · " + p.warranty, price: p.price, cat: p.cat });
+  });
+  card.appendChild(btn);
+  return card;
+}
+function sortList(list){
   var sortMode = (document.getElementById("sortSelect") || {}).value || "popular";
   if (sortMode === "price-asc") list.sort(function(a, b){ return a.price - b.price; });
   else if (sortMode === "price-desc") list.sort(function(a, b){ return b.price - a.price; });
   else if (sortMode === "name") list.sort(function(a, b){ return a.name.localeCompare(b.name); });
   else list.sort(function(a, b){ return (b.hot ? 1 : 0) - (a.hot ? 1 : 0) || a.name.localeCompare(b.name); });
-  grid.innerHTML = "";
-  list.forEach(function(p){
-    var off = p.old ? Math.round((1 - p.price / p.old) * 100) : 0;
-    var card = document.createElement("article");
-    card.className = "card";
-    card.innerHTML =
-      '<div class="card-top"><div class="tile" style="background:' + p.color + '">' + p.initials + '</div>' +
-      (p.hot ? '<span class="hot">HOT DEAL</span>' : '') +
-      '<button type="button" class="fav-btn" data-fav="' + p.name.replace(/"/g, "") + '" aria-label="Save ' + p.name.replace(/"/g, "") + ' to favorites">' + (isFav(p.name) ? "♥" : "♡") + '</button></div>' +
-      '<div class="cat">' + p.cat + '</div>' +
-      '<h3>' + p.name + '</h3>' +
-      '<p class="desc">' + p.desc + '</p>' +
-      '<div class="meta"><span class="pill">' + p.duration + '</span>' +
-      '<span class="pill warranty">' + p.warranty + '</span>' +
-      '<span class="pill">' + p.delivery + '</span></div>' +
-      '<div class="price-row"><span class="price">' + fmt(p.price) + '</span>' +
-      (p.old ? '<span class="old-price">' + fmt(p.old) + '</span><span class="off">−' + off + '%</span>' : '') + '</div>';
-    var btn = document.createElement("button");
-    btn.type = "button"; btn.className = "order-btn"; btn.textContent = "Order now";
-    btn.addEventListener("click", function(){
-      openOrder({ title: p.name, detail: p.duration + " · " + p.delivery + " · " + p.warranty, price: p.price, cat: p.cat });
-    });
-    card.appendChild(btn);
-    grid.appendChild(card);
-  });
-  resultCount.textContent = list.length + (list.length === 1 ? " plan" : " plans") + (activeCat !== "All" ? " in " + activeCat : "") + (q ? ' matching "' + searchInput.value.trim() + '"' : "");
-  emptyState.style.display = list.length ? "none" : "block";
+  return list;
 }
-searchInput.addEventListener("input", renderGrid);
+function renderGrid(){
+  var q = searchQuery();
+  var list = PRODUCTS.filter(function(p){
+    var inCat = activeCat === "All" || p.cat === activeCat || (activeCat === "Favorites" && isFav(p.name));
+    var inSearch = !q || (p.name + " " + p.cat + " " + p.desc).toLowerCase().indexOf(q) !== -1;
+    return inCat && inSearch;
+  });
+  sortList(list);
+  var favCountEl = document.getElementById("favCount");
+  if (favCountEl) favCountEl.textContent = PRODUCTS.filter(function(p){ return isFav(p.name); }).length;
+  grid.innerHTML = "";
+  var catsToShow = activeCat === "All" || activeCat === "Favorites" ? SECTION_ORDER : SECTION_ORDER.filter(function(s){ return s.cat === activeCat; });
+  var shownSections = 0;
+  catsToShow.forEach(function(sec){
+    var items = list.filter(function(p){ return p.cat === sec.cat; });
+    if (!items.length) return;
+    shownSections++;
+    var wrap = document.createElement("div");
+    wrap.className = "cat-section";
+    wrap.id = "section-" + sec.cat.replace(/[^A-Za-z0-9]+/g, "-").toLowerCase();
+    var label = sec.cat === "Social & Accounts" ? "Social and TikTok IDs" : sec.cat;
+    wrap.innerHTML = '<div class="cat-head"><h3>' + label + '</h3><span class="cat-count">' + items.length + (items.length === 1 ? " item" : " items") + '</span></div>' +
+      '<p class="cat-desc">' + sec.desc + '</p>';
+    var g = document.createElement("div");
+    g.className = "grid";
+    items.forEach(function(p){ g.appendChild(makeCard(p)); });
+    wrap.appendChild(g);
+    grid.appendChild(wrap);
+  });
+  var otpN = otpMatches(q);
+  var rentN = rentMatches(q);
+  var note = "";
+  if (q){
+    note = list.length + (list.length === 1 ? " result" : " results") + " in " + shownSections + (shownSections === 1 ? " section" : " sections");
+    note += ". Also " + otpN + " OTP number" + (otpN === 1 ? "" : "s") + " and " + rentN + " rental number" + (rentN === 1 ? "" : "s") + " match, see <a href=\"#otp\">OTP Numbers</a> and <a href=\"#rentals\">Rental Numbers</a> below.";
+  } else {
+    note = list.length + " products in " + shownSections + (shownSections === 1 ? " section" : " sections") + (activeCat !== "All" ? " in " + activeCat : "") + ".";
+  }
+  resultCount.innerHTML = note;
+  if (clearSearchBtn) clearSearchBtn.classList.toggle("show", !!q);
+  emptyState.style.display = list.length ? "none" : "block";
+  applySearchToOtpRentals(q);
+}
+function applySearchToOtpRentals(q){
+  var chips = document.getElementById("otpChips");
+  if (chips && typeof renderOtp === "function" && typeof OTP_OPTIONS !== "undefined" && OTP_OPTIONS && q !== undefined) renderOtp();
+  document.querySelectorAll(".rent-card").forEach(function(card){
+    var name = (card.querySelector("h3") || {}).textContent || "";
+    card.style.display = (!q || name.toLowerCase().indexOf(q) !== -1) ? "" : "none";
+  });
+}
+searchInput.addEventListener("input", function(){ syncSearch(false); });
+if (sidebarSearch) sidebarSearch.addEventListener("input", function(){ syncSearch(true); });
+if (clearSearchBtn) clearSearchBtn.addEventListener("click", function(){
+  searchInput.value = "";
+  if (sidebarSearch) sidebarSearch.value = "";
+  renderGrid();
+  searchInput.focus();
+});
 document.getElementById("sortSelect").addEventListener("change", renderGrid);
 grid.addEventListener("click", function(e){
   var favBtn = e.target.closest ? e.target.closest("[data-fav]") : null;
@@ -1331,7 +1500,12 @@ function withCommission(cost){
 }
 function otpPriceCalc(){ return selOtp.price; }
 function renderOtp(){
-  buildChips(document.getElementById("otpChips"), OTP_OPTIONS,
+  var q = searchQuery();
+  var otpList = q ? OTP_OPTIONS.filter(function(o){ return (o.name + " " + o.country + " otp number").toLowerCase().indexOf(q) !== -1; }) : OTP_OPTIONS;
+  var chipsEl = document.getElementById("otpChips");
+  if (!otpList.length && chipsEl){ chipsEl.innerHTML = "<p style=\"font-size:14.5px;color:var(--text-2)\">No OTP numbers match that search.</p>"; document.getElementById("otpSummary").innerHTML = ""; document.getElementById("otpPrice").innerHTML = ""; return; }
+  if (otpList.indexOf(selOtp) === -1) selOtp = otpList[0];
+  buildChips(document.getElementById("otpChips"), otpList,
     function(o){ return o.name + ", " + o.country; }, function(o){ return o === selOtp; },
     function(o){ selOtp = o; renderOtp(); });
   document.getElementById("otpSummary").innerHTML =
