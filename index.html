@@ -421,9 +421,9 @@ html[data-theme="dark"] .badge.failed{color:#fca5a5;background:#450a0a}
 <!-- ===================== HERO ===================== -->
 <div class="hero" id="top">
   <div class="wrap">
-    <span class="hero-badge">Subscriptions · AI Tools · OTP Numbers</span>
+    <span class="hero-badge">Subscriptions · AI Tools · OTP Numbers · Social Media Growth</span>
     <h1>Every subscription you need. <span class="red">Served fresh.</span></h1>
-    <p>ChatGPT Plus, Netflix, Spotify, VPNs, design tools and private OTP numbers from Pakistan, India, the USA, Canada, the UK, Germany and Indonesia, ordered in under a minute on WhatsApp, activated by a real person.</p>
+    <p>ChatGPT Plus, Netflix, Spotify, VPNs, design tools, social media growth and private OTP numbers from Pakistan, India, the USA, Canada, the UK, Germany and Indonesia, ordered in under a minute on WhatsApp, activated by a real person.</p>
     <div class="hero-ctas">
       <a class="btn btn-dark" href="#catalog">Browse the menu</a>
       <a class="btn btn-wa" href="https://wa.me/966593140752?text=Hi%20Sushi%20Cafe%2C%20I%20want%20to%20place%20an%20order." target="_blank" rel="noopener">Order on WhatsApp</a>
@@ -453,7 +453,7 @@ html[data-theme="dark"] .badge.failed{color:#fca5a5;background:#450a0a}
 <!-- ===================== STATS ===================== -->
 <div class="stats">
   <div class="wrap stats-in">
-    <div class="stat"><b>56</b><span>Subscriptions and tools listed</span></div>
+    <div class="stat"><b>74</b><span>Subscriptions, tools and growth services listed</span></div>
     <div class="stat"><b>7</b><span>Countries for OTP numbers</span></div>
     <div class="stat"><b>24</b><span>OTP numbers, 8 apps, 7 countries</span></div>
     <div class="stat"><b>25-day</b><span>Replacement on monthly plans</span></div>
@@ -497,7 +497,7 @@ html[data-theme="dark"] .badge.failed{color:#fca5a5;background:#450a0a}
   <div class="wrap">
     <div class="sec-head">
       <h2>The menu</h2>
-      <p>AI tools, streaming, VPNs and creative apps, the full catalog from one store. Prices are shown in your chosen currency, converted from PKR at approx rates. Every plan shows its warranty before you pay.</p>
+      <p>AI tools, streaming, VPNs, creative apps and social media growth, the full catalog from one store. Prices are shown in your chosen currency, converted from PKR at approx rates. Every plan shows its warranty before you pay.</p>
       <p style="margin-top:14px;font-size:15px;background:var(--chip);border:1px solid var(--card-border);border-radius:12px;padding:12px 16px;line-height:1.55"><b style="color:var(--text)">Final price, no surprises:</b> the price you see is the price you pay. No extra charges are added at checkout or in the WhatsApp order, the total in your order is your final total.</p>
     </div>
     <div class="controls">
@@ -816,7 +816,7 @@ html[data-theme="dark"] .badge.failed{color:#fca5a5;background:#450a0a}
     <div class="foot-bottom">
       <span>© 2026 Sushi Cafe. All rights reserved.</span>
       <span>Prices are converted from PKR at approx rates. The final total is confirmed on WhatsApp in PKR / USDT.</span>
-      <span>Prices checked 16 Nov 2026 from GetOTP, DigiToolsHub and SMMVIX. OTP and rental prices move with live stock. Commission: 20 percent up to Rs 2,000, 10 percent above, minimum Rs 70.</span>
+      <span>Prices checked 16 Nov 2026 from GetOTP, DigiToolsHub, SMMVIX and PakSMMPanel. OTP and rental prices move with live stock. Social media growth prices are per 1000 units unless stated. Commission: 20 percent up to Rs 2,000, 10 percent above, minimum Rs 70.</span>
     </div>
   </div>
 </footer>
@@ -1090,7 +1090,7 @@ try {
 } catch (e) {}
 
 /* ---------------- Catalog data ---------------- */
-var CATEGORIES = ["All","AI Tools","Streaming","VPN & Privacy","Design & Creative","Social & Accounts"];
+var CATEGORIES = ["All","AI Tools","Streaming","VPN & Privacy","Design & Creative","Social & Accounts","Social Media Growth"];
 /* Final selling prices shown to customers. */
 var PRODUCTS = [
   {name:"ChatGPT Plus", cat:"AI Tools", initials:"G", color:"#10a37f", desc:"GPT-5 access, image generation, deep research and priority speed, activated on your own OpenAI account.", duration:"1 Month", price:3300, base:3000, warranty:"Full Warranty", delivery:"Your account", hot:true}, // base Rs 3000, DigiToolsHub
@@ -1149,6 +1149,24 @@ var PRODUCTS = [
   {name:"TikTok ID, UK", cat:"Social & Accounts", initials:"T", color:"#010101", desc:"Fresh UK region TikTok account, full access, ready to post. Details handed over in the chat.", duration:"One-time", price:390, base:320, warranty:"Full Warranty", delivery:"Account provided", hot:false}, // base Rs 320, DigiToolsHub
   {name:"TikTok ID, Germany", cat:"Social & Accounts", initials:"T", color:"#010101", desc:"Fresh Germany region TikTok account, full access, ready to post. Details handed over in the chat.", duration:"One-time", price:390, base:320, warranty:"Full Warranty", delivery:"Account provided", hot:false}, // base Rs 320, DigiToolsHub
   {name:"TikTok ID, France", cat:"Social & Accounts", initials:"T", color:"#010101", desc:"Fresh France region TikTok account, full access, ready to post. Details handed over in the chat.", duration:"One-time", price:390, base:320, warranty:"Full Warranty", delivery:"Account provided", hot:false}, // base Rs 320, DigiToolsHub
+  {name:"TikTok Followers, No Refill", cat:"Social Media Growth", initials:"T", color:"#010101", desc:"TikTok followers, no refill, per 1000.", duration:"Per 1000, min 100", price:435, base:363, warranty:"No warranty", delivery:"Account provided", hot:false}, // base Rs 363, PakSMMPanel, per 1000
+  {name:"TikTok Likes, Lifetime Refill", cat:"Social Media Growth", initials:"T", color:"#010101", desc:"TikTok likes with lifetime refill, per 1000.", duration:"Per 1000, min 50", price:600, base:500, warranty:"No warranty", delivery:"Account provided", hot:false}, // base Rs 500, PakSMMPanel, per 1000
+  {name:"TikTok Views", cat:"Social Media Growth", initials:"T", color:"#010101", desc:"TikTok views, per 1000, delivery in seconds to minutes.", duration:"Per 1000, min 100", price:100, base:30, warranty:"No warranty", delivery:"Account provided", hot:false}, // base Rs 30, PakSMMPanel, per 1000
+  {name:"TikTok Monetization Package", cat:"Social Media Growth", initials:"T", color:"#010101", desc:"TikTok monetization package.", duration:"1 Package", price:5500, base:5000, warranty:"No warranty", delivery:"Account provided", hot:false}, // base Rs 5000, PakSMMPanel, per 1000
+  {name:"TikTok Fresh Monetizable Account", cat:"Social Media Growth", initials:"T", color:"#010101", desc:"Fresh monetizable TikTok account, UK, USA or Germany.", duration:"1 Account", price:480, base:399, warranty:"No warranty", delivery:"Account provided", hot:false}, // base Rs 399, PakSMMPanel, per 1000
+  {name:"Instagram Followers", cat:"Social Media Growth", initials:"I", color:"#e1306c", desc:"Instagram followers, per 1000.", duration:"Per 1000, min 100", price:1490, base:1240, warranty:"No warranty", delivery:"Account provided", hot:false}, // base Rs 1240, PakSMMPanel, per 1000
+  {name:"Instagram Likes", cat:"Social Media Growth", initials:"I", color:"#e1306c", desc:"Instagram likes, per 1000.", duration:"Per 1000", price:1535, base:1280, warranty:"No warranty", delivery:"Account provided", hot:false}, // base Rs 1280, PakSMMPanel, per 1000
+  {name:"Instagram Video Views", cat:"Social Media Growth", initials:"I", color:"#e1306c", desc:"Instagram video views, per 1000.", duration:"Per 1000", price:95, base:25, warranty:"No warranty", delivery:"Account provided", hot:false}, // base Rs 25, PakSMMPanel, per 1000
+  {name:"Instagram Story Views", cat:"Social Media Growth", initials:"I", color:"#e1306c", desc:"Instagram story views, per 1000.", duration:"Per 1000", price:370, base:300, warranty:"No warranty", delivery:"Account provided", hot:false}, // base Rs 300, PakSMMPanel, per 1000
+  {name:"YouTube Subscribers, No Refill", cat:"Social Media Growth", initials:"Y", color:"#cc0000", desc:"YouTube subscribers, no refill, per 1000.", duration:"Per 1000, min 100", price:1920, base:1600, warranty:"No warranty", delivery:"Account provided", hot:false}, // base Rs 1600, PakSMMPanel, per 1000
+  {name:"YouTube Views", cat:"Social Media Growth", initials:"Y", color:"#cc0000", desc:"YouTube views, per 1000.", duration:"Per 1000", price:1020, base:850, warranty:"No warranty", delivery:"Account provided", hot:false}, // base Rs 850, PakSMMPanel, per 1000
+  {name:"YouTube Watchtime, 4000 Hours", cat:"Social Media Growth", initials:"Y", color:"#cc0000", desc:"YouTube watchtime, 4000 hours.", duration:"4000 Hours", price:3630, base:3300, warranty:"No warranty", delivery:"Account provided", hot:false}, // base Rs 3300, PakSMMPanel, per 1000
+  {name:"YouTube Shorts Views", cat:"Social Media Growth", initials:"Y", color:"#cc0000", desc:"YouTube Shorts views, per 1000.", duration:"Per 1000", price:600, base:500, warranty:"No warranty", delivery:"Account provided", hot:false}, // base Rs 500, PakSMMPanel, per 1000
+  {name:"Facebook Page Followers, Refill", cat:"Social Media Growth", initials:"F", color:"#1877f2", desc:"Facebook page followers with refill, per 1000.", duration:"Per 1000", price:2750, base:2500, warranty:"No warranty", delivery:"Account provided", hot:false}, // base Rs 2500, PakSMMPanel, per 1000
+  {name:"Facebook Post Likes", cat:"Social Media Growth", initials:"F", color:"#1877f2", desc:"Facebook post likes, per 1000.", duration:"Per 1000", price:1680, base:1400, warranty:"No warranty", delivery:"Account provided", hot:false}, // base Rs 1400, PakSMMPanel, per 1000
+  {name:"Twitter / X Followers", cat:"Social Media Growth", initials:"X", color:"#111111", desc:"Twitter / X followers, per 1000.", duration:"Per 1000", price:4400, base:4000, warranty:"No warranty", delivery:"Account provided", hot:false}, // base Rs 4000, PakSMMPanel, per 1000
+  {name:"Telegram Group / Channel Members", cat:"Social Media Growth", initials:"T", color:"#229ed9", desc:"Telegram group or channel members, per 1000.", duration:"Per 1000", price:1800, base:1500, warranty:"No warranty", delivery:"Account provided", hot:false}, // base Rs 1500, PakSMMPanel, per 1000
+  {name:"LinkedIn Followers", cat:"Social Media Growth", initials:"L", color:"#0a66c2", desc:"LinkedIn followers, per 1000.", duration:"Per 1000, min 10", price:4180, base:3800, warranty:"No warranty", delivery:"Account provided", hot:false}, // base Rs 3800, PakSMMPanel, per 1000
 ];
 
 /* ---------------- Render catalog ---------------- */
