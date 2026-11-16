@@ -4,9 +4,9 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <meta name="color-scheme" content="light dark" />
-<meta name="description" content="Sushi Cafe — premium subscriptions, AI tools, VPNs and private OTP numbers. Order on WhatsApp, pay with Binance Pay, Easypaisa or JazzCash, activated in minutes." />
+<meta name="description" content="Sushi Cafe, premium subscriptions, AI tools, VPNs and private OTP numbers. Order on WhatsApp, pay with Binance Pay, Easypaisa or JazzCash, activated in minutes." />
 <link rel="icon" href="data:," />
-<title>Sushi Cafe — Subscriptions, AI Tools & OTP Numbers</title>
+<title>Sushi Cafe, Subscriptions, AI Tools & OTP Numbers</title>
 <style>
 :root{
   --bg:#ffffff;
@@ -361,6 +361,30 @@ table.admin-table{width:100%;border-collapse:collapse;font-size:14px;min-width:7
 .admin-table th,.admin-table td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--card-border);vertical-align:top}
 .admin-table th{font-size:12.5px;text-transform:uppercase;letter-spacing:.04em;color:var(--text-3)}
 .admin-table select{font-family:inherit;font-size:13.5px;color:var(--text);background:var(--bg);border:1px solid var(--border);border-radius:9px;padding:7px 9px;min-height:36px}
+/* ---------- Currency, theme, favorites, sort, track, referrals, coupons ---------- */
+html[data-theme="dark"]{--bg:#000000;--bg-alt:#161617;--card:#1d1d1f;--card-border:#333336;--text:#f5f5f7;--text-2:#a1a1a6;--text-3:#86868b;--border:#38383a;--accent:#ff5147;--accent-dark:#ff7a72;--link:#2997ff;--chip:#2c2c2e;--nav-bg:rgba(22,22,23,.78);--shadow:0 4px 24px rgba(0,0,0,.4);--shadow-lg:0 24px 70px rgba(0,0,0,.7)}
+html[data-theme="light"]{--bg:#ffffff;--bg-alt:#f5f5f7;--card:#ffffff;--card-border:#e3e3e6;--text:#1d1d1f;--text-2:#6e6e73;--text-3:#86868b;--border:#d2d2d7;--accent:#d92d20;--accent-dark:#b42318;--link:#0066cc;--chip:#f5f5f7;--nav-bg:rgba(251,251,253,.82);--shadow:0 4px 24px rgba(0,0,0,.06);--shadow-lg:0 24px 70px rgba(0,0,0,.28)}
+html[data-theme="dark"] .pill.warranty{color:#4ade80}
+html[data-theme="dark"] .badge.pending{color:#fcd34d;background:#451a03}
+html[data-theme="dark"] .badge.paid{color:#93c5fd;background:#1e3a5f}
+html[data-theme="dark"] .badge.activated{color:#86efac;background:#14532d}
+html[data-theme="dark"] .badge.failed{color:#fca5a5;background:#450a0a}
+.currency-select,.sort-select{font-family:inherit;font-size:13px;font-weight:600;color:var(--text);background:var(--chip);border:1px solid var(--card-border);border-radius:980px;padding:7px 10px;min-height:36px;white-space:nowrap}
+.fav-btn{font-size:19px;line-height:1;color:var(--accent);padding:4px 6px;border-radius:8px;min-height:32px}
+.fav-btn:hover{background:var(--chip)}
+.sort-row{display:flex;gap:10px;align-items:center;margin-top:12px;flex-wrap:wrap}
+.sort-row label{font-size:14px;font-weight:600;color:var(--text-2)}
+.currency-note{font-size:12.5px;color:var(--text-3);line-height:1.55;margin-top:10px}
+.track-box{background:var(--card);border:1px solid var(--card-border);border-radius:24px;box-shadow:var(--shadow);padding:30px;max-width:680px;margin:0 auto}
+.track-box .field{margin-bottom:12px}
+.track-result{font-size:15px;line-height:1.6;margin-top:14px}
+.refer-box{background:var(--bg-alt);border:1px solid var(--card-border);border-radius:14px;padding:16px 18px;margin-bottom:16px}
+.refer-box h4{font-size:16px;margin-bottom:6px}
+.refer-box p{font-size:14px;color:var(--text-2);line-height:1.55;margin-bottom:10px}
+.refer-code{font-size:19px;font-weight:800;letter-spacing:.06em;background:var(--card);border:1px solid var(--card-border);border-radius:10px;padding:8px 14px;display:inline-block;margin-right:8px}
+.coupon-form{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0;align-items:center}
+.coupon-form input{font-family:inherit;font-size:14.5px;color:var(--text);background:var(--bg);border:1px solid var(--border);border-radius:11px;padding:10px 13px;min-height:44px}
+.coupon-form label{font-size:13.5px;font-weight:600;display:inline-flex;gap:6px;align-items:center}
 </style>
 </head>
 <body>
@@ -376,6 +400,10 @@ table.admin-table{width:100%;border-collapse:collapse;font-size:14px;min-width:7
       <a href="#payment">Payment</a>
       <a href="#faq">FAQ</a>
     </nav>
+    <select class="currency-select" id="currencySelect" aria-label="Currency">
+      <option value="USD">USD $</option><option value="PKR">PKR Rs</option><option value="SAR">SAR</option><option value="AED">AED</option><option value="INR">INR</option><option value="GBP">GBP</option><option value="EUR">EUR</option><option value="CAD">CAD</option><option value="AUD">AUD</option>
+    </select>
+    <button class="auth-btn" id="themeBtn" type="button" aria-label="Switch light or dark theme">Dark</button>
     <button class="auth-btn" id="signInBtn" type="button">Sign in</button>
     <span class="user-chip" id="userChip">
       <span class="who" id="userName"></span>
@@ -395,29 +423,29 @@ table.admin-table{width:100%;border-collapse:collapse;font-size:14px;min-width:7
   <div class="wrap">
     <span class="hero-badge">Subscriptions · AI Tools · OTP Numbers</span>
     <h1>Every subscription you need. <span class="red">Served fresh.</span></h1>
-    <p>ChatGPT Plus, Netflix, Spotify, VPNs, design tools and private OTP numbers from 180+ countries — ordered in under a minute on WhatsApp, activated by a real person.</p>
+    <p>ChatGPT Plus, Netflix, Spotify, VPNs, design tools and private OTP numbers from 180+ countries, ordered in under a minute on WhatsApp, activated by a real person.</p>
     <div class="hero-ctas">
       <a class="btn btn-dark" href="#catalog">Browse the menu</a>
       <a class="btn btn-wa" href="https://wa.me/966593140752?text=Hi%20Sushi%20Cafe%2C%20I%20want%20to%20place%20an%20order." target="_blank" rel="noopener">Order on WhatsApp</a>
     </div>
     <div class="hero-points">
-      <span><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Activation in 5–30 minutes</span>
+      <span><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Activation in 5-30 minutes</span>
       <span><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Warranty on every plan</span>
       <span><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Binance Pay, Easypaisa &amp; JazzCash</span>
       <span><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>No OTP? No charge</span>
     </div>
     <div class="offer-strip" id="heroOffer">
-      <div class="offer-kicker">Launch offer — 5% off your first order</div>
+      <div class="offer-kicker">Launch offer, 5% off your first order</div>
       <h2>Offer ends Sunday 22 November 2026, 11:59 PM PKT</h2>
       <p>Enter your email below to unlock your discount code. The code applies automatically to your first order.</p>
       <div class="count-grid countdown-grid" data-countdown aria-live="polite">
-        <div class="count-cell"><b data-cd="days">–</b><span>Days</span></div>
-        <div class="count-cell"><b data-cd="hours">–</b><span>Hours</span></div>
-        <div class="count-cell"><b data-cd="mins">–</b><span>Minutes</span></div>
-        <div class="count-cell"><b data-cd="secs">–</b><span>Seconds</span></div>
+        <div class="count-cell"><b data-cd="days">0</b><span>Days</span></div>
+        <div class="count-cell"><b data-cd="hours">0</b><span>Hours</span></div>
+        <div class="count-cell"><b data-cd="mins">0</b><span>Minutes</span></div>
+        <div class="count-cell"><b data-cd="secs">0</b><span>Seconds</span></div>
       </div>
       <div class="offer-ended countdown-ended" style="display:none">This launch offer has ended.</div>
-      <a class="offer-link" href="#discount">Get 5% off — enter your email ↓</a>
+      <a class="offer-link" href="#discount">Get 5% off, enter your email ↓</a>
     </div>
   </div>
 </div>
@@ -438,7 +466,7 @@ table.admin-table{width:100%;border-collapse:collapse;font-size:14px;min-width:7
     <div class="discount-box">
       <div>
         <h2>Get 5% off your first order</h2>
-        <p>Drop your email here and we’ll show your discount code right away. Use code <b>SUSHI5</b> at checkout — or let us apply it for you. Your email is included in your WhatsApp order so we can match your discount when you order.</p>
+        <p>Drop your email here and we’ll show your discount code right away. Use code <b>SUSHI5</b> at checkout, or let us apply it for you. Your email is included in your WhatsApp order so we can match your discount when you order.</p>
         <p style="font-size:14px;margin-top:12px">Launch offer ends <b>Sunday 22 November 2026, 11:59 PM PKT</b>. One code per customer, first order only.</p>
       </div>
       <div>
@@ -452,12 +480,12 @@ table.admin-table{width:100%;border-collapse:collapse;font-size:14px;min-width:7
           <p class="discount-note">No spam. Your email is only carried into the WhatsApp order you place from this page, so the discount can be honoured on that order.</p>
         </form>
         <div class="code-reveal" id="codeReveal" aria-live="polite">
-          <div class="code-label">Your 5% off code — it’s already applied to your next order on this page:</div>
+          <div class="code-label">Your 5% off code, it’s already applied to your next order on this page:</div>
           <div class="code-line">
             <span class="code-value">SUSHI5</span>
             <button class="copy-code-btn" type="button" id="copyCodeBtn">Copy code</button>
           </div>
-          <div class="code-applied" id="codeAppliedNote">✓ Code applied — you’ll see 5% off in the order window.</div>
+          <div class="code-applied" id="codeAppliedNote">✓ Code applied, you’ll see 5% off in the order window.</div>
         </div>
       </div>
     </div>
@@ -469,8 +497,8 @@ table.admin-table{width:100%;border-collapse:collapse;font-size:14px;min-width:7
   <div class="wrap">
     <div class="sec-head">
       <h2>The menu</h2>
-      <p>AI tools, streaming, VPNs and creative apps — the full catalog from one store. Every price is in PKR, every plan shows its warranty before you pay.</p>
-      <p style="margin-top:14px;font-size:15px;background:var(--chip);border:1px solid var(--card-border);border-radius:12px;padding:12px 16px;line-height:1.55"><b style="color:var(--text)">Final price, no surprises:</b> the price you see is the price you pay. No extra charges are added at checkout or in the WhatsApp order — the total in your order is your final total.</p>
+      <p>AI tools, streaming, VPNs and creative apps, the full catalog from one store. Prices are shown in your chosen currency, converted from PKR at approx rates. Every plan shows its warranty before you pay.</p>
+      <p style="margin-top:14px;font-size:15px;background:var(--chip);border:1px solid var(--card-border);border-radius:12px;padding:12px 16px;line-height:1.55"><b style="color:var(--text)">Final price, no surprises:</b> the price you see is the price you pay. No extra charges are added at checkout or in the WhatsApp order, the total in your order is your final total.</p>
     </div>
     <div class="controls">
       <div class="search-row">
@@ -480,12 +508,16 @@ table.admin-table{width:100%;border-collapse:collapse;font-size:14px;min-width:7
         </div>
       </div>
       <div class="tabs" id="tabs" role="tablist" aria-label="Filter by category"></div>
+      <div class="sort-row"><label for="sortSelect">Sort</label>
+        <select class="sort-select" id="sortSelect"><option value="popular">Most popular</option><option value="price-asc">Price, low to high</option><option value="price-desc">Price, high to low</option><option value="name">Name, A to Z</option></select>
+      </div>
+      <p class="currency-note" id="currencyNote">Prices in USD by default. Converted from PKR at approx rates dated 16 Nov 2026. Final total is confirmed on WhatsApp in PKR / USDT.</p>
       <div class="result-count" id="resultCount"></div>
     </div>
     <div class="grid" id="grid"></div>
     <div class="empty" id="emptyState">
       <b>Nothing on the menu matches that.</b>
-      Try a different search — or ask us on WhatsApp, we stock more than what's listed.
+      Try a different search, or ask us on WhatsApp, we stock more than what's listed.
     </div>
   </div>
 </section>
@@ -495,47 +527,47 @@ table.admin-table{width:100%;border-collapse:collapse;font-size:14px;min-width:7
   <div class="wrap">
     <div class="sec-head">
       <h2>OTP numbers, served private</h2>
-      <p>Real non-VoIP numbers for WhatsApp, Telegram, Google and 500+ apps. The number is yours alone for the session — nobody else sees your code. If no code arrives in 15 minutes, you pay nothing.</p>
+      <p>Real non-VoIP numbers for WhatsApp, Telegram, Google and 500+ apps. OTPs start from Rs 49. The number is yours alone for the session, nobody else sees your code. If no code arrives in 15 minutes, you pay nothing.</p>
     </div>
 
     <div class="otp-panel">
       <div class="otp-left">
         <h3>Build your OTP order</h3>
         <p>Pick an app and a country. Your private number is assigned the moment your order is confirmed on WhatsApp.</p>
-        <div class="field-label">App — popular picks</div>
+        <div class="field-label">App, popular picks</div>
         <div class="chip-grid" id="appChips"></div>
-        <div class="field-label">Country — popular picks</div>
+        <div class="field-label">Country, popular picks</div>
         <div class="chip-grid" id="countryChips"></div>
-        <p style="font-size:14px;color:var(--text-2);margin-top:18px;line-height:1.55">Don't see yours? We cover 500+ apps and numbers from 180+ countries — <a href="https://wa.me/966593140752?text=Hi%20Sushi%20Cafe%2C%20I%20need%20an%20OTP%20number%20for%20an%20app%2Fcountry%20not%20listed." target="_blank" rel="noopener">ask on WhatsApp</a> and we'll quote it on the spot.</p>
+        <p style="font-size:14px;color:var(--text-2);margin-top:18px;line-height:1.55">Don't see yours? We cover 500+ apps and numbers from 180+ countries, <a href="https://wa.me/966593140752?text=Hi%20Sushi%20Cafe%2C%20I%20need%20an%20OTP%20number%20for%20an%20app%2Fcountry%20not%20listed." target="_blank" rel="noopener">ask on WhatsApp</a> and we'll quote it on the spot.</p>
       </div>
       <div class="otp-right">
         <div class="field-label">Your order</div>
         <div class="otp-summary" id="otpSummary"></div>
         <div class="otp-price" id="otpPrice"></div>
-        <p class="otp-note">Final price shown — that's all you pay. One-time verification · code window 15 minutes · full refund to your balance if the code never arrives.</p>
+        <p class="otp-note">Final price shown, that's all you pay. One-time verification · code window 15 minutes · full refund to your balance if the code never arrives.</p>
         <button class="order-btn" id="otpOrderBtn" type="button">Order this number</button>
       </div>
     </div>
 
     <div class="rent-row">
       <div class="rent-card">
-        <h3>Rental — 1 Month</h3>
+        <h3>Rental, 1 Month</h3>
         <p>Your own dedicated number for repeat logins, 2FA and a permanent Telegram or WhatsApp session.</p>
-        <div class="price">Rs 1,949 <small>/ month</small></div>
-        <button type="button" data-rent="Rental Number — 1 Month" data-rent-price="1949">Rent for 1 month</button>
+        <div class="price" data-pkr="1949"></div>
+        <button type="button" data-rent="Rental Number, 1 Month" data-rent-price="1949">Rent for 1 month</button>
       </div>
       <div class="rent-card featured">
         <span class="rent-tag">Most rented</span>
-        <h3>Rental — 3 Months</h3>
+        <h3>Rental, 3 Months</h3>
         <p>Same dedicated number for a full quarter. Best for business accounts that get verified often.</p>
-        <div class="price">Rs 4,799 <small>/ 3 months</small></div>
-        <button type="button" data-rent="Rental Number — 3 Months" data-rent-price="4799">Rent for 3 months</button>
+        <div class="price" data-pkr="4799"></div>
+        <button type="button" data-rent="Rental Number, 3 Months" data-rent-price="4799">Rent for 3 months</button>
       </div>
       <div class="rent-card">
-        <h3>Rental — 12 Months</h3>
+        <h3>Rental, 12 Months</h3>
         <p>A year of the same number, renewable anytime before expiry. Set it once, forget about it.</p>
-        <div class="price">Rs 15,599 <small>/ year</small></div>
-        <button type="button" data-rent="Rental Number — 12 Months" data-rent-price="15599">Rent for 12 months</button>
+        <div class="price" data-pkr="15599"></div>
+        <button type="button" data-rent="Rental Number, 12 Months" data-rent-price="15599">Rent for 12 months</button>
       </div>
     </div>
   </div>
@@ -562,12 +594,12 @@ table.admin-table{width:100%;border-collapse:collapse;font-size:14px;min-width:7
       <div class="step">
         <div class="step-num">3</div>
         <h3>Pay your way</h3>
-        <p>Pay the exact amount by Binance Pay, Easypaisa or JazzCash — details are shared in the chat — and send the payment screenshot.</p>
+        <p>Pay the exact amount by Binance Pay, Easypaisa or JazzCash, details are shared in the chat, and send the payment screenshot.</p>
       </div>
       <div class="step">
         <div class="step-num">4</div>
         <h3>We activate it</h3>
-        <p>Once payment is verified, we activate your plan or assign your number — usually within 5 to 30 minutes — and confirm on WhatsApp.</p>
+        <p>Once payment is verified, we activate your plan or assign your number, usually within 5 to 30 minutes, and confirm on WhatsApp.</p>
       </div>
     </div>
   </div>
@@ -581,14 +613,14 @@ table.admin-table{width:100%;border-collapse:collapse;font-size:14px;min-width:7
       <p>International payments land in Pakistan without a card. Pay in PKR locally, or in USD from anywhere in the world.</p>
     </div>
     <div class="offer-strip pay-countdown" style="margin:0 auto 26px;max-width:760px">
-      <div class="offer-kicker">Launch offer — 5% off with SUSHI5</div>
+      <div class="offer-kicker">Launch offer, 5% off with SUSHI5</div>
       <h3>Time left to order with 5% off</h3>
       <p>Ends Sunday 22 November 2026, 11:59 PM PKT. Enter your email above or use code SUSHI5 in the order window.</p>
       <div class="count-grid countdown-grid" data-countdown aria-live="polite">
-        <div class="count-cell"><b data-cd="days">–</b><span>Days</span></div>
-        <div class="count-cell"><b data-cd="hours">–</b><span>Hours</span></div>
-        <div class="count-cell"><b data-cd="mins">–</b><span>Minutes</span></div>
-        <div class="count-cell"><b data-cd="secs">–</b><span>Seconds</span></div>
+        <div class="count-cell"><b data-cd="days">0</b><span>Days</span></div>
+        <div class="count-cell"><b data-cd="hours">0</b><span>Hours</span></div>
+        <div class="count-cell"><b data-cd="mins">0</b><span>Minutes</span></div>
+        <div class="count-cell"><b data-cd="secs">0</b><span>Seconds</span></div>
       </div>
       <div class="offer-ended countdown-ended" style="display:none">This launch offer has ended.</div>
     </div>
@@ -612,7 +644,7 @@ table.admin-table{width:100%;border-collapse:collapse;font-size:14px;min-width:7
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2.5"/><path d="M12 18h.01"/></svg>
         </div>
         <h3>JazzCash</h3>
-        <p>Prefer JazzCash? Same flow — pay in PKR, send the screenshot in the same WhatsApp chat, and we verify it on the spot.</p>
+        <p>Prefer JazzCash? Same flow, pay in PKR, send the screenshot in the same WhatsApp chat, and we verify it on the spot.</p>
       </div>
       <div class="pay-card">
         <div class="pay-icon" style="background:#26a17b">
@@ -622,7 +654,7 @@ table.admin-table{width:100%;border-collapse:collapse;font-size:14px;min-width:7
         <p>Direct USDT (TRC20) wallet transfer for customers outside Binance. The wallet address is shared per order, so payments never get mixed up.</p>
       </div>
     </div>
-    <div class="pay-note"><b>How payment works:</b> place your order on WhatsApp first — we reply with the exact payment details and QR for your order, you pay and send the screenshot, and activation starts the moment it's verified. <b>Every price on this site is final</b> — the total in your order message is exactly what you pay, with nothing added later. Never share your PIN, password or any OTP with us; we will never ask for them.</div>
+    <div class="pay-note"><b>How payment works:</b> place your order on WhatsApp first, we reply with the exact payment details and QR for your order, you pay and send the screenshot, and activation starts the moment it's verified. <b>Every price on this site is final</b>, the total in your order message is exactly what you pay, with nothing added later. Never share your PIN, password or any OTP with us; we will never ask for them.</div>
   </div>
 </section>
 
@@ -631,29 +663,29 @@ table.admin-table{width:100%;border-collapse:collapse;font-size:14px;min-width:7
   <div class="wrap">
     <div class="sec-head">
       <h2>Why Sushi Cafe</h2>
-      <p>Three stores' worth of services, one WhatsApp number, and rules written down before you pay — not after something goes wrong.</p>
+      <p>Three stores' worth of services, one WhatsApp number, and rules written down before you pay, not after something goes wrong.</p>
     </div>
     <div class="why-grid">
       <div class="why-card">
         <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-3.6 8-10V5.2L12 2 4 5.2V12c0 6.4 8 10 8 10z"/><path d="m9 11.5 2 2 4-4.5"/></svg>
         <h3>Warranty, stated up front</h3>
-        <p>Every plan lists its warranty on the card. Monthly tools carry a 25-day replacement window: if it stops working, we replace it first — and if we can't, we refund the remaining days.</p>
+        <p>Every plan lists its warranty on the card. Monthly tools carry a 25-day replacement window: if it stops working, we replace it first, and if we can't, we refund the remaining days.</p>
       </div>
       <div class="why-card">
         <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
         <h3>Private by default</h3>
-        <p>OTP numbers are assigned to you alone — no public inbox where strangers read your codes. Subscription plans marked “your account” are activated on your own email, not a stranger's.</p>
+        <p>OTP numbers are assigned to you alone, no public inbox where strangers read your codes. Subscription plans marked “your account” are activated on your own email, not a stranger's.</p>
       </div>
       <div class="why-card">
         <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-12.4 7.5L3 21l2-5.6A8.5 8.5 0 1 1 21 11.5z"/></svg>
         <h3>A person, not a ticket queue</h3>
-        <p>Every order gets a number and a WhatsApp thread. Stuck at midnight? Message the same chat with your order number and a person picks it up — support runs 24/7.</p>
+        <p>Every order gets a number and a WhatsApp thread. Stuck at midnight? Message the same chat with your order number and a person picks it up, support runs 24/7.</p>
       </div>
     </div>
 
     <div class="cta-band" style="margin-top:56px">
       <h2>Not sure which plan fits?</h2>
-      <p>Tell us what you need it for — studying, work, a second account — and we'll point you at the right one before you spend anything.</p>
+      <p>Tell us what you need it for, studying, work, a second account, and we'll point you at the right one before you spend anything.</p>
       <a class="btn btn-wa" href="https://wa.me/966593140752?text=Hi%20Sushi%20Cafe%2C%20I%27m%20not%20sure%20which%20plan%20I%20need." target="_blank" rel="noopener">Ask on WhatsApp</a>
     </div>
   </div>
@@ -668,7 +700,7 @@ table.admin-table{width:100%;border-collapse:collapse;font-size:14px;min-width:7
     <div class="faq" id="faqList">
       <div class="faq-item">
         <button class="faq-q" type="button">How do I place an order?<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
-        <div class="faq-a">Tap Order on any plan, fill in your name and WhatsApp number, and hit “Confirm on WhatsApp”. Your order opens in WhatsApp with an order number — we confirm it there, share payment details, and activate once your payment screenshot is verified.</div>
+        <div class="faq-a">Tap Order on any plan, fill in your name and WhatsApp number, and hit “Confirm on WhatsApp”. Your order opens in WhatsApp with an order number, we confirm it there, share payment details, and activate once your payment screenshot is verified.</div>
       </div>
       <div class="faq-item">
         <button class="faq-q" type="button">Which payment methods do you accept?<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
@@ -684,11 +716,11 @@ table.admin-table{width:100%;border-collapse:collapse;font-size:14px;min-width:7
       </div>
       <div class="faq-item">
         <button class="faq-q" type="button">What does the warranty actually cover?<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
-        <div class="faq-a">Warranty covers the activation for the stated period — a 1-month plan carries 25 days. If your tool stops working inside that window, message us with your order number: we replace it first, and if a replacement isn't possible we refund the remaining days. Plans marked “No warranty” are the exception, and they're always labelled before you order.</div>
+        <div class="faq-a">Warranty covers the activation for the stated period, a 1-month plan carries 25 days. If your tool stops working inside that window, message us with your order number: we replace it first, and if a replacement isn't possible we refund the remaining days. Plans marked “No warranty” are the exception, and they're always labelled before you order.</div>
       </div>
       <div class="faq-item">
         <button class="faq-q" type="button">Are the OTP numbers private and non-VoIP?<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
-        <div class="faq-a">Yes. Numbers come from real carrier SIM pools, not VoIP ranges, so they pass verification on WhatsApp, Telegram, Google and banking apps. Each number is leased to you alone for the session — your codes are never shown in a public inbox.</div>
+        <div class="faq-a">Yes. Numbers come from real carrier SIM pools, not VoIP ranges, so they pass verification on WhatsApp, Telegram, Google and banking apps. Each number is leased to you alone for the session, your codes are never shown in a public inbox.</div>
       </div>
       <div class="faq-item">
         <button class="faq-q" type="button">What if my OTP never arrives?<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
@@ -696,8 +728,21 @@ table.admin-table{width:100%;border-collapse:collapse;font-size:14px;min-width:7
       </div>
       <div class="faq-item">
         <button class="faq-q" type="button">Can I rent a number long-term?<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
-        <div class="faq-a">Yes — dedicated rental numbers run for 1, 3 or 12 months and can be renewed before expiry so you never lose the number. They're the right pick for business accounts and recurring 2FA.</div>
+        <div class="faq-a">Yes, dedicated rental numbers run for 1, 3 or 12 months and can be renewed before expiry so you never lose the number. They're the right pick for business accounts and recurring 2FA.</div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== TRACK ORDER ===================== -->
+<section id="track">
+  <div class="wrap">
+    <div class="sec-head center"><h2>Track your order</h2><p>Enter your order ID and the email you used. Only that order, for that email, is shown.</p></div>
+    <div class="track-box">
+      <div class="field"><label for="trackId">Order ID</label><input id="trackId" type="text" placeholder="e.g. SC-1042" autocomplete="off" style="text-transform:uppercase" /></div>
+      <div class="field"><label for="trackEmail">Email used for the order</label><input id="trackEmail" type="email" placeholder="you@example.com" autocomplete="email" /></div>
+      <button class="btn btn-dark" type="button" id="trackBtn">Track order</button>
+      <div class="track-result" id="trackResult" aria-live="polite"></div>
     </div>
   </div>
 </section>
@@ -708,7 +753,7 @@ table.admin-table{width:100%;border-collapse:collapse;font-size:14px;min-width:7
     <div class="foot-grid">
       <div class="foot-brand">
         <a class="logo" href="#top" style="color:var(--text)"><span class="logo-mark">S</span>Sushi&nbsp;Cafe</a>
-        <p>Premium subscriptions, AI tools and private OTP numbers — ordered on WhatsApp and activated by hand, so nothing gets lost in an automated checkout.</p>
+        <p>Premium subscriptions, AI tools and private OTP numbers, ordered on WhatsApp and activated by hand, so nothing gets lost in an automated checkout.</p>
       </div>
       <div>
         <h4>Shop</h4>
@@ -729,13 +774,13 @@ table.admin-table{width:100%;border-collapse:collapse;font-size:14px;min-width:7
         <h4>Contact</h4>
         <a href="https://wa.me/966593140752" target="_blank" rel="noopener">Saudi / International: +966 593 140 752</a>
         <a href="https://wa.me/923399609528" target="_blank" rel="noopener">Pakistan: +92 339 9609528</a>
-        <a href="#top">WhatsApp only — replies 24/7</a>
+        <a href="#top">WhatsApp only, replies 24/7</a>
         <a href="#catalog">Support hours: round the clock</a>
       </div>
     </div>
     <div class="foot-bottom">
       <span>© 2026 Sushi Cafe. All rights reserved.</span>
-      <span>All prices in PKR are final — what you see is what you pay. Binance Pay &amp; USDT accepted worldwide.</span>
+      <span>Prices are converted from PKR at approx rates. The final total is confirmed on WhatsApp in PKR / USDT.</span>
     </div>
   </div>
 </footer>
@@ -754,7 +799,7 @@ table.admin-table{width:100%;border-collapse:collapse;font-size:14px;min-width:7
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
       </button>
     </div>
-    <p class="modal-sub">Fill this in and your order opens in WhatsApp, addressed to Sushi Cafe, with everything pre-written. We confirm, share payment details, and activate. The total below is your final price — no extra charges added later.</p>
+    <p class="modal-sub">Fill this in and your order opens in WhatsApp, addressed to Sushi Cafe, with everything pre-written. We confirm, share payment details, and activate. The total below is your final price, no extra charges added later.</p>
     <div class="order-summary" id="orderSummary"></div>
     <form id="orderForm" novalidate>
       <div class="form-grid">
@@ -768,7 +813,7 @@ table.admin-table{width:100%;border-collapse:collapse;font-size:14px;min-width:7
         </div>
         <div class="field full">
           <label for="fEmail">Email for delivery</label>
-          <input id="fEmail" type="email" placeholder="you@example.com — where the plan gets activated" autocomplete="email" />
+          <input id="fEmail" type="email" placeholder="you@example.com, where the plan gets activated" autocomplete="email" />
           <span class="hint">Needed for “your account” plans. Leave blank if the plan provides an account.</span>
         </div>
         <div class="field full">
@@ -778,13 +823,20 @@ table.admin-table{width:100%;border-collapse:collapse;font-size:14px;min-width:7
           <span class="code-feedback" id="codeFeedback" aria-live="polite"></span>
         </div>
         <div class="field full">
+          <label for="fCurrency">Currency for this order</label>
+          <select id="fCurrency">
+            <option value="USD">USD $</option><option value="PKR">PKR Rs</option><option value="SAR">SAR</option><option value="AED">AED</option><option value="INR">INR</option><option value="GBP">GBP</option><option value="EUR">EUR</option><option value="CAD">CAD</option><option value="AUD">AUD</option>
+          </select>
+          <span class="hint">Prices are converted from PKR at approx rates. The final total is confirmed on WhatsApp in PKR / USDT.</span>
+        </div>
+        <div class="field full">
           <label for="fPay">How will you pay?</label>
           <select id="fPay">
             <option>Binance Pay (USDT / USD)</option>
             <option>Easypaisa (PKR)</option>
             <option>JazzCash (PKR)</option>
             <option>USDT Transfer (TRC20)</option>
-            <option>Not sure yet — advise me</option>
+            <option>Not sure yet, advise me</option>
           </select>
         </div>
         <div class="field full">
@@ -794,10 +846,10 @@ table.admin-table{width:100%;border-collapse:collapse;font-size:14px;min-width:7
         <div class="field full">
           <label for="fDest">Send this order to</label>
           <select id="fDest">
-            <option value="966593140752" selected>Saudi / International — +966 593 140 752</option>
-            <option value="923399609528">Pakistan — +92 339 9609528</option>
+            <option value="966593140752" selected>Saudi / International, +966 593 140 752</option>
+            <option value="923399609528">Pakistan, +92 339 9609528</option>
           </select>
-          <span class="hint">Pick whichever number you prefer — your full order, discount and email go to the one you choose.</span>
+          <span class="hint">Pick whichever number you prefer, your full order, discount and email go to the one you choose.</span>
         </div>
       </div>
       <div class="error-msg" id="errorMsg"></div>
@@ -807,7 +859,7 @@ table.admin-table{width:100%;border-collapse:collapse;font-size:14px;min-width:7
           Confirm order on WhatsApp
         </button>
         <button class="btn btn-ghost" type="button" id="copyBtn">Copy order details instead</button>
-        <p class="secure-note" id="destNote">This opens WhatsApp to Saudi / International +966 593 140 752 with your order pre-written — nothing is sent until you tap send there. Payment details and the Binance QR are shared in that chat.</p>
+        <p class="secure-note" id="destNote">This opens WhatsApp to Saudi / International +966 593 140 752 with your order pre-written, nothing is sent until you tap send there. Payment details and the Binance QR are shared in that chat.</p>
       </div>
     </form>
   </div>
@@ -824,7 +876,7 @@ table.admin-table{width:100%;border-collapse:collapse;font-size:14px;min-width:7
       </button>
     </div>
     <p class="modal-sub">Sign in to place orders and see your order history. Your orders are saved to your account only.</p>
-    <div class="auth-note" id="authSetupNote">Accounts are being set up — order on WhatsApp for now. Sign-in will work once the store is connected.</div>
+    <div class="auth-note" id="authSetupNote">Accounts are being set up, order on WhatsApp for now. Sign-in will work once the store is connected.</div>
     <div class="auth-tabs" role="tablist">
       <button class="auth-tab active" type="button" data-auth-tab="google">Google</button>
       <button class="auth-tab" type="button" data-auth-tab="email">Email</button>
@@ -868,6 +920,14 @@ table.admin-table{width:100%;border-collapse:collapse;font-size:14px;min-width:7
       </button>
     </div>
     <p class="modal-sub">Only your orders, newest first. Status updates when the store confirms or activates your order.</p>
+    <div class="refer-box" id="referSection" style="display:none">
+      <h4>Refer and earn</h4>
+      <p>Share your code with a friend. They get 5% off their first order with code REF5, and you earn Rs 200 credit once their first order is paid or activated.</p>
+      <div><span class="refer-code" id="referCodeValue"></span>
+      <button class="copy-code-btn" type="button" id="copyReferBtn">Copy code</button>
+      <button class="copy-code-btn" type="button" id="shareReferBtn">Share on WhatsApp</button></div>
+      <p style="margin-top:10px;margin-bottom:0">Friends referred: <b id="referCount">0</b> &nbsp; Credit earned: <b id="referCredit">Rs 0</b></p>
+    </div>
     <div id="myOrdersList"><p style="font-size:15px;color:var(--text-2)">Loading your orders…</p></div>
   </div>
 </div>
@@ -888,6 +948,22 @@ table.admin-table{width:100%;border-collapse:collapse;font-size:14px;min-width:7
         <div class="stat-card"><b id="statActivated">0</b><span>Activated</span></div>
         <div class="stat-card"><b id="statFailed">0</b><span>Failed</span></div>
         <div class="stat-card"><b id="statRevenue">Rs 0</b><span>Revenue (paid + activated)</span></div>
+      </div>
+      <div class="stat-cards" style="margin-top:14px">
+        <div class="stat-card"><b id="statReferrals">0</b><span>Referred sign-ups</span></div>
+        <div class="stat-card"><b id="statCreditIssued">Rs 0</b><span>Referral credit issued</span></div>
+      </div>
+      <div style="background:var(--card);border:1px solid var(--card-border);border-radius:16px;padding:20px;box-shadow:var(--shadow);margin-bottom:22px">
+        <h3 style="font-size:18px;margin-bottom:4px">Coupons</h3>
+        <p style="font-size:14px;color:var(--text-2);line-height:1.55">Create a coupon code. Customers enter it in the order window. SUSHI5 stays as the launch coupon.</p>
+        <div class="coupon-form">
+          <input id="couponCode" type="text" placeholder="CODE, e.g. RAMADAN10" style="text-transform:uppercase" />
+          <input id="couponPct" type="number" min="1" max="90" placeholder="% off" style="width:90px" />
+          <input id="couponExpiry" type="date" />
+          <label><input id="couponOnePer" type="checkbox" checked /> One per customer</label>
+          <button class="btn btn-dark" type="button" id="createCouponBtn" style="padding:10px 20px;min-height:44px">Create coupon</button>
+        </div>
+        <div id="couponList" style="font-size:14px;line-height:1.7;color:var(--text-2)">No coupons loaded yet.</div>
       </div>
       <div class="admin-controls">
         <input type="search" id="adminSearch" placeholder="Search order ID, name or email…" aria-label="Search orders" />
@@ -921,30 +997,98 @@ function selectedWaLabel(){
   return selectedWaNumber() === WA_NUMBER_PK ? "Pakistan +92 339 9609528" : "Saudi / International +966 593 140 752";
 }
 
+/* ---------------- Currency: base prices are PKR, default display USD ---------------- */
+/* Rates per 1 USD, dated 16 Nov 2026, approximate. Final totals are confirmed on WhatsApp in PKR / USDT. */
+var CURRENCIES = {
+  USD: { symbol: "$", rate: 1 }, PKR: { symbol: "Rs ", rate: 281 }, SAR: { symbol: "SR ", rate: 3.75 },
+  AED: { symbol: "AED ", rate: 3.67 }, INR: { symbol: "₹", rate: 88.7 }, GBP: { symbol: "£", rate: 0.76 },
+  EUR: { symbol: "€", rate: 0.86 }, CAD: { symbol: "CA$ ", rate: 1.40 }, AUD: { symbol: "A$ ", rate: 1.54 }
+};
+var SC_CURRENCY = "USD";
+try { SC_CURRENCY = localStorage.getItem("scCurrency") || "USD"; } catch (e) {}
+if (!CURRENCIES[SC_CURRENCY]) SC_CURRENCY = "USD";
+function fmtPKR(n){ return "Rs " + Math.round(Number(n) || 0).toLocaleString("en-PK"); }
+function fmt(n){
+  var pkr = Number(n) || 0;
+  if (SC_CURRENCY === "PKR") return fmtPKR(pkr);
+  var c = CURRENCIES[SC_CURRENCY] || CURRENCIES.USD;
+  var v = pkr / 281 * c.rate;
+  return c.symbol + v.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+}
+function renderRentPrices(){
+  document.querySelectorAll("[data-pkr]").forEach(function(el){
+    var pkr = parseInt(el.getAttribute("data-pkr"), 10);
+    var suffix = el.getAttribute("data-pkr") === "1949" ? " / month" : (el.getAttribute("data-pkr") === "4799" ? " / 3 months" : " / year");
+    el.innerHTML = fmt(pkr) + " <small>" + suffix + "</small>";
+  });
+}
+function setCurrency(code){
+  if (!CURRENCIES[code]) return;
+  SC_CURRENCY = code;
+  try { localStorage.setItem("scCurrency", code); } catch (e) {}
+  var a = document.getElementById("currencySelect"); if (a) a.value = code;
+  var b = document.getElementById("fCurrency"); if (b) b.value = code;
+  renderGrid(); renderOtp(); renderRentPrices();
+  if (typeof currentOrder !== "undefined" && currentOrder) renderSummary();
+  if (window.SCAuth && window.SCAuth.rerenderOrders) window.SCAuth.rerenderOrders();
+  if (window.SCAuth && window.SCAuth.rerenderAdmin) window.SCAuth.rerenderAdmin();
+}
+window.SC_SET_CURRENCY = setCurrency;
+
+/* ---------------- Favorites ---------------- */
+var SC_FAVS = new Set();
+try { SC_FAVS = new Set(JSON.parse(localStorage.getItem("scFavs") || "[]")); } catch (e) {}
+function isFav(name){ return SC_FAVS.has(name); }
+function toggleFav(name){
+  if (SC_FAVS.has(name)) SC_FAVS.delete(name); else SC_FAVS.add(name);
+  try { localStorage.setItem("scFavs", JSON.stringify(Array.from(SC_FAVS))); } catch (e) {}
+  if (window.SCAuth && window.SCAuth.saveFavorites) window.SCAuth.saveFavorites(Array.from(SC_FAVS));
+  renderGrid();
+}
+
+/* ---------------- Theme: manual light/dark, persisted ---------------- */
+function applyTheme(mode){
+  if (mode === "dark" || mode === "light") document.documentElement.setAttribute("data-theme", mode);
+  else document.documentElement.removeAttribute("data-theme");
+  var btn = document.getElementById("themeBtn");
+  if (btn) btn.textContent = (document.documentElement.getAttribute("data-theme") === "dark") ? "Light" : "Dark";
+}
+var SC_THEME = "";
+try { SC_THEME = localStorage.getItem("scTheme") || ""; } catch (e) {}
+
+/* ---------------- Referral capture: ?ref=CODE ---------------- */
+try {
+  var refParam = new URLSearchParams(window.location.search).get("ref");
+  if (refParam){
+    var cleanRef = refParam.trim().toUpperCase().replace(/[^A-Z0-9-]/g, "");
+    if (cleanRef) localStorage.setItem("scPendingRef", cleanRef);
+  }
+} catch (e) {}
+
 /* ---------------- Catalog data ---------------- */
 var CATEGORIES = ["All","AI Tools","Streaming","VPN & Privacy","Design & Creative","Productivity","Social & Accounts"];
 /* Final selling prices shown to customers. */
 var PRODUCTS = [
-  {name:"ChatGPT Plus", cat:"AI Tools", initials:"G", color:"#10a37f", desc:"GPT-5 access, image generation, deep research and priority speed — activated on your own OpenAI account.", duration:"1 Month", price:2940, old:3999, warranty:"Full Warranty", delivery:"Your account", hot:true},
+  {name:"ChatGPT Plus", cat:"AI Tools", initials:"G", color:"#10a37f", desc:"GPT-5 access, image generation, deep research and priority speed, activated on your own OpenAI account.", duration:"1 Month", price:2940, old:3999, warranty:"Full Warranty", delivery:"Your account", hot:true},
   {name:"Claude Pro", cat:"AI Tools", initials:"C", color:"#c96442", desc:"Anthropic's Claude with higher limits, projects and early access to new models. On your own account.", duration:"1 Month", price:3180, old:4200, warranty:"Full Warranty", delivery:"Your account", hot:false},
   {name:"Gemini Advanced", cat:"AI Tools", initials:"G", color:"#1a73e8", desc:"Google's Gemini Advanced with 2TB Google One storage bundled in. Activated on your Gmail.", duration:"1 Month", price:2405, old:2999, warranty:"Full Warranty", delivery:"Your account", hot:false},
   {name:"Perplexity Pro", cat:"AI Tools", initials:"P", color:"#1f6f6b", desc:"AI search with unlimited Pro queries, file uploads and model switching between GPT, Claude and Sonar.", duration:"1 Month", price:2599, old:3400, warranty:"Full Warranty", delivery:"Your account", hot:false},
-  {name:"Netflix Premium 4K", cat:"Streaming", initials:"N", color:"#b00610", desc:"Your own private profile on a 4K UHD account — PIN-locked, watch history stays yours alone.", duration:"1 Month", price:714, old:1100, warranty:"Full Warranty", delivery:"Shared profile", hot:true},
-  {name:"Spotify Premium", cat:"Streaming", initials:"S", color:"#1db954", desc:"Ad-free music, offline downloads and full quality — upgraded on your own Spotify account.", duration:"1 Month", price:599, old:750, warranty:"Full Warranty", delivery:"Your account", hot:true},
+  {name:"Netflix Premium 4K", cat:"Streaming", initials:"N", color:"#b00610", desc:"Your own private profile on a 4K UHD account, PIN-locked, watch history stays yours alone.", duration:"1 Month", price:714, old:1100, warranty:"Full Warranty", delivery:"Shared profile", hot:true},
+  {name:"Spotify Premium", cat:"Streaming", initials:"S", color:"#1db954", desc:"Ad-free music, offline downloads and full quality, upgraded on your own Spotify account.", duration:"1 Month", price:599, old:750, warranty:"Full Warranty", delivery:"Your account", hot:true},
   {name:"YouTube Premium", cat:"Streaming", initials:"Y", color:"#cc0000", desc:"No ads, background play and YouTube Music included. Activated on your own Google account.", duration:"1 Month", price:649, old:899, warranty:"Full Warranty", delivery:"Your account", hot:false},
   {name:"Disney+", cat:"Streaming", initials:"D", color:"#113ccf", desc:"Disney, Pixar, Marvel, Star Wars and National Geographic in one plan, up to 4K where available.", duration:"1 Month", price:844, old:1299, warranty:"Full Warranty", delivery:"Account provided", hot:false},
   {name:"HBO Max", cat:"Streaming", initials:"H", color:"#4b2bb5", desc:"HBO originals, Warner Bros films and Max exclusives, full HD streaming on your own profile.", duration:"1 Month", price:1169, old:1600, warranty:"Full Warranty", delivery:"Shared profile", hot:false},
   {name:"IPTV Premium", cat:"Streaming", initials:"TV", color:"#37474f", desc:"Live channels, movies and sports in HD/FHD with a stable server and all major sports packages included.", duration:"12 Months", price:7798, old:8999, warranty:"Full Warranty", delivery:"Account provided", hot:true},
   {name:"NordVPN", cat:"VPN & Privacy", initials:"N", color:"#4685ff", desc:"Fast servers in 60+ countries, up to 10 devices at once, no-logs policy and threat protection built in.", duration:"1 Month", price:1039, old:1499, warranty:"Full Warranty", delivery:"Account provided", hot:false},
   {name:"Surfshark VPN", cat:"VPN & Privacy", initials:"S", color:"#17808e", desc:"Unlimited devices on one account, clean web ad-blocking and servers in 100 countries.", duration:"1 Month", price:779, old:1199, warranty:"Full Warranty", delivery:"Account provided", hot:true},
-  {name:"Proton VPN Plus", cat:"VPN & Privacy", initials:"P", color:"#5b4bc4", desc:"Swiss privacy, Secure Core servers and the fastest tier — for people who take privacy seriously.", duration:"1 Month", price:1169, old:1699, warranty:"Full Warranty", delivery:"Account provided", hot:false},
-  {name:"ExpressVPN", cat:"VPN & Privacy", initials:"E", color:"#a6192e", desc:"Consistently the fastest VPN for streaming — unblocks Netflix, BBC iPlayer and more on 8 devices.", duration:"1 Month", price:1429, old:1999, warranty:"Full Warranty", delivery:"Account provided", hot:false},
+  {name:"Proton VPN Plus", cat:"VPN & Privacy", initials:"P", color:"#5b4bc4", desc:"Swiss privacy, Secure Core servers and the fastest tier, for people who take privacy seriously.", duration:"1 Month", price:1169, old:1699, warranty:"Full Warranty", delivery:"Account provided", hot:false},
+  {name:"ExpressVPN", cat:"VPN & Privacy", initials:"E", color:"#a6192e", desc:"Consistently the fastest VPN for streaming, unblocks Netflix, BBC iPlayer and more on 8 devices.", duration:"1 Month", price:1429, old:1999, warranty:"Full Warranty", delivery:"Account provided", hot:false},
   {name:"CapCut Pro", cat:"Design & Creative", initials:"C", color:"#111111", desc:"All Pro effects, transitions, auto-captions and cloud storage unlocked on your own CapCut account.", duration:"1 Month", price:845, old:1200, warranty:"Full Warranty", delivery:"Your account", hot:true},
   {name:"Canva Pro", cat:"Design & Creative", initials:"C", color:"#7d2ae8", desc:"Premium templates, background remover, brand kit and 100M+ stock assets on your own Canva team seat.", duration:"1 Month", price:499, old:699, warranty:"Full Warranty", delivery:"Your account", hot:true},
   {name:"Figma Professional", cat:"Design & Creative", initials:"F", color:"#1e1e1e", desc:"Full Figma + Dev Mode seat with unlimited projects, version history and shared libraries.", duration:"1 Month", price:1949, old:2600, warranty:"Full Warranty", delivery:"Your account", hot:false},
   {name:"Adobe Creative Cloud", cat:"Design & Creative", initials:"A", color:"#eb1000", desc:"Photoshop, Premiere Pro, Illustrator, After Effects and 20+ apps with 100GB cloud storage.", duration:"1 Month", price:3599, old:5500, warranty:"Full Warranty", delivery:"Your account", hot:false},
-  {name:"Microsoft 365 Personal", cat:"Productivity", initials:"M", color:"#d83b01", desc:"Word, Excel, PowerPoint and Outlook plus 1TB OneDrive — activated on your Microsoft account.", duration:"12 Months", price:5999, old:9500, warranty:"Full Warranty", delivery:"Your account", hot:false},
-  {name:"TikTok Account — USA / UK", cat:"Social & Accounts", initials:"T", color:"#010101", desc:"Fresh USA or UK region TikTok account, full access, ready to post. Details handed over in the chat.", duration:"One-time", price:1949, old:2500, warranty:"Login Warranty", delivery:"Account provided", hot:true}
+  {name:"Microsoft 365 Personal", cat:"Productivity", initials:"M", color:"#d83b01", desc:"Word, Excel, PowerPoint and Outlook plus 1TB OneDrive, activated on your Microsoft account.", duration:"12 Months", price:5999, old:9500, warranty:"Full Warranty", delivery:"Your account", hot:false},
+  {name:"TikTok Account, USA / UK", cat:"Social & Accounts", initials:"T", color:"#010101", desc:"Fresh USA or UK region TikTok account, full access, ready to post. Details handed over in the chat.", duration:"One-time", price:1949, old:2500, warranty:"Login Warranty", delivery:"Account provided", hot:true}
 ];
 
 /* ---------------- Render catalog ---------------- */
@@ -954,8 +1098,6 @@ var searchInput = document.getElementById("searchInput");
 var resultCount = document.getElementById("resultCount");
 var emptyState = document.getElementById("emptyState");
 var activeCat = "All";
-
-function fmt(n){ return "Rs " + n.toLocaleString("en-PK"); }
 
 CATEGORIES.forEach(function(c){
   var b = document.createElement("button");
@@ -968,14 +1110,29 @@ CATEGORIES.forEach(function(c){
   });
   tabsEl.appendChild(b);
 });
+(function(){
+  var fb = document.createElement("button");
+  fb.type = "button"; fb.className = "tab"; fb.textContent = "Favorites"; fb.setAttribute("role", "tab");
+  fb.addEventListener("click", function(){
+    activeCat = "Favorites";
+    tabsEl.querySelectorAll(".tab").forEach(function(t){ t.classList.toggle("active", t === fb); });
+    renderGrid();
+  });
+  tabsEl.appendChild(fb);
+})();
 
 function renderGrid(){
   var q = searchInput.value.trim().toLowerCase();
   var list = PRODUCTS.filter(function(p){
-    var inCat = activeCat === "All" || p.cat === activeCat;
+    var inCat = activeCat === "All" || p.cat === activeCat || (activeCat === "Favorites" && isFav(p.name));
     var inSearch = !q || (p.name + " " + p.cat + " " + p.desc).toLowerCase().indexOf(q) !== -1;
     return inCat && inSearch;
   });
+  var sortMode = (document.getElementById("sortSelect") || {}).value || "popular";
+  if (sortMode === "price-asc") list.sort(function(a, b){ return a.price - b.price; });
+  else if (sortMode === "price-desc") list.sort(function(a, b){ return b.price - a.price; });
+  else if (sortMode === "name") list.sort(function(a, b){ return a.name.localeCompare(b.name); });
+  else list.sort(function(a, b){ return (b.hot ? 1 : 0) - (a.hot ? 1 : 0) || a.name.localeCompare(b.name); });
   grid.innerHTML = "";
   list.forEach(function(p){
     var off = p.old ? Math.round((1 - p.price / p.old) * 100) : 0;
@@ -983,7 +1140,8 @@ function renderGrid(){
     card.className = "card";
     card.innerHTML =
       '<div class="card-top"><div class="tile" style="background:' + p.color + '">' + p.initials + '</div>' +
-      (p.hot ? '<span class="hot">HOT DEAL</span>' : '') + '</div>' +
+      (p.hot ? '<span class="hot">HOT DEAL</span>' : '') +
+      '<button type="button" class="fav-btn" data-fav="' + p.name.replace(/"/g, "") + '" aria-label="Save ' + p.name.replace(/"/g, "") + ' to favorites">' + (isFav(p.name) ? "♥" : "♡") + '</button></div>' +
       '<div class="cat">' + p.cat + '</div>' +
       '<h3>' + p.name + '</h3>' +
       '<p class="desc">' + p.desc + '</p>' +
@@ -1004,19 +1162,36 @@ function renderGrid(){
   emptyState.style.display = list.length ? "none" : "block";
 }
 searchInput.addEventListener("input", renderGrid);
+document.getElementById("sortSelect").addEventListener("change", renderGrid);
+grid.addEventListener("click", function(e){
+  var favBtn = e.target.closest ? e.target.closest("[data-fav]") : null;
+  if (favBtn){ e.preventDefault(); toggleFav(favBtn.getAttribute("data-fav")); }
+});
+document.getElementById("currencySelect").value = SC_CURRENCY;
+document.getElementById("currencySelect").addEventListener("change", function(){ setCurrency(this.value); });
+applyTheme(SC_THEME);
+document.getElementById("themeBtn").addEventListener("click", function(){
+  var next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+  try { localStorage.setItem("scTheme", next); } catch (e) {}
+  applyTheme(next);
+});
 renderGrid();
+renderRentPrices();
 
 /* ---------------- OTP builder ---------------- */
+/* OTP pricing, PKR. Country base price plus a small per-app adjustment.
+   No normal commission is added here, so OTPs stay close to market rates.
+   WhatsApp and Amazon cost a little more, Facebook and TikTok a little less. */
 var OTP_APPS = [
-  {name:"WhatsApp", base:120},{name:"Telegram", base:90},{name:"Google / Gmail", base:110},
-  {name:"TikTok", base:80},{name:"Instagram", base:100},{name:"Facebook", base:70},
-  {name:"Discord", base:90},{name:"Amazon", base:130}
+  {name:"WhatsApp", adj:6},{name:"Telegram", adj:0},{name:"Google / Gmail", adj:3},
+  {name:"TikTok", adj:-4},{name:"Instagram", adj:0},{name:"Facebook", adj:-4},
+  {name:"Discord", adj:0},{name:"Amazon", adj:6}
 ];
 var OTP_COUNTRIES = [
-  {name:"United States", code:"+1", mult:1.6},{name:"United Kingdom", code:"+44", mult:1.4},
-  {name:"Pakistan", code:"+92", mult:0.4},{name:"India", code:"+91", mult:0.35},
-  {name:"Canada", code:"+1", mult:1.5},{name:"UAE", code:"+971", mult:1.2},
-  {name:"Germany", code:"+49", mult:1.1},{name:"Indonesia", code:"+62", mult:0.5}
+  {name:"United States", code:"+1", base:129},{name:"United Kingdom", code:"+44", base:119},
+  {name:"Pakistan", code:"+92", base:49},{name:"India", code:"+91", base:49},
+  {name:"Canada", code:"+1", base:129},{name:"UAE", code:"+971", base:89},
+  {name:"Germany", code:"+49", base:89},{name:"Indonesia", code:"+62", base:69}
 ];
 var selApp = OTP_APPS[0], selCountry = OTP_COUNTRIES[0];
 
@@ -1035,8 +1210,8 @@ function withCommission(cost){
   if (cost <= 2000) return Math.round(cost * 1.3);
   return Math.round(cost * 1.2);
 }
-function otpCost(){ return Math.max(30, Math.round(selApp.base * selCountry.mult / 5) * 5); }
-function otpPriceCalc(){ return withCommission(otpCost()); }
+function otpCost(){ return Math.max(39, selCountry.base + selApp.adj); }
+function otpPriceCalc(){ return otpCost(); }
 function renderOtp(){
   buildChips(document.getElementById("appChips"), OTP_APPS,
     function(a){ return a.name; }, function(a){ return a === selApp; },
@@ -1045,13 +1220,13 @@ function renderOtp(){
     function(c){ return c.name + " (" + c.code + ")"; }, function(c){ return c === selCountry; },
     function(c){ selCountry = c; renderOtp(); });
   document.getElementById("otpSummary").innerHTML =
-    "OTP for <b>" + selApp.name + "</b><br>Number from <b>" + selCountry.name + " (" + selCountry.code + ")</b><br>Private, non-VoIP line — yours alone";
+    "OTP for <b>" + selApp.name + "</b><br>Number from <b>" + selCountry.name + " (" + selCountry.code + ")</b><br>Private, non-VoIP line, yours alone";
   document.getElementById("otpPrice").innerHTML = fmt(otpPriceCalc()) + " <small>per OTP</small>";
 }
 renderOtp();
 document.getElementById("otpOrderBtn").addEventListener("click", function(){
   openOrder({
-    title: "OTP Number — " + selApp.name,
+    title: "OTP Number, " + selApp.name,
     detail: selCountry.name + " (" + selCountry.code + ") · One-time OTP · No code, no charge",
     price: otpPriceCalc()
   });
@@ -1101,6 +1276,7 @@ setInterval(updateCountdowns, 1000);
 var visitorEmail = "";
 var discountUnlocked = false;
 function isValidEmail(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
+var SC_DISCOUNT = { code: "", pct: 0, applied: false, reason: "", validated: false };
 function currentCode(){
   var el = document.getElementById("fCode");
   var v = el ? el.value.trim().toUpperCase() : "";
@@ -1108,11 +1284,26 @@ function currentCode(){
   return discountUnlocked ? "SUSHI5" : "";
 }
 function discountInfo(){
-  if (!currentOrder) return { applied:false, amount:0, final:0, code:"" };
+  if (!currentOrder) return { applied:false, amount:0, final:0, code:"", pct:0 };
   var code = currentCode();
-  var applied = code === "SUSHI5";
-  var amount = applied ? Math.round(currentOrder.price * 0.05) : 0;
-  return { applied: applied, amount: amount, final: currentOrder.price - amount, code: code };
+  if (SC_DISCOUNT.validated && SC_DISCOUNT.code === code && SC_DISCOUNT.applied){
+    var amount = Math.round(currentOrder.price * SC_DISCOUNT.pct / 100);
+    return { applied: true, amount: amount, final: currentOrder.price - amount, code: code, pct: SC_DISCOUNT.pct };
+  }
+  return { applied: false, amount: 0, final: currentOrder.price, code: code, pct: 0 };
+}
+async function scValidateDiscount(){
+  var code = currentCode();
+  if (!code){ SC_DISCOUNT = { code: "", pct: 0, applied: false, reason: "", validated: false }; renderSummary(); return; }
+  if (SC_DISCOUNT.validated && SC_DISCOUNT.code === code) return;
+  SC_DISCOUNT = { code: code, pct: 0, applied: false, reason: "Checking code...", validated: false };
+  renderSummary();
+  var res = { ok: false, pct: 0, reason: "That code is not recognised." };
+  try {
+    if (window.SCAuth && window.SCAuth.validateCode) res = await window.SCAuth.validateCode(code);
+  } catch (e) {}
+  SC_DISCOUNT = { code: code, pct: res.pct || 0, applied: !!res.ok, reason: res.reason || "", validated: true };
+  renderSummary();
 }
 document.getElementById("discountForm").addEventListener("submit", function(e){
   e.preventDefault();
@@ -1125,6 +1316,11 @@ document.getElementById("discountForm").addEventListener("submit", function(e){
     return;
   }
   errEl.style.display = "none";
+  if (window.SCAuth && window.SCAuth.sushi5Used){
+    document.getElementById("codeReveal").classList.add("show");
+    document.getElementById("codeReveal").innerHTML = "<div class='code-label'>You have already used your 5% off. SUSHI5 works once per customer, on the first order.</div>";
+    return;
+  }
   visitorEmail = v;
   discountUnlocked = true;
   document.getElementById("codeReveal").classList.add("show");
@@ -1132,11 +1328,11 @@ document.getElementById("discountForm").addEventListener("submit", function(e){
   if (modalEmail && !modalEmail.value.trim()) modalEmail.value = v;
   var modalCode = document.getElementById("fCode");
   if (modalCode) modalCode.value = "SUSHI5";
-  showToast("Code SUSHI5 unlocked — 5% off is applied to your next order.");
+  showToast("Code SUSHI5 unlocked, 5% off is applied to your next order.");
   if (currentOrder) renderSummary();
 });
 document.getElementById("copyCodeBtn").addEventListener("click", function(){
-  function done(){ showToast("Code SUSHI5 copied — it’s already applied on this page too."); }
+  function done(){ showToast("Code SUSHI5 copied, it’s already applied on this page too."); }
   if (navigator.clipboard && navigator.clipboard.writeText){
     navigator.clipboard.writeText("SUSHI5").then(done, function(){ fallbackCopy("SUSHI5"); done(); });
   } else { fallbackCopy("SUSHI5"); done(); }
@@ -1162,20 +1358,24 @@ function renderSummary(){
   if (info.applied){
     html +=
       '<div class="row"><span>Original price</span><span>' + fmt(currentOrder.price) + '</span></div>' +
-      '<div class="row discount-applied-row"><span>Discount — SUSHI5 (5% off)</span><span>− ' + fmt(info.amount) + '</span></div>' +
-      '<div class="row total"><span>Total to pay</span><span>' + fmt(info.final) + '</span></div>';
-    if (fb){ fb.textContent = "✓ SUSHI5 applied — 5% off. You save " + fmt(info.amount) + "."; fb.className = "code-feedback ok"; }
+      '<div class="row discount-applied-row"><span>Discount ' + info.code + ' (' + info.pct + '% off)</span><span>- ' + fmt(info.amount) + '</span></div>' +
+      '<div class="row total"><span>Total to pay</span><span>' + fmt(info.final) + '</span></div>' +
+      '<div class="row"><span>PKR total</span><span>' + fmtPKR(info.final) + '</span></div>';
+    if (fb){ fb.textContent = "✓ " + info.code + " applied, " + info.pct + "% off. You save " + fmt(info.amount) + "."; fb.className = "code-feedback ok"; }
   } else {
-    html += '<div class="row total"><span>Total</span><span>' + fmt(currentOrder.price) + '</span></div>';
+    html += '<div class="row total"><span>Total</span><span>' + fmt(currentOrder.price) + '</span></div>' +
+      '<div class="row"><span>PKR total</span><span>' + fmtPKR(currentOrder.price) + '</span></div>';
     var code = currentCode();
     if (fb){
-      if (code){ fb.textContent = "That code isn’t recognised — check it and try SUSHI5."; fb.className = "code-feedback bad"; }
+      if (code){ fb.textContent = SC_DISCOUNT.reason || "That code is not recognised. Check it and try SUSHI5."; fb.className = "code-feedback bad"; }
       else { fb.textContent = ""; fb.className = "code-feedback"; }
     }
   }
+  html += '<p class="currency-note">Converted from PKR at approx rates dated 16 Nov 2026. Final total is confirmed on WhatsApp in PKR / USDT.</p>';
   orderSummary.innerHTML = html;
 }
-document.getElementById("fCode").addEventListener("input", function(){ renderSummary(); });
+document.getElementById("fCode").addEventListener("input", function(){ scValidateDiscount(); });
+document.getElementById("fCurrency").addEventListener("change", function(){ setCurrency(this.value); });
 function openOrder(order){
   if (window.SCAuth && window.SCAuth.requireSignIn && window.SCAuth.requireSignIn()){
     window.SCAuth.pendingOrder = order;
@@ -1187,8 +1387,10 @@ function openOrder(order){
   var emailEl = document.getElementById("fEmail");
   if (visitorEmail && emailEl && !emailEl.value.trim()) emailEl.value = visitorEmail;
   var codeEl = document.getElementById("fCode");
-  if (discountUnlocked && codeEl && !codeEl.value.trim()) codeEl.value = "SUSHI5";
+  if (discountUnlocked && codeEl && !codeEl.value.trim() && !(window.SCAuth && window.SCAuth.sushi5Used)) codeEl.value = "SUSHI5";
+  var curEl = document.getElementById("fCurrency"); if (curEl) curEl.value = SC_CURRENCY;
   renderSummary();
+  if (codeEl && codeEl.value.trim()) scValidateDiscount();
   errorMsg.style.display = "none";
   overlay.classList.add("open");
   document.body.style.overflow = "hidden";
@@ -1210,20 +1412,21 @@ function buildMessage(){
   var note = document.getElementById("fNote").value.trim();
   var info = discountInfo();
   var lines = [
-    "New Order — Sushi Cafe",
+    "New Order, Sushi Cafe",
     "Order ID: " + currentOrder.id,
     "Item: " + currentOrder.title,
     "Details: " + currentOrder.detail
   ];
   if (info.applied){
-    lines.push("Original price: " + fmt(currentOrder.price));
-    lines.push("Discount code: SUSHI5 (5% off)");
-    lines.push("Discount amount: − " + fmt(info.amount));
-    lines.push("Final total: " + fmt(info.final));
+    lines.push("Original price: " + fmt(currentOrder.price) + " (" + fmtPKR(currentOrder.price) + ")");
+    lines.push("Discount code: " + info.code + " (" + info.pct + "% off)");
+    lines.push("Discount amount: - " + fmt(info.amount) + " (" + fmtPKR(info.amount) + ")");
+    lines.push("Final total: " + fmt(info.final) + " (" + fmtPKR(info.final) + ")");
   } else {
     if (info.code) lines.push("Discount code entered: " + info.code + " (not applied)");
-    lines.push("Total: " + fmt(currentOrder.price));
+    lines.push("Total: " + fmt(currentOrder.price) + " (" + fmtPKR(currentOrder.price) + ")");
   }
+  if (window.SCAuth && window.SCAuth.userDoc && window.SCAuth.userDoc.referralCode) lines.push("My referral code: " + window.SCAuth.userDoc.referralCode);
   lines.push("Name: " + name);
   lines.push("My WhatsApp: " + phone);
   if (email) lines.push("Email: " + email);
@@ -1236,11 +1439,11 @@ function validate(){
   var name = document.getElementById("fName").value.trim();
   var phone = document.getElementById("fPhone").value.trim();
   if (name.length < 2){ return "Please enter your name so we know who the order is for."; }
-  if (phone.replace(/\D/g, "").length < 9){ return "Please enter a valid WhatsApp number — activation updates are sent there."; }
+  if (phone.replace(/\D/g, "").length < 9){ return "Please enter a valid WhatsApp number, activation updates are sent there."; }
   return "";
 }
 document.getElementById("fDest").addEventListener("change", function(){
-  document.getElementById("destNote").textContent = "This opens WhatsApp to " + selectedWaLabel() + " with your order pre-written — nothing is sent until you tap send there. Payment details and the Binance QR are shared in that chat.";
+  document.getElementById("destNote").textContent = "This opens WhatsApp to " + selectedWaLabel() + " with your order pre-written, nothing is sent until you tap send there. Payment details and the Binance QR are shared in that chat.";
 });
 document.getElementById("orderForm").addEventListener("submit", async function(e){
   e.preventDefault();
@@ -1260,22 +1463,27 @@ document.getElementById("orderForm").addEventListener("submit", async function(e
       price: currentOrder.price,
       originalPrice: currentOrder.price,
       discountAmount: info.applied ? info.amount : 0,
-      discountCode: info.applied ? "SUSHI5" : (info.code || ""),
+      discountCode: info.applied ? info.code : (info.code || ""),
+      referralCodeUsed: info.applied ? info.code : null,
+      referredBy: (window.SCAuth.userDoc && window.SCAuth.userDoc.referredBy) || null,
       finalTotal: info.applied ? info.final : currentOrder.price,
       paymentMethod: document.getElementById("fPay").value,
       whatsappDest: selectedWaLabel(),
       status: "pending"
     };
     try { saved = await window.SCAuth.saveOrder(rec); } catch (err2) { saved = false; }
+    if (saved && info.applied && window.SCAuth.markDiscountUsed){
+      try { await window.SCAuth.markDiscountUsed(info.code); } catch (err3) {}
+    }
   }
   var url = "https://wa.me/" + selectedWaNumber() + "?text=" + encodeURIComponent(buildMessage());
   window.open(url, "_blank");
   if (window.SCAuth && !window.SCAuth.configured){
-    showToast("Order " + currentOrder.id + " opened in WhatsApp (" + selectedWaLabel() + ") — just tap send there and we'll confirm. Accounts are being set up, so this order was not saved to an account.");
+    showToast("Order " + currentOrder.id + " opened in WhatsApp (" + selectedWaLabel() + "), just tap send there and we'll confirm. Accounts are being set up, so this order was not saved to an account.");
   } else if (!saved){
-    showToast("Order " + currentOrder.id + " opened in WhatsApp (" + selectedWaLabel() + ") — just tap send there and we'll confirm. Note: the order was not saved to your account, please keep your order number.");
+    showToast("Order " + currentOrder.id + " opened in WhatsApp (" + selectedWaLabel() + "), just tap send there and we'll confirm. Note: the order was not saved to your account, please keep your order number.");
   } else {
-    showToast("Order " + currentOrder.id + " saved and opened in WhatsApp (" + selectedWaLabel() + ") — just tap send there and we'll confirm.");
+    showToast("Order " + currentOrder.id + " saved and opened in WhatsApp (" + selectedWaLabel() + "), just tap send there and we'll confirm.");
   }
   closeOrder();
 });
@@ -1283,7 +1491,7 @@ document.getElementById("copyBtn").addEventListener("click", function(){
   var err = validate();
   if (err){ errorMsg.textContent = err; errorMsg.style.display = "block"; return; }
   var text = buildMessage();
-  function done(){ showToast("Order details copied — paste them into WhatsApp " + selectedWaLabel() + "."); }
+  function done(){ showToast("Order details copied, paste them into WhatsApp " + selectedWaLabel() + "."); }
   if (navigator.clipboard && navigator.clipboard.writeText){
     navigator.clipboard.writeText(text).then(done, function(){ fallbackCopy(text); done(); });
   } else { fallbackCopy(text); done(); }
@@ -1318,7 +1526,7 @@ function showToast(msg){
 
 <script type="module">
 /* ===================== Firebase accounts + admin ===================== */
-/* CONFIG TO FILL — paste your own Firebase web app config here (Firebase
+/* CONFIG TO FILL, paste your own Firebase web app config here (Firebase
    console > Project settings > Your apps > Web app). Leave empty until
    then: the site keeps working and orders go through on WhatsApp. */
 var FIREBASE_CONFIG = {
@@ -1336,6 +1544,8 @@ var SCAuth = {
   currentUser: null,
   isAdmin: false,
   pendingOrder: null,
+  userDoc: null,
+  sushi5Used: false,
   _fb: null
 };
 window.SCAuth = SCAuth;
@@ -1355,7 +1565,7 @@ function scSetMsg(id, text, ok){
 }
 SCAuth.openSignIn = function(){
   scSetupNote();
-  if (!SCAuth.configured) scToast("Accounts are being set up — order on WhatsApp for now.");
+  if (!SCAuth.configured) scToast("Accounts are being set up, order on WhatsApp for now.");
   document.getElementById("authOverlay").classList.add("open");
   document.body.style.overflow = "hidden";
 };
@@ -1407,9 +1617,9 @@ document.addEventListener("keydown", function(e){
 
 /* ---------- Orders rendering ---------- */
 function scFmtDate(ts){
-  if (!ts) return "—";
+  if (!ts) return ",";
   try { var d = ts.toDate ? ts.toDate() : new Date(ts); return d.toLocaleString("en-PK", { day: "numeric", month: "short", year: "numeric", hour: "numeric", minute: "2-digit" }); }
-  catch (e) { return "—"; }
+  catch (e) { return ","; }
 }
 function scBadge(status){
   return '<span class="badge ' + (status || "pending") + '">' + (status || "pending") + '</span>';
@@ -1419,13 +1629,23 @@ function scOrderCard(o){
     '<div class="row"><span>' + (o.id || "") + '</span>' + scBadge(o.status) + '</div>' +
     '<div class="row"><span>Item</span><b>' + (o.item || "") + '</b></div>' +
     '<div class="row"><span>Date</span><b>' + scFmtDate(o.createdAt) + '</b></div>' +
-    '<div class="row"><span>Total</span><b>Rs ' + Number(o.finalTotal || o.price || 0).toLocaleString("en-PK") + '</b></div>' +
+    '<div class="row"><span>Total</span><b>' + fmt(o.finalTotal || o.price || 0) + ' (' + fmtPKR(o.finalTotal || o.price || 0) + ')</b></div>' +
     '</div>';
 }
-var myOrdersUnsub = null;
+var myOrdersUnsub = null, myOrdersRows = [];
+function scRenderReferSection(){
+  var sec = document.getElementById("referSection");
+  if (!sec) return;
+  var doc = SCAuth.userDoc;
+  if (!SCAuth.currentUser || !doc || !doc.referralCode){ sec.style.display = "none"; return; }
+  sec.style.display = "block";
+  document.getElementById("referCodeValue").textContent = doc.referralCode;
+  document.getElementById("referCount").textContent = doc.referralCount || 0;
+  document.getElementById("referCredit").textContent = fmt(doc.referralCredit || 0);
+}
 function scRenderMyOrders(){
   var list = document.getElementById("myOrdersList");
-  if (!SCAuth.configured){ list.innerHTML = "<p style='font-size:15px;color:var(--text-2)'>Accounts are being set up — order on WhatsApp for now. Your past WhatsApp orders are not shown here yet.</p>"; return; }
+  if (!SCAuth.configured){ list.innerHTML = "<p style='font-size:15px;color:var(--text-2)'>Accounts are being set up, order on WhatsApp for now. Your past WhatsApp orders are not shown here yet.</p>"; return; }
   if (!SCAuth.currentUser){ list.innerHTML = "<p style='font-size:15px;color:var(--text-2)'>Sign in to see your orders.</p>"; return; }
   if (myOrdersUnsub) return; /* live listener already running */
   var fb = SCAuth._fb;
@@ -1433,6 +1653,8 @@ function scRenderMyOrders(){
     var rows = [];
     snap.forEach(function(d){ rows.push(d.data()); });
     rows.sort(function(a, b){ var ta = a.createdAt && a.createdAt.seconds ? a.createdAt.seconds : 0; var tb = b.createdAt && b.createdAt.seconds ? b.createdAt.seconds : 0; return tb - ta; });
+    myOrdersRows = rows;
+    scRenderReferSection();
     if (!rows.length){ list.innerHTML = "<p style='font-size:15px;color:var(--text-2)'>No orders yet. Your first order will show up here once you place it.</p>"; return; }
     list.innerHTML = rows.map(scOrderCard).join("");
   }, function(err){ list.innerHTML = "<p style='font-size:15px;color:var(--accent)'>Could not load your orders. Please try again.</p>"; });
@@ -1443,10 +1665,12 @@ var adminUnsub = null, adminRows = [];
 function scIsAdmin(){ return !!(SCAuth.currentUser && SCAuth.currentUser.email && ADMIN_EMAILS.indexOf(SCAuth.currentUser.email.toLowerCase()) !== -1); }
 function scRenderAdmin(){
   var body = document.getElementById("adminBody"), gate = document.getElementById("adminGate");
-  if (!SCAuth.configured){ gate.style.display = "block"; body.style.display = "none"; gate.innerHTML = "<p style='font-size:16px;color:var(--text-2);line-height:1.6'>Accounts are being set up — the admin panel will work once Firebase is connected.</p>"; return; }
+  if (!SCAuth.configured){ gate.style.display = "block"; body.style.display = "none"; gate.innerHTML = "<p style='font-size:16px;color:var(--text-2);line-height:1.6'>Accounts are being set up, the admin panel will work once Firebase is connected.</p>"; return; }
   if (!SCAuth.currentUser){ gate.style.display = "block"; body.style.display = "none"; gate.innerHTML = "<p style='font-size:16px;color:var(--text-2);line-height:1.6'>Admin only. Please sign in with an admin account to view this panel.</p>"; return; }
   if (!scIsAdmin()){ gate.style.display = "block"; body.style.display = "none"; gate.innerHTML = "<p style='font-size:16px;color:var(--text-2);line-height:1.6'>Admin only. This account does not have admin access.</p>"; return; }
   gate.style.display = "none"; body.style.display = "block";
+  scLoadAdminReferrals();
+  scRenderCoupons();
   if (adminUnsub) return;
   var fb = SCAuth._fb;
   adminUnsub = fb.onSnapshot(fb.query(fb.collection(fb.db, "orders"), fb.orderBy("createdAt", "desc")), function(snap){
@@ -1471,7 +1695,7 @@ function scDrawAdminTable(){
   document.getElementById("statPaid").textContent = counts.paid;
   document.getElementById("statActivated").textContent = counts.activated;
   document.getElementById("statFailed").textContent = counts.failed;
-  document.getElementById("statRevenue").textContent = "Rs " + revenue.toLocaleString("en-PK");
+  document.getElementById("statRevenue").textContent = fmt(revenue);
   var tb = document.getElementById("adminTableBody");
   if (!rows.length){ tb.innerHTML = "<tr><td colspan='6'>No orders match that search.</td></tr>"; return; }
   tb.innerHTML = rows.map(function(o){
@@ -1479,17 +1703,26 @@ function scDrawAdminTable(){
       return "<option value='" + st + "'" + (o.status === st ? " selected" : "") + ">" + st + "</option>";
     }).join("");
     return "<tr><td><b>" + (o.id || "") + "</b><br><span style='color:var(--text-3)'>" + (o.paymentMethod || "") + "</span></td>" +
-      "<td>" + (o.userName || "—") + "<br><span style='color:var(--text-3)'>" + (o.userEmail || "") + "<br>" + (o.userPhone || "") + "</span></td>" +
+      "<td>" + (o.userName || ",") + "<br><span style='color:var(--text-3)'>" + (o.userEmail || "") + "<br>" + (o.userPhone || "") + "</span></td>" +
       "<td>" + (o.item || "") + "<br><span style='color:var(--text-3)'>" + (o.detail || "") + "</span></td>" +
-      "<td>Rs " + Number(o.finalTotal || o.price || 0).toLocaleString("en-PK") + "</td>" +
+      "<td>" + fmt(o.finalTotal || o.price || 0) + "</td>" +
       "<td>" + scFmtDate(o.createdAt) + "</td>" +
       "<td><select data-order-id='" + (o.id || "") + "' aria-label='Status for " + (o.id || "") + "'>" + opts + "</select></td></tr>";
   }).join("");
   tb.querySelectorAll("select[data-order-id]").forEach(function(sel){
     sel.addEventListener("change", async function(){
       var fb = SCAuth._fb;
-      try { await fb.updateDoc(fb.doc(fb.db, "orders", sel.dataset.orderId), { status: sel.value }); scToast("Order " + sel.dataset.orderId + " set to " + sel.value + "."); }
-      catch (err) { scToast("Could not update that order — please try again."); scDrawAdminTable(); }
+      var newStatus = sel.value;
+      try {
+        var orderBefore = adminRows.filter(function(o){ return o.id === sel.dataset.orderId; })[0] || null;
+        await fb.updateDoc(fb.doc(fb.db, "orders", sel.dataset.orderId), { status: newStatus });
+        /* Referral credit: only once, only when a referred first order is first marked paid or activated. */
+        if (orderBefore && orderBefore.referredBy && !orderBefore.creditGrantedForOrder && (newStatus === "paid" || newStatus === "activated")){
+          try { await scGrantReferralCredit(orderBefore); } catch (e) { console.warn("Referral credit failed:", e); }
+        }
+        scToast("Order " + sel.dataset.orderId + " set to " + newStatus + ".");
+      }
+      catch (err) { scToast("Could not update that order, please try again."); scDrawAdminTable(); }
     });
   });
 }
@@ -1508,9 +1741,42 @@ function scRouteAdmin(){
 window.addEventListener("hashchange", scRouteAdmin);
 
 /* ---------- Firebase init (only when configured) ---------- */
+async function scEnsureUserDoc(user){
+  if (!SCAuth.configured || !SCAuth._fb || !user) return;
+  var fb = SCAuth._fb;
+  try {
+    var ref = fb.doc(fb.db, "users", user.uid);
+    var snap = await fb.getDoc(ref);
+    var myCode = "SUSHI-" + user.uid.slice(0, 6).toUpperCase();
+    var pendingRef = "";
+    try { pendingRef = localStorage.getItem("scPendingRef") || ""; } catch (e) {}
+    if (!snap.exists()){
+      var data = {
+        email: user.email || "", name: user.displayName || "", phone: user.phoneNumber || "",
+        referralCode: myCode, referredBy: (pendingRef && pendingRef !== myCode) ? pendingRef : null,
+        sushi5Used: false, ref5Used: false, referralCredit: 0, referralCount: 0, creditEarned: 0,
+        favorites: Array.from(SC_FAVS), usedCoupons: [], createdAt: fb.serverTimestamp()
+      };
+      await fb.setDoc(ref, data);
+      SCAuth.userDoc = data;
+    } else {
+      SCAuth.userDoc = snap.data() || {};
+      var patch = {};
+      if (!SCAuth.userDoc.referralCode) patch.referralCode = myCode;
+      if (!SCAuth.userDoc.referredBy && pendingRef && pendingRef !== myCode && pendingRef !== SCAuth.userDoc.referralCode) patch.referredBy = pendingRef;
+      if (Object.keys(patch).length){ await fb.setDoc(ref, patch, { merge: true }); SCAuth.userDoc = Object.assign({}, SCAuth.userDoc, patch); }
+    }
+    SCAuth.sushi5Used = !!(SCAuth.userDoc.sushi5Used || (function(){ try { return localStorage.getItem("sushi5Used_" + user.uid) === "1"; } catch (e) { return false; } })());
+    if (SCAuth.userDoc.favorites && SCAuth.userDoc.favorites.length){
+      SC_FAVS = new Set(SCAuth.userDoc.favorites);
+      try { localStorage.setItem("scFavs", JSON.stringify(Array.from(SC_FAVS))); } catch (e) {}
+    }
+  } catch (e) { console.warn("User doc setup failed:", e); }
+}
 function scOnAuth(user){
   SCAuth.currentUser = user || null;
   SCAuth.isAdmin = scIsAdmin();
+  if (user) scEnsureUserDoc(user); else { SCAuth.userDoc = null; SCAuth.sushi5Used = false; }
   var chip = document.getElementById("userChip"), btn = document.getElementById("signInBtn");
   if (user){
     btn.style.display = "none"; chip.classList.add("show");
@@ -1544,7 +1810,8 @@ async function scInitFirebase(){
       signOut: authMod.signOut,
       collection: fsMod.collection, doc: fsMod.doc, setDoc: fsMod.setDoc, updateDoc: fsMod.updateDoc,
       query: fsMod.query, where: fsMod.where, orderBy: fsMod.orderBy, onSnapshot: fsMod.onSnapshot,
-      serverTimestamp: fsMod.serverTimestamp
+      serverTimestamp: fsMod.serverTimestamp, getDoc: fsMod.getDoc, getDocs: fsMod.getDocs,
+      increment: fsMod.increment, arrayUnion: fsMod.arrayUnion
     };
     /* Google */
     document.getElementById("googleSignInBtn").addEventListener("click", async function(){
@@ -1562,7 +1829,7 @@ async function scInitFirebase(){
     document.getElementById("emailSignupBtn").addEventListener("click", async function(){
       var em = document.getElementById("authEmail").value.trim(), pw = document.getElementById("authPassword").value;
       scSetMsg("emailMsg", "");
-      try { await authMod.createUserWithEmailAndPassword(auth, em, pw); scSetMsg("emailMsg", "Account created — you are signed in.", true); }
+      try { await authMod.createUserWithEmailAndPassword(auth, em, pw); scSetMsg("emailMsg", "Account created, you are signed in.", true); }
       catch (err) { scSetMsg("emailMsg", "Sign-up failed: " + (err.message || err.code || "try a different email or a stronger password.")); }
     });
     /* Phone */
@@ -1581,7 +1848,7 @@ async function scInitFirebase(){
     document.getElementById("verifySmsBtn").addEventListener("click", async function(){
       var code = document.getElementById("authSmsCode").value.trim();
       if (!phoneConfirm){ scSetMsg("phoneMsg", "Send the SMS code first."); return; }
-      try { await phoneConfirm.confirm(code); scSetMsg("phoneMsg", "Phone verified — you are signed in.", true); }
+      try { await phoneConfirm.confirm(code); scSetMsg("phoneMsg", "Phone verified, you are signed in.", true); }
       catch (err) { scSetMsg("phoneMsg", "Wrong code: " + (err.message || err.code || "please try again.")); }
     });
     authMod.onAuthStateChanged(auth, scOnAuth);
@@ -1592,8 +1859,178 @@ async function scInitFirebase(){
     scOnAuth(null);
   }
 }
+/* ---------- Discount validation: SUSHI5, REF5, admin coupons ---------- */
+SCAuth.validateCode = async function(code){
+  code = (code || "").trim().toUpperCase();
+  if (!code) return { ok: false, pct: 0, reason: "Enter a code." };
+  if (!SCAuth.currentUser) return { ok: false, pct: 0, reason: "Sign in to use a discount code. SUSHI5 works once per customer, on your first order." };
+  var uid = SCAuth.currentUser.uid;
+  /* Any non-failed order already placed means this is no longer a first order. */
+  var hasPriorOrder = false, hasDiscountedOrder = false;
+  if (SCAuth.configured && SCAuth._fb){
+    try {
+      var snap = await SCAuth._fb.getDocs(SCAuth._fb.query(SCAuth._fb.collection(SCAuth._fb.db, "orders"), SCAuth._fb.where("userId", "==", uid)));
+      snap.forEach(function(d){
+        var o = d.data() || {};
+        if (o.status !== "failed"){
+          hasPriorOrder = true;
+          if (o.discountCode) hasDiscountedOrder = true;
+        }
+      });
+    } catch (e) {}
+  }
+  if (code === "SUSHI5"){
+    if (SCAuth.sushi5Used || (SCAuth.userDoc && SCAuth.userDoc.sushi5Used)) return { ok: false, pct: 0, reason: "SUSHI5 was already used on your first order, it works once per customer." };
+    if (hasDiscountedOrder) return { ok: false, pct: 0, reason: "SUSHI5 was already used on your first order, it works once per customer." };
+    try { if (localStorage.getItem("sushi5Used_" + uid) === "1") return { ok: false, pct: 0, reason: "SUSHI5 was already used on your first order, it works once per customer." }; } catch (e) {}
+    return { ok: true, pct: 5, reason: "" };
+  }
+  if (code === "REF5"){
+    var referredBy = SCAuth.userDoc ? SCAuth.userDoc.referredBy : null;
+    if (!referredBy) return { ok: false, pct: 0, reason: "REF5 is only for customers who signed up with a referral code." };
+    if (hasPriorOrder) return { ok: false, pct: 0, reason: "REF5 works once, on your first order only." };
+    if (SCAuth.userDoc && SCAuth.userDoc.ref5Used) return { ok: false, pct: 0, reason: "REF5 was already used on your first order." };
+    return { ok: true, pct: 5, reason: "" };
+  }
+  /* Admin coupons, stored in Firestore collection "coupons", doc id = code. */
+  if (!SCAuth.configured || !SCAuth._fb) return { ok: false, pct: 0, reason: "That code is not recognised." };
+  try {
+    var cSnap = await SCAuth._fb.getDoc(SCAuth._fb.doc(SCAuth._fb.db, "coupons", code));
+    if (!cSnap.exists()) return { ok: false, pct: 0, reason: "That code is not recognised." };
+    var c = cSnap.data() || {};
+    if (c.active === false) return { ok: false, pct: 0, reason: "That coupon is no longer active." };
+    if (c.expiry){
+      var exp = new Date(c.expiry + "T23:59:59");
+      if (exp < new Date()) return { ok: false, pct: 0, reason: "That coupon expired on " + c.expiry + "." };
+    }
+    if (c.onePerCustomer){
+      var used = (SCAuth.userDoc && SCAuth.userDoc.usedCoupons) || [];
+      if (used.indexOf(code) !== -1) return { ok: false, pct: 0, reason: code + " was already used on your account, it works once per customer." };
+      if (hasDiscountedOrder && c.pct >= 5) { /* fall through: a one-per-customer coupon is still usable once, checked by usedCoupons above */ }
+    }
+    var pct = Math.max(1, Math.min(90, Number(c.pct) || 0));
+    if (!pct) return { ok: false, pct: 0, reason: "That coupon has no discount set." };
+    return { ok: true, pct: pct, reason: "" };
+  } catch (e) { return { ok: false, pct: 0, reason: "Could not check that code, please try again." }; }
+};
+SCAuth.markDiscountUsed = async function(code){
+  code = (code || "").trim().toUpperCase();
+  if (!SCAuth.currentUser || !code) return;
+  var uid = SCAuth.currentUser.uid;
+  try { localStorage.setItem("sushi5Used_" + uid, code === "SUSHI5" ? "1" : "0"); } catch (e) {}
+  if (!SCAuth.configured || !SCAuth._fb) return;
+  var fb = SCAuth._fb;
+  try {
+    var patch = {};
+    if (code === "SUSHI5"){ patch.sushi5Used = true; SCAuth.sushi5Used = true; }
+    if (code === "REF5") patch.ref5Used = true;
+    if (code !== "SUSHI5" && code !== "REF5") patch.usedCoupons = fb.arrayUnion(code);
+    if (Object.keys(patch).length){
+      await fb.setDoc(fb.doc(fb.db, "users", uid), patch, { merge: true });
+      SCAuth.userDoc = Object.assign({}, SCAuth.userDoc || {}, patch);
+    }
+  } catch (e) { console.warn("Mark discount used failed:", e); }
+};
+SCAuth.saveFavorites = async function(list){
+  if (!SCAuth.currentUser || !SCAuth.configured || !SCAuth._fb) return;
+  try { await SCAuth._fb.setDoc(SCAuth._fb.doc(SCAuth._fb.db, "users", SCAuth.currentUser.uid), { favorites: list }, { merge: true }); } catch (e) {}
+};
+SCAuth.rerenderOrders = function(){
+  if (myOrdersUnsub){ myOrdersUnsub(); myOrdersUnsub = null; }
+  scRenderMyOrders();
+};
+SCAuth.rerenderAdmin = function(){ if (window.location.hash === "#admin") scDrawAdminTable(); };
+
+/* ---------- Referral credit: granted once, by admin, on first paid order ---------- */
+async function scGrantReferralCredit(order){
+  var fb = SCAuth._fb;
+  if (!fb || !order.referredBy) return;
+  var snap = await fb.getDocs(fb.query(fb.collection(fb.db, "users"), fb.where("referralCode", "==", order.referredBy)));
+  var referrer = null, referrerId = null;
+  snap.forEach(function(d){ referrer = d.data() || {}; referrerId = d.id; });
+  if (!referrer || !referrerId || referrerId === order.userId) return;
+  await fb.setDoc(fb.doc(fb.db, "users", referrerId), {
+    referralCredit: (Number(referrer.referralCredit) || 0) + 200,
+    creditEarned: (Number(referrer.creditEarned) || 0) + 200,
+    referralCount: (Number(referrer.referralCount) || 0) + 1
+  }, { merge: true });
+  await fb.updateDoc(fb.doc(fb.db, "orders", order.id), { creditGrantedForOrder: true });
+}
+
+/* ---------- Admin referrals summary + coupons ---------- */
+async function scLoadAdminReferrals(){
+  var el1 = document.getElementById("statReferrals"), el2 = document.getElementById("statCreditIssued");
+  if (!el1 || !SCAuth._fb) return;
+  try {
+    var snap = await SCAuth._fb.getDocs(SCAuth._fb.collection(SCAuth._fb.db, "users"));
+    var referred = 0, credit = 0;
+    snap.forEach(function(d){ var u = d.data() || {}; if (u.referredBy) referred++; credit += Number(u.creditEarned) || 0; });
+    el1.textContent = referred;
+    el2.textContent = fmt(credit);
+  } catch (e) {}
+}
+var couponsUnsub = null;
+function scRenderCoupons(){
+  var listEl = document.getElementById("couponList");
+  if (!listEl || !SCAuth._fb) return;
+  if (couponsUnsub) return;
+  couponsUnsub = SCAuth._fb.onSnapshot(SCAuth._fb.collection(SCAuth._fb.db, "coupons"), function(snap){
+    var rows = [];
+    snap.forEach(function(d){ rows.push(d.data() || {}); });
+    if (!rows.length){ listEl.textContent = "No coupons yet. SUSHI5 is the launch coupon."; return; }
+    listEl.innerHTML = rows.map(function(c){
+      return "<div><b>" + (c.code || "") + "</b> " + (c.pct || 0) + "% off" + (c.expiry ? ", expires " + c.expiry : ", no expiry") + (c.onePerCustomer ? ", one per customer" : "") + (c.active === false ? ", inactive" : "") + "</div>";
+    }).join("");
+  }, function(){ listEl.textContent = "Could not load coupons."; });
+}
+
+/* ---------- Track order by ID + email ---------- */
+async function scTrackOrder(){
+  var idEl = document.getElementById("trackId"), emEl = document.getElementById("trackEmail"), resEl = document.getElementById("trackResult");
+  var id = (idEl.value || "").trim().toUpperCase();
+  var email = (emEl.value || "").trim().toLowerCase();
+  if (!id || !email){ resEl.textContent = "Enter both your order ID and the email you used."; return; }
+  if (!SCAuth.configured || !SCAuth._fb){ resEl.textContent = "Order tracking is being set up. Please ask on WhatsApp with your order ID."; return; }
+  if (!SCAuth.currentUser){ resEl.textContent = "Sign in first, then track your order. Tracking shows only orders for the signed-in account email."; return; }
+  resEl.textContent = "Looking up " + id + "...";
+  try {
+    var snap = await SCAuth._fb.getDoc(SCAuth._fb.doc(SCAuth._fb.db, "orders", id));
+    if (!snap.exists()){ resEl.textContent = "No order found with ID " + id + "."; return; }
+    var o = snap.data() || {};
+    if ((o.userEmail || "").toLowerCase() !== email){ resEl.textContent = "No order found for that ID and email."; return; }
+    resEl.innerHTML = "<b>" + (o.id || id) + "</b> " + scBadge(o.status) + "<br>Item: " + (o.item || "") + "<br>Total: " + fmt(o.finalTotal || o.price || 0) + " (" + fmtPKR(o.finalTotal || o.price || 0) + ")<br>Date: " + scFmtDate(o.createdAt);
+  } catch (e) { resEl.textContent = "Could not look up that order, please try again."; }
+}
+
 scInitFirebase();
 scRouteAdmin();
+document.getElementById("trackBtn").addEventListener("click", scTrackOrder);
+document.getElementById("copyReferBtn").addEventListener("click", function(){
+  var code = (SCAuth.userDoc && SCAuth.userDoc.referralCode) || "";
+  if (!code) return;
+  function done(){ showToast("Referral code " + code + " copied."); }
+  if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(code).then(done, function(){ fallbackCopy(code); done(); });
+  else { fallbackCopy(code); done(); }
+});
+document.getElementById("shareReferBtn").addEventListener("click", function(){
+  var code = (SCAuth.userDoc && SCAuth.userDoc.referralCode) || "";
+  if (!code) return;
+  var msg = "Join Sushi Cafe with my code " + code + " and get 5% off your first order: https://sushi-cafe-chi.vercel.app/?ref=" + code;
+  window.open("https://wa.me/?text=" + encodeURIComponent(msg), "_blank");
+});
+document.getElementById("createCouponBtn").addEventListener("click", async function(){
+  var code = (document.getElementById("couponCode").value || "").trim().toUpperCase();
+  var pct = parseInt(document.getElementById("couponPct").value, 10);
+  var expiry = document.getElementById("couponExpiry").value || "";
+  var onePer = document.getElementById("couponOnePer").checked;
+  if (!code || !pct || pct < 1 || pct > 90){ scToast("Enter a coupon code and a % off between 1 and 90."); return; }
+  if (!SCAuth._fb){ scToast("Firebase is not connected yet."); return; }
+  try {
+    await SCAuth._fb.setDoc(SCAuth._fb.doc(SCAuth._fb.db, "coupons", code), { code: code, pct: pct, expiry: expiry || null, onePerCustomer: !!onePer, active: true, createdAt: SCAuth._fb.serverTimestamp() });
+    scToast("Coupon " + code + " created, " + pct + "% off.");
+    document.getElementById("couponCode").value = ""; document.getElementById("couponPct").value = "";
+  } catch (e) { scToast("Could not create that coupon, please try again."); }
+});
 </script>
 </body>
 </html>
