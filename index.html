@@ -679,7 +679,7 @@ html[data-theme="dark"] .badge.failed{color:#fca5a5;background:#450a0a}
       <div class="why-card">
         <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-12.4 7.5L3 21l2-5.6A8.5 8.5 0 1 1 21 11.5z"/></svg>
         <h3>A person, not a ticket queue</h3>
-        <p>Every order gets a number and a WhatsApp thread. Stuck at midnight? Message the same chat with your order number and a person picks it up, support runs 24/7.</p>
+        <p>Every order gets a number and a WhatsApp thread. Stuck at midnight? Message the same chat with your order number and a person picks it up, support runs 24/7. <a href="https://wa.me/966593140752?text=Hi%20Sushi%20Cafe%2C%20I%20need%20support%20with%20my%20order." target="_blank" rel="noopener">Get support on WhatsApp</a></p>
       </div>
     </div>
 
@@ -769,13 +769,13 @@ html[data-theme="dark"] .badge.failed{color:#fca5a5;background:#450a0a}
         <a href="#payment">Payment methods</a>
         <a href="#faq">FAQ</a>
         <a href="#why">Warranty policy</a>
+        <a href="https://wa.me/966593140752?text=Hi%20Sushi%20Cafe%2C%20I%20need%20support%20with%20my%20order." target="_blank" rel="noopener">Support on WhatsApp</a>
       </div>
       <div>
         <h4>Contact</h4>
         <a href="https://wa.me/966593140752" target="_blank" rel="noopener">Saudi / International: +966 593 140 752</a>
         <a href="https://wa.me/923399609528" target="_blank" rel="noopener">Pakistan: +92 339 9609528</a>
-        <a href="#top">WhatsApp only, replies 24/7</a>
-        <a href="#catalog">Support hours: round the clock</a>
+        <a href="https://wa.me/966593140752?text=Hi%20Sushi%20Cafe%2C%20I%20need%20support." target="_blank" rel="noopener">Support: WhatsApp only, replies 24/7</a>
       </div>
     </div>
     <div class="foot-bottom">
@@ -880,7 +880,6 @@ html[data-theme="dark"] .badge.failed{color:#fca5a5;background:#450a0a}
     <div class="auth-tabs" role="tablist">
       <button class="auth-tab active" type="button" data-auth-tab="google">Google</button>
       <button class="auth-tab" type="button" data-auth-tab="email">Email</button>
-      <button class="auth-tab" type="button" data-auth-tab="phone">Phone</button>
     </div>
     <div class="auth-pane active" id="authPaneGoogle">
       <button class="google-btn" type="button" id="googleSignInBtn">Continue with Google</button>
@@ -894,18 +893,6 @@ html[data-theme="dark"] .badge.failed{color:#fca5a5;background:#450a0a}
         <button class="btn btn-ghost" type="button" id="emailSignupBtn">Create account</button>
       </div>
       <p class="auth-msg" id="emailMsg"></p>
-    </div>
-    <div class="auth-pane" id="authPanePhone">
-      <div class="field"><label for="authPhone">Phone number</label><input id="authPhone" type="tel" placeholder="+92 3XX XXXXXXX" autocomplete="tel" /></div>
-      <div class="modal-actions" style="margin-top:6px">
-        <button class="btn btn-dark" type="button" id="sendSmsBtn">Send SMS code</button>
-      </div>
-      <div id="recaptchaContainer"></div>
-      <div class="field" id="smsCodeField" style="display:none;margin-top:14px"><label for="authSmsCode">SMS code</label><input id="authSmsCode" type="text" inputmode="numeric" placeholder="6-digit code" /></div>
-      <div class="modal-actions" style="margin-top:6px">
-        <button class="btn btn-dark" type="button" id="verifySmsBtn" style="display:none">Verify code &amp; sign in</button>
-      </div>
-      <p class="auth-msg" id="phoneMsg"></p>
     </div>
   </div>
 </div>
@@ -1554,7 +1541,7 @@ function scToast(msg){ if (typeof showToast === "function") showToast(msg); }
 function scSetupNote(){
   var n = document.getElementById("authSetupNote");
   if (n) n.style.display = SCAuth.configured ? "none" : "block";
-  ["googleSignInBtn", "emailLoginBtn", "emailSignupBtn", "sendSmsBtn", "verifySmsBtn"].forEach(function(id){
+  ["googleSignInBtn", "emailLoginBtn", "emailSignupBtn"].forEach(function(id){
     var el = document.getElementById(id);
     if (el) el.disabled = !SCAuth.configured;
   });
@@ -1831,25 +1818,6 @@ async function scInitFirebase(){
       scSetMsg("emailMsg", "");
       try { await authMod.createUserWithEmailAndPassword(auth, em, pw); scSetMsg("emailMsg", "Account created, you are signed in.", true); }
       catch (err) { scSetMsg("emailMsg", "Sign-up failed: " + (err.message || err.code || "try a different email or a stronger password.")); }
-    });
-    /* Phone */
-    var phoneVerifier = null, phoneConfirm = null;
-    document.getElementById("sendSmsBtn").addEventListener("click", async function(){
-      var phone = document.getElementById("authPhone").value.trim();
-      scSetMsg("phoneMsg", "");
-      try {
-        if (!phoneVerifier) phoneVerifier = new authMod.RecaptchaVerifier(auth, "recaptchaContainer", { size: "invisible" });
-        phoneConfirm = await authMod.signInWithPhoneNumber(auth, phone, phoneVerifier);
-        document.getElementById("smsCodeField").style.display = "block";
-        document.getElementById("verifySmsBtn").style.display = "block";
-        scSetMsg("phoneMsg", "SMS code sent to " + phone + ".", true);
-      } catch (err) { scSetMsg("phoneMsg", "Could not send the SMS code: " + (err.message || err.code || "check the number.")); }
-    });
-    document.getElementById("verifySmsBtn").addEventListener("click", async function(){
-      var code = document.getElementById("authSmsCode").value.trim();
-      if (!phoneConfirm){ scSetMsg("phoneMsg", "Send the SMS code first."); return; }
-      try { await phoneConfirm.confirm(code); scSetMsg("phoneMsg", "Phone verified, you are signed in.", true); }
-      catch (err) { scSetMsg("phoneMsg", "Wrong code: " + (err.message || err.code || "please try again.")); }
     });
     authMod.onAuthStateChanged(auth, scOnAuth);
   } catch (err) {
