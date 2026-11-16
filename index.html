@@ -1516,46 +1516,45 @@ function validate(){
 document.getElementById("fDest").addEventListener("change", function(){
   document.getElementById("destNote").textContent = "This opens WhatsApp to " + selectedWaLabel() + " with your order pre-written, nothing is sent until you tap send there. Payment details and the Binance QR are shared in that chat.";
 });
-document.getElementById("orderForm").addEventListener("submit", async function(e){
+document.getElementById("orderForm").addEventListener("submit", function(e){
   e.preventDefault();
   var err = validate();
   if (err){ errorMsg.textContent = err; errorMsg.style.display = "block"; return; }
   var info = discountInfo();
-  var saved = false;
-  if (window.SCAuth && window.SCAuth.saveOrder){
-    var rec = {
-      id: currentOrder.id,
-      userId: (window.SCAuth.currentUser && window.SCAuth.currentUser.uid) || "guest",
-      userEmail: (document.getElementById("fEmail").value.trim() || visitorEmail || (window.SCAuth.currentUser && window.SCAuth.currentUser.email) || ""),
-      userName: document.getElementById("fName").value.trim(),
-      userPhone: document.getElementById("fPhone").value.trim(),
-      item: currentOrder.title,
-      detail: currentOrder.detail,
-      price: currentOrder.price,
-      originalPrice: currentOrder.price,
-      discountAmount: info.applied ? info.amount : 0,
-      discountCode: info.applied ? info.code : (info.code || ""),
-      referralCodeUsed: info.applied ? info.code : null,
-      referredBy: (window.SCAuth.userDoc && window.SCAuth.userDoc.referredBy) || null,
-      finalTotal: info.applied ? info.final : currentOrder.price,
-      paymentMethod: document.getElementById("fPay").value,
-      whatsappDest: selectedWaLabel(),
-      status: "pending"
-    };
-    try { saved = await window.SCAuth.saveOrder(rec); } catch (err2) { saved = false; }
-    if (saved && info.applied && window.SCAuth.markDiscountUsed){
-      try { await window.SCAuth.markDiscountUsed(info.code); } catch (err3) {}
-    }
-  }
+  var rec = {
+    id: currentOrder.id,
+    userId: (window.SCAuth.currentUser && window.SCAuth.currentUser.uid) || "guest",
+    userEmail: (document.getElementById("fEmail").value.trim() || visitorEmail || (window.SCAuth.currentUser && window.SCAuth.currentUser.email) || ""),
+    userName: document.getElementById("fName").value.trim(),
+    userPhone: document.getElementById("fPhone").value.trim(),
+    item: currentOrder.title,
+    detail: currentOrder.detail,
+    price: currentOrder.price,
+    originalPrice: currentOrder.price,
+    discountAmount: info.applied ? info.amount : 0,
+    discountCode: info.applied ? info.code : (info.code || ""),
+    referralCodeUsed: info.applied ? info.code : null,
+    referredBy: (window.SCAuth.userDoc && window.SCAuth.userDoc.referredBy) || null,
+    finalTotal: info.applied ? info.final : currentOrder.price,
+    paymentMethod: document.getElementById("fPay").value,
+    whatsappDest: selectedWaLabel(),
+    status: "pending"
+  };
   var url = "https://wa.me/" + selectedWaNumber() + "?text=" + encodeURIComponent(buildMessage());
-  window.open(url, "_blank");
-  if (window.SCAuth && !window.SCAuth.configured){
-    showToast("Order " + currentOrder.id + " opened in WhatsApp (" + selectedWaLabel() + "), just tap send there and we'll confirm. Accounts are being set up, so this order was not saved to an account.");
-  } else if (!saved){
-    showToast("Order " + currentOrder.id + " opened in WhatsApp (" + selectedWaLabel() + "), just tap send there and we'll confirm. Note: the order was not saved to your account, please keep your order number.");
-  } else {
-    showToast("Order " + currentOrder.id + " saved and opened in WhatsApp (" + selectedWaLabel() + "), just tap send there and we'll confirm.");
+  /* Open WhatsApp chat FIRST, in the same tap, before any network wait.
+     The old code waited for the Firestore save first, so the browser
+     treated the open as not from a tap and blocked it, nothing happened. */
+  var waWin = window.open(url, "_blank");
+  if (!waWin){ window.location.href = url; return; }
+  /* Save the order in the background now, WhatsApp is already opening. */
+  if (window.SCAuth && window.SCAuth.saveOrder){
+    window.SCAuth.saveOrder(rec).then(function(saved){
+      if (saved && info.applied && window.SCAuth.markDiscountUsed){
+        window.SCAuth.markDiscountUsed(info.code).catch(function(){});
+      }
+    }).catch(function(){});
   }
+  showToast("Order " + currentOrder.id + " opened in WhatsApp (" + selectedWaLabel() + "), just tap send there and we'll confirm.");
   closeOrder();
 });
 document.getElementById("copyBtn").addEventListener("click", function(){
