@@ -403,7 +403,7 @@ html[data-theme="dark"] .badge.failed{color:#fca5a5;background:#450a0a}
     <select class="currency-select" id="currencySelect" aria-label="Currency">
       <option value="USD">USD $</option><option value="PKR">PKR Rs</option><option value="SAR">SAR</option><option value="AED">AED</option><option value="INR">INR</option><option value="GBP">GBP</option><option value="EUR">EUR</option><option value="CAD">CAD</option><option value="AUD">AUD</option>
     </select>
-    <button class="auth-btn" id="themeBtn" type="button" aria-label="Switch light or dark theme">Dark</button>
+    <button class="auth-btn" id="themeBtn" type="button" aria-label="Switch light or dark theme">Light</button>
     <button class="auth-btn" id="signInBtn" type="button">Sign in</button>
     <span class="user-chip" id="userChip">
       <span class="who" id="userName"></span>
@@ -698,7 +698,7 @@ html[data-theme="dark"] .badge.failed{color:#fca5a5;background:#450a0a}
   <div class="wrap">
     <div class="sec-head">
       <h2>Why Sushi Cafe</h2>
-      <p>Three stores' worth of services, one WhatsApp number, and rules written down before you pay, not after something goes wrong.</p>
+      <p>Four stores' worth of services, one WhatsApp number, and rules written down before you pay, not after something goes wrong.</p>
     </div>
     <div class="why-grid">
       <div class="why-card">
@@ -852,6 +852,11 @@ html[data-theme="dark"] .badge.failed{color:#fca5a5;background:#450a0a}
           <input id="fEmail" type="email" placeholder="you@example.com, where the plan gets activated" autocomplete="email" />
           <span class="hint">Needed for “your account” plans. Leave blank if the plan provides an account.</span>
         </div>
+        <div class="field full" id="profileField" style="display:none">
+          <label for="fProfile">Profile link or username <span style="color:var(--text-3);font-weight:400">(for Social Media Growth orders)</span></label>
+          <input id="fProfile" type="text" placeholder="e.g. @username or profile link" autocomplete="off" />
+          <span class="hint">We need this to deliver followers, likes or views to the right profile.</span>
+        </div>
         <div class="field full">
           <label for="fCode">Discount code <span style="color:var(--text-3);font-weight:400">(optional)</span></label>
           <input id="fCode" type="text" placeholder="e.g. SUSHI5 for 5% off" autocomplete="off" style="text-transform:uppercase" />
@@ -982,7 +987,7 @@ html[data-theme="dark"] .badge.failed{color:#fca5a5;background:#450a0a}
         <div class="coupon-form">
           <input id="couponCode" type="text" placeholder="CODE, e.g. RAMADAN10" style="text-transform:uppercase" />
           <input id="couponPct" type="number" min="1" max="90" placeholder="% off" style="width:90px" />
-          <input id="couponExpiry" type="date" />
+          <input id="couponExpiry" type="text" placeholder="YYYY-MM-DD" inputmode="numeric" />
           <label><input id="couponOnePer" type="checkbox" checked /> One per customer</label>
           <button class="btn btn-dark" type="button" id="createCouponBtn" style="padding:10px 20px;min-height:44px">Create coupon</button>
         </div>
@@ -1029,7 +1034,17 @@ var CURRENCIES = {
   EUR: { symbol: "€", rate: 0.86 }, CAD: { symbol: "CA$ ", rate: 1.40 }, AUD: { symbol: "A$ ", rate: 1.54 }
 };
 var SC_CURRENCY = "USD";
-try { SC_CURRENCY = localStorage.getItem("scCurrency") || "USD"; } catch (e) {}
+/* Only trust a saved currency if the visitor chose it themselves. A value left
+   in storage without that flag is ignored, so a first-time visitor always
+   sees USD, as the page promises. The flag is set only in setCurrency. */
+try {
+  if (localStorage.getItem("scCurrencyChosen") === "1"){
+    var savedCur = localStorage.getItem("scCurrency");
+    if (CURRENCIES[savedCur]) SC_CURRENCY = savedCur;
+  } else {
+    try { localStorage.removeItem("scCurrency"); } catch (e) {}
+  }
+} catch (e) {}
 if (!CURRENCIES[SC_CURRENCY]) SC_CURRENCY = "USD";
 function fmtPKR(n){ return "Rs " + Math.round(Number(n) || 0).toLocaleString("en-PK"); }
 function fmt(n){
@@ -1049,7 +1064,7 @@ function renderRentPrices(){
 function setCurrency(code){
   if (!CURRENCIES[code]) return;
   SC_CURRENCY = code;
-  try { localStorage.setItem("scCurrency", code); } catch (e) {}
+  try { localStorage.setItem("scCurrency", code); localStorage.setItem("scCurrencyChosen", "1"); } catch (e) {}
   var a = document.getElementById("currencySelect"); if (a) a.value = code;
   var b = document.getElementById("fCurrency"); if (b) b.value = code;
   renderGrid(); renderOtp(); renderRentPrices();
@@ -1072,10 +1087,17 @@ function toggleFav(name){
 
 /* ---------------- Theme: manual light/dark, persisted ---------------- */
 function applyTheme(mode){
-  if (mode === "dark" || mode === "light") document.documentElement.setAttribute("data-theme", mode);
-  else document.documentElement.removeAttribute("data-theme");
+  /* No saved theme means follow the device: dark on a dark system, light
+     otherwise. The attribute is always set explicitly, so the button label
+     always matches the theme on screen, including on first load. */
+  var effective = mode;
+  if (effective !== "dark" && effective !== "light"){
+    try { effective = (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) ? "dark" : "light"; }
+    catch (e) { effective = "dark"; }
+  }
+  document.documentElement.setAttribute("data-theme", effective);
   var btn = document.getElementById("themeBtn");
-  if (btn) btn.textContent = (document.documentElement.getAttribute("data-theme") === "dark") ? "Light" : "Dark";
+  if (btn) btn.textContent = effective === "dark" ? "Light" : "Dark";
 }
 var SC_THEME = "";
 try { SC_THEME = localStorage.getItem("scTheme") || ""; } catch (e) {}
@@ -1235,7 +1257,7 @@ function renderGrid(){
     var btn = document.createElement("button");
     btn.type = "button"; btn.className = "order-btn"; btn.textContent = "Order now";
     btn.addEventListener("click", function(){
-      openOrder({ title: p.name, detail: p.duration + " · " + p.delivery + " · " + p.warranty, price: p.price });
+      openOrder({ title: p.name, detail: p.duration + " · " + p.delivery + " · " + p.warranty, price: p.price, cat: p.cat });
     });
     card.appendChild(btn);
     grid.appendChild(card);
@@ -1477,6 +1499,10 @@ function openOrder(order){
   }
   order.id = newOrderId();
   currentOrder = order;
+  var profileField = document.getElementById("profileField");
+  var profileEl = document.getElementById("fProfile");
+  if (profileEl) profileEl.value = "";
+  if (profileField) profileField.style.display = (order.cat === "Social Media Growth") ? "" : "none";
   var emailEl = document.getElementById("fEmail");
   if (visitorEmail && emailEl && !emailEl.value.trim()) emailEl.value = visitorEmail;
   var codeEl = document.getElementById("fCode");
@@ -1532,6 +1558,8 @@ function buildMessage(){
   lines.push("*Name:* " + name);
   lines.push("*WhatsApp:* " + phone);
   if (email) lines.push("*Email:* " + email);
+  var profile = document.getElementById("fProfile").value.trim();
+  if (currentOrder && currentOrder.cat === "Social Media Growth" && profile) lines.push("*Profile:* " + profile);
   if (window.SCAuth && window.SCAuth.userDoc && window.SCAuth.userDoc.referralCode) lines.push("*My referral code:* " + window.SCAuth.userDoc.referralCode);
   if (note) lines.push("*Note:* " + note);
   lines.push("");
@@ -1572,6 +1600,8 @@ document.getElementById("orderForm").addEventListener("submit", function(e){
     whatsappDest: selectedWaLabel(),
     status: "pending"
   };
+  var profileVal = document.getElementById("fProfile").value.trim();
+  if (currentOrder.cat === "Social Media Growth" && profileVal) rec.profileLink = profileVal;
   var url = "https://wa.me/" + selectedWaNumber() + "?text=" + encodeURIComponent(buildMessage());
   /* Open WhatsApp chat FIRST, in the same tap, before any network wait.
      The old code waited for the Firestore save first, so the browser
@@ -2104,14 +2134,23 @@ document.getElementById("shareReferBtn").addEventListener("click", function(){
 document.getElementById("createCouponBtn").addEventListener("click", async function(){
   var code = (document.getElementById("couponCode").value || "").trim().toUpperCase();
   var pct = parseInt(document.getElementById("couponPct").value, 10);
-  var expiry = document.getElementById("couponExpiry").value || "";
+  var expiry = (document.getElementById("couponExpiry").value || "").trim();
   var onePer = document.getElementById("couponOnePer").checked;
   if (!code || !pct || pct < 1 || pct > 90){ scToast("Enter a coupon code and a % off between 1 and 90."); return; }
+  if (expiry){
+    var parts = expiry.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+    var d = parts ? new Date(parts[1], parts[2] - 1, parts[3]) : null;
+    var real = !!d && !isNaN(d.getTime()) &&
+      d.getFullYear() === parseInt(parts[1], 10) &&
+      d.getMonth() + 1 === parseInt(parts[2], 10) &&
+      d.getDate() === parseInt(parts[3], 10);
+    if (!real){ scToast("Enter the expiry as YYYY-MM-DD, e.g. 2026-12-31."); return; }
+  }
   if (!SCAuth._fb){ scToast("Firebase is not connected yet."); return; }
   try {
     await SCAuth._fb.setDoc(SCAuth._fb.doc(SCAuth._fb.db, "coupons", code), { code: code, pct: pct, expiry: expiry || null, onePerCustomer: !!onePer, active: true, createdAt: SCAuth._fb.serverTimestamp() });
     scToast("Coupon " + code + " created, " + pct + "% off.");
-    document.getElementById("couponCode").value = ""; document.getElementById("couponPct").value = "";
+    document.getElementById("couponCode").value = ""; document.getElementById("couponPct").value = ""; document.getElementById("couponExpiry").value = "";
   } catch (e) { scToast("Could not create that coupon, please try again."); }
 });
 </script>
