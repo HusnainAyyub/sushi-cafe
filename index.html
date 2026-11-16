@@ -527,7 +527,7 @@ html[data-theme="dark"] .badge.failed{color:#fca5a5;background:#450a0a}
   <div class="wrap">
     <div class="sec-head">
       <h2>OTP numbers, served private</h2>
-      <p>Premium international numbers, 8 apps, 7 countries. OTPs from Rs 190. The number is yours alone for the session, nobody else sees your code. If no code arrives in 15 minutes, you pay nothing.</p>
+      <p>Premium international numbers, 8 apps, 7 countries. OTPs from Rs 90. The number is yours alone for the session, nobody else sees your code. If no code arrives in 15 minutes, you pay nothing.</p>
     </div>
 
     <div class="otp-panel">
@@ -816,7 +816,7 @@ html[data-theme="dark"] .badge.failed{color:#fca5a5;background:#450a0a}
     <div class="foot-bottom">
       <span>© 2026 Sushi Cafe. All rights reserved.</span>
       <span>Prices are converted from PKR at approx rates. The final total is confirmed on WhatsApp in PKR / USDT.</span>
-      <span>Prices checked 16 Nov 2026 from GetOTP, DigiToolsHub and SMMVIX. OTP and rental prices move with live stock.</span>
+      <span>Prices checked 16 Nov 2026 from GetOTP, DigiToolsHub and SMMVIX. OTP and rental prices move with live stock. Commission: 30 percent up to Rs 2,000, 20 percent above, minimum Rs 50.</span>
     </div>
   </div>
 </footer>
@@ -1021,7 +1021,7 @@ function selectedWaLabel(){
 }
 
 /* ---------------- Currency: base prices are PKR, default display USD ---------------- */
-/* Rental final prices: USA 1745/4840/19355, Canada 1530/4235/16935, UK 2420/7260/29030. Bases checked 16 Nov 2026 on GetOTP, commission is the tiered rate above. */
+/* Rental final prices: USA 1745/4840/19355, Canada 1530/4235/16935, UK 2420/7260/29030. Bases checked 16 Nov 2026 on GetOTP, commission is 30 percent up to Rs 2,000, 20 percent above, minimum Rs 50. */
 /* Rates per 1 USD, dated 16 Nov 2026, approximate. Final totals are confirmed on WhatsApp in PKR / USDT. */
 var CURRENCIES = {
   USD: { symbol: "$", rate: 1 }, PKR: { symbol: "Rs ", rate: 281 }, SAR: { symbol: "SR ", rate: 3.75 },
@@ -1104,7 +1104,7 @@ var PRODUCTS = [
   {name:"Gemini Plus", cat:"AI Tools", initials:"G", color:"#1a73e8", desc:"Gemini Plus with Google AI features, activated on your own Google account.", duration:"12 Months", price:845, base:650, warranty:"Full Warranty", delivery:"Your account", hot:false}, // base Rs 650, DigiToolsHub
   {name:"Gemini Education", cat:"AI Tools", initials:"G", color:"#1a73e8", desc:"Gemini Education plan for students, activated on your own Google account.", duration:"1 Year", price:715, base:550, warranty:"Full Warranty", delivery:"Your account", hot:false}, // base Rs 550, DigiToolsHub
   {name:"Gemini Pro plus YouTube Premium bundle", cat:"AI Tools", initials:"G", color:"#1a73e8", desc:"Gemini Pro for 2 years bundled with YouTube Premium, on your own Google account.", duration:"2 Years", price:2340, base:1800, warranty:"Full Warranty", delivery:"Your account", hot:false}, // base Rs 1800, DigiToolsHub
-  {name:"Perplexity Pro, 1 Month", cat:"AI Tools", initials:"P", color:"#1f6f6b", desc:"AI search with Pro queries, file uploads and model switching.", duration:"1 Month", price:550, base:400, warranty:"Full Warranty", delivery:"Your account", hot:false}, // base Rs 400, DigiToolsHub
+  {name:"Perplexity Pro, 1 Month", cat:"AI Tools", initials:"P", color:"#1f6f6b", desc:"AI search with Pro queries, file uploads and model switching.", duration:"1 Month", price:520, base:400, warranty:"Full Warranty", delivery:"Your account", hot:false}, // base Rs 400, DigiToolsHub
   {name:"Perplexity Pro, 3 Months", cat:"AI Tools", initials:"P", color:"#1f6f6b", desc:"AI search with Pro queries, file uploads and model switching.", duration:"3 Months", price:1040, base:800, warranty:"Full Warranty", delivery:"Your account", hot:false}, // base Rs 800, DigiToolsHub
   {name:"Perplexity Pro, 1 Year", cat:"AI Tools", initials:"P", color:"#1f6f6b", desc:"AI search with Pro queries, file uploads and model switching.", duration:"1 Year", price:1300, base:1000, warranty:"Full Warranty", delivery:"Your account", hot:false}, // base Rs 1000, DigiToolsHub
   {name:"Midjourney", cat:"AI Tools", initials:"M", color:"#111111", desc:"AI image generation with Midjourney, activated on your own account.", duration:"1 Month", price:1950, base:1500, warranty:"Full Warranty", delivery:"Your account", hot:false}, // base Rs 1500, DigiToolsHub
@@ -1119,20 +1119,20 @@ var PRODUCTS = [
   {name:"Opus", cat:"AI Tools", initials:"O", color:"#111111", desc:"Opus AI access, activated on your own account.", duration:"1 Month", price:4200, base:3500, warranty:"Full Warranty", delivery:"Your account", hot:false}, // base Rs 3500, DigiToolsHub
   {name:"Replit", cat:"AI Tools", initials:"R", color:"#111111", desc:"Replit coding workspace, activated on your own account.", duration:"1 Month", price:2600, base:2000, warranty:"Full Warranty", delivery:"Your account", hot:false}, // base Rs 2000, DigiToolsHub
   {name:"Antigravity", cat:"AI Tools", initials:"A", color:"#111111", desc:"Antigravity AI coding platform, activated on your own account.", duration:"1 Month", price:3000, base:2500, warranty:"Full Warranty", delivery:"Your account", hot:false}, // base Rs 2500, DigiToolsHub
-  {name:"Netflix ULTRA screen", cat:"Streaming", initials:"N", color:"#b00610", desc:"Your own private profile on a 4K UHD Netflix account, PIN-locked.", duration:"1 Month", price:649, base:499, warranty:"Full Warranty", delivery:"Shared profile", hot:true}, // base Rs 499, SMMVIX
+  {name:"Netflix ULTRA screen", cat:"Streaming", initials:"N", color:"#b00610", desc:"Your own private profile on a 4K UHD Netflix account, PIN-locked.", duration:"1 Month", price:650, base:499, warranty:"Full Warranty", delivery:"Shared profile", hot:true}, // base Rs 499, SMMVIX
   {name:"Netflix 4K Admin", cat:"Streaming", initials:"N", color:"#b00610", desc:"Netflix 4K admin account, full control of the account.", duration:"1 Month", price:4200, base:3500, warranty:"Full Warranty", delivery:"Account provided", hot:false}, // base Rs 3500, DigiToolsHub
   {name:"Spotify Premium Redeem, 3 Months", cat:"Streaming", initials:"S", color:"#1db954", desc:"Spotify Premium by redeem code, ad-free music and offline downloads on your own account.", duration:"3 Months", price:1040, base:800, warranty:"Full Warranty", delivery:"Your account", hot:false}, // base Rs 800, DigiToolsHub
   {name:"Spotify Premium, No Warranty, 3 Months", cat:"Streaming", initials:"S", color:"#1db954", desc:"Spotify Premium for 3 months, no warranty on this plan.", duration:"3 Months", price:2600, base:2000, warranty:"No warranty", delivery:"Account provided", hot:false}, // base Rs 2000, DigiToolsHub
-  {name:"Amazon Prime", cat:"Streaming", initials:"A", color:"#00a8e1", desc:"Amazon Prime Video and Prime benefits, account provided.", duration:"duration not stated", price:549, base:399, warranty:"Full Warranty", delivery:"Account provided", hot:false}, // base Rs 399, DigiToolsHub
-  {name:"YouTube Premium", cat:"Streaming", initials:"Y", color:"#cc0000", desc:"No ads, background play and YouTube Music included, on your own Google account.", duration:"duration not stated", price:500, base:350, warranty:"Full Warranty", delivery:"Your account", hot:false}, // base Rs 350, DigiToolsHub
+  {name:"Amazon Prime", cat:"Streaming", initials:"A", color:"#00a8e1", desc:"Amazon Prime Video and Prime benefits, account provided.", duration:"duration not stated", price:520, base:399, warranty:"Full Warranty", delivery:"Account provided", hot:false}, // base Rs 399, DigiToolsHub
+  {name:"YouTube Premium", cat:"Streaming", initials:"Y", color:"#cc0000", desc:"No ads, background play and YouTube Music included, on your own Google account.", duration:"duration not stated", price:455, base:350, warranty:"Full Warranty", delivery:"Your account", hot:false}, // base Rs 350, DigiToolsHub
   {name:"HBO Max", cat:"Streaming", initials:"H", color:"#4b2bb5", desc:"HBO originals, Warner Bros films and Max exclusives, full HD streaming on your own profile.", duration:"30 days", price:3000, base:2500, warranty:"Full Warranty", delivery:"Shared profile", hot:false}, // base Rs 2500, DigiToolsHub
   {name:"IPTV Opplex", cat:"Streaming", initials:"TV", color:"#37474f", desc:"IPTV with live channels, movies and sports in HD, account provided.", duration:"1 Month", price:2340, base:1799, warranty:"Full Warranty", delivery:"Account provided", hot:false}, // base Rs 1799, DigiToolsHub
   {name:"Chaupal", cat:"Streaming", initials:"C", color:"#37474f", desc:"Chaupal Punjabi streaming, movies and shows, account provided.", duration:"1 Month", price:2340, base:1799, warranty:"Full Warranty", delivery:"Account provided", hot:false}, // base Rs 1799, DigiToolsHub
   {name:"ALT Balaji", cat:"Streaming", initials:"A", color:"#37474f", desc:"ALT Balaji streaming, shows and movies, account provided.", duration:"duration not stated", price:1885, base:1450, warranty:"Full Warranty", delivery:"Account provided", hot:false}, // base Rs 1450, DigiToolsHub
-  {name:"Canva Pro, 1 Month", cat:"Design & Creative", initials:"C", color:"#7d2ae8", desc:"Premium templates, background remover, brand kit and stock assets on your own Canva account.", duration:"1 Month", price:270, base:120, warranty:"Full Warranty", delivery:"Your account", hot:true}, // base Rs 120, SMMVIX
+  {name:"Canva Pro, 1 Month", cat:"Design & Creative", initials:"C", color:"#7d2ae8", desc:"Premium templates, background remover, brand kit and stock assets on your own Canva account.", duration:"1 Month", price:170, base:120, warranty:"Full Warranty", delivery:"Your account", hot:true}, // base Rs 120, SMMVIX
   {name:"Canva Pro, 1 Year", cat:"Design & Creative", initials:"C", color:"#7d2ae8", desc:"Premium templates, background remover, brand kit and stock assets on your own Canva account.", duration:"1 Year", price:1950, base:1499, warranty:"Full Warranty", delivery:"Your account", hot:false}, // base Rs 1499, DigiToolsHub
-  {name:"CapCut Pro, 1 Month", cat:"Design & Creative", initials:"C", color:"#111111", desc:"All Pro effects, transitions, auto-captions and cloud storage on your own CapCut account.", duration:"1 Month", price:949, base:730, warranty:"Full Warranty", delivery:"Your account", hot:true}, // base Rs 730, SMMVIX
-  {name:"CapCut Pro, 7 Days", cat:"Design & Creative", initials:"C", color:"#111111", desc:"CapCut Pro for 7 days, all Pro effects and auto-captions on your own account.", duration:"7 Days", price:400, base:250, warranty:"Full Warranty", delivery:"Your account", hot:false}, // base Rs 250, DigiToolsHub
+  {name:"CapCut Pro, 1 Month", cat:"Design & Creative", initials:"C", color:"#111111", desc:"All Pro effects, transitions, auto-captions and cloud storage on your own CapCut account.", duration:"1 Month", price:950, base:730, warranty:"Full Warranty", delivery:"Your account", hot:true}, // base Rs 730, SMMVIX
+  {name:"CapCut Pro, 7 Days", cat:"Design & Creative", initials:"C", color:"#111111", desc:"CapCut Pro for 7 days, all Pro effects and auto-captions on your own account.", duration:"7 Days", price:325, base:250, warranty:"Full Warranty", delivery:"Your account", hot:false}, // base Rs 250, DigiToolsHub
   {name:"CapCut Pro Team, 1 Month", cat:"Design & Creative", initials:"C", color:"#111111", desc:"CapCut Pro Team plan for 1 month, on your own CapCut account.", duration:"1 Month", price:1560, base:1200, warranty:"Full Warranty", delivery:"Your account", hot:false}, // base Rs 1200, DigiToolsHub
   {name:"Figma Professional Education, 2 Years", cat:"Design & Creative", initials:"F", color:"#1e1e1e", desc:"Figma Professional education plan with Dev Mode, unlimited projects and shared libraries.", duration:"2 Years", price:3600, base:3000, warranty:"Full Warranty", delivery:"Your account", hot:false}, // base Rs 3000, DigiToolsHub
   {name:"Figma Professional Private, 2 Years", cat:"Design & Creative", initials:"F", color:"#1e1e1e", desc:"Figma Professional private plan with Dev Mode, unlimited projects and shared libraries.", duration:"2 Years", price:4200, base:3500, warranty:"Full Warranty", delivery:"Your account", hot:false}, // base Rs 3500, DigiToolsHub
@@ -1145,10 +1145,10 @@ var PRODUCTS = [
   {name:"Panda VPN, 2 Years, 20 Devices", cat:"VPN & Privacy", initials:"P", color:"#4685ff", desc:"Panda VPN for 2 years on up to 20 devices, account provided.", duration:"2 Years", price:7800, base:6498, warranty:"Full Warranty", delivery:"Account provided", hot:false}, // base Rs 6498, DigiToolsHub
   {name:"TunnelBear", cat:"VPN & Privacy", initials:"T", color:"#4685ff", desc:"TunnelBear VPN, simple and private, account provided.", duration:"duration not stated", price:2340, base:1799, warranty:"Full Warranty", delivery:"Account provided", hot:false}, // base Rs 1799, DigiToolsHub
   {name:"PIA VPN", cat:"VPN & Privacy", initials:"P", color:"#4685ff", desc:"Private Internet Access VPN, account provided.", duration:"duration not stated", price:1690, base:1300, warranty:"Full Warranty", delivery:"Account provided", hot:false}, // base Rs 1300, DigiToolsHub
-  {name:"TikTok ID, USA", cat:"Social & Accounts", initials:"T", color:"#010101", desc:"Fresh USA region TikTok account, full access, ready to post. Details handed over in the chat.", duration:"One-time", price:470, base:320, warranty:"Full Warranty", delivery:"Account provided", hot:true}, // base Rs 320, DigiToolsHub
-  {name:"TikTok ID, UK", cat:"Social & Accounts", initials:"T", color:"#010101", desc:"Fresh UK region TikTok account, full access, ready to post. Details handed over in the chat.", duration:"One-time", price:470, base:320, warranty:"Full Warranty", delivery:"Account provided", hot:false}, // base Rs 320, DigiToolsHub
-  {name:"TikTok ID, Germany", cat:"Social & Accounts", initials:"T", color:"#010101", desc:"Fresh Germany region TikTok account, full access, ready to post. Details handed over in the chat.", duration:"One-time", price:470, base:320, warranty:"Full Warranty", delivery:"Account provided", hot:false}, // base Rs 320, DigiToolsHub
-  {name:"TikTok ID, France", cat:"Social & Accounts", initials:"T", color:"#010101", desc:"Fresh France region TikTok account, full access, ready to post. Details handed over in the chat.", duration:"One-time", price:470, base:320, warranty:"Full Warranty", delivery:"Account provided", hot:false}, // base Rs 320, DigiToolsHub
+  {name:"TikTok ID, USA", cat:"Social & Accounts", initials:"T", color:"#010101", desc:"Fresh USA region TikTok account, full access, ready to post. Details handed over in the chat.", duration:"One-time", price:415, base:320, warranty:"Full Warranty", delivery:"Account provided", hot:true}, // base Rs 320, DigiToolsHub
+  {name:"TikTok ID, UK", cat:"Social & Accounts", initials:"T", color:"#010101", desc:"Fresh UK region TikTok account, full access, ready to post. Details handed over in the chat.", duration:"One-time", price:415, base:320, warranty:"Full Warranty", delivery:"Account provided", hot:false}, // base Rs 320, DigiToolsHub
+  {name:"TikTok ID, Germany", cat:"Social & Accounts", initials:"T", color:"#010101", desc:"Fresh Germany region TikTok account, full access, ready to post. Details handed over in the chat.", duration:"One-time", price:415, base:320, warranty:"Full Warranty", delivery:"Account provided", hot:false}, // base Rs 320, DigiToolsHub
+  {name:"TikTok ID, France", cat:"Social & Accounts", initials:"T", color:"#010101", desc:"Fresh France region TikTok account, full access, ready to post. Details handed over in the chat.", duration:"One-time", price:415, base:320, warranty:"Full Warranty", delivery:"Account provided", hot:false}, // base Rs 320, DigiToolsHub
 ];
 
 /* ---------------- Render catalog ---------------- */
@@ -1240,33 +1240,33 @@ renderRentPrices();
 
 /* ---------------- OTP builder ---------------- */
 /* OTP pricing, PKR, final selling price only. Base prices checked live 16 Nov 2026 on GetOTP.
-   Commission is the agreed tiered rate: base under Rs 500 plus Rs 150, base Rs 500 to 2,000 plus 30 percent,
-   base over Rs 2,000 plus 20 percent, rounded to the nearest Rs 5. 24 OTP options, 8 apps, 7 countries. */
+   Commission: 30 percent on a base up to Rs 2,000, 20 percent above Rs 2,000, minimum Rs 50,
+   final price rounded to the nearest Rs 5. 24 OTP options, 8 apps, 7 countries. */
 var OTP_OPTIONS = [
   {name:"WhatsApp", country:"Pakistan", code:"+92", base:567, price:735}, // base Rs 567, GetOTP
-  {name:"Telegram", country:"Pakistan", code:"+92", base:211, price:360}, // base Rs 211, GetOTP
-  {name:"Google", country:"Pakistan", code:"+92", base:65, price:215}, // base Rs 65, GetOTP
-  {name:"TikTok", country:"Pakistan", code:"+92", base:71, price:220}, // base Rs 71, GetOTP
-  {name:"Instagram", country:"Pakistan", code:"+92", base:39, price:190}, // base Rs 39, GetOTP
-  {name:"Facebook", country:"Pakistan", code:"+92", base:70, price:220}, // base Rs 70, GetOTP
-  {name:"Discord", country:"Pakistan", code:"+92", base:71, price:220}, // base Rs 71, GetOTP
-  {name:"Amazon", country:"Pakistan", code:"+92", base:104, price:255}, // base Rs 104, GetOTP
+  {name:"Telegram", country:"Pakistan", code:"+92", base:211, price:275}, // base Rs 211, GetOTP
+  {name:"Google", country:"Pakistan", code:"+92", base:65, price:115}, // base Rs 65, GetOTP
+  {name:"TikTok", country:"Pakistan", code:"+92", base:71, price:120}, // base Rs 71, GetOTP
+  {name:"Instagram", country:"Pakistan", code:"+92", base:39, price:90}, // base Rs 39, GetOTP
+  {name:"Facebook", country:"Pakistan", code:"+92", base:70, price:120}, // base Rs 70, GetOTP
+  {name:"Discord", country:"Pakistan", code:"+92", base:71, price:120}, // base Rs 71, GetOTP
+  {name:"Amazon", country:"Pakistan", code:"+92", base:104, price:155}, // base Rs 104, GetOTP
   {name:"WhatsApp", country:"India", code:"+91", base:661, price:860}, // base Rs 661, GetOTP
-  {name:"Google", country:"India", code:"+91", base:97, price:245}, // base Rs 97, GetOTP
-  {name:"Amazon", country:"India", code:"+91", base:58, price:210}, // base Rs 58, GetOTP
+  {name:"Google", country:"India", code:"+91", base:97, price:145}, // base Rs 97, GetOTP
+  {name:"Amazon", country:"India", code:"+91", base:58, price:110}, // base Rs 58, GetOTP
   {name:"WhatsApp", country:"United States", code:"+1", base:726, price:945}, // base Rs 726, GetOTP
-  {name:"Google", country:"United States", code:"+1", base:146, price:295}, // base Rs 146, GetOTP
+  {name:"Google", country:"United States", code:"+1", base:146, price:195}, // base Rs 146, GetOTP
   {name:"WhatsApp", country:"United Kingdom", code:"+44", base:672, price:875}, // base Rs 672, GetOTP
-  {name:"Google", country:"United Kingdom", code:"+44", base:135, price:285}, // base Rs 135, GetOTP
+  {name:"Google", country:"United Kingdom", code:"+44", base:135, price:185}, // base Rs 135, GetOTP
   {name:"WhatsApp", country:"Canada", code:"+1", base:650, price:845}, // base Rs 650, GetOTP
-  {name:"Google", country:"Canada", code:"+1", base:95, price:245}, // base Rs 95, GetOTP
+  {name:"Google", country:"Canada", code:"+1", base:95, price:145}, // base Rs 95, GetOTP
   {name:"WhatsApp", country:"Germany", code:"+49", base:1888, price:2455}, // base Rs 1888, GetOTP
   {name:"Telegram", country:"Germany", code:"+49", base:1360, price:1770}, // base Rs 1360, GetOTP
-  {name:"Google", country:"Germany", code:"+49", base:303, price:455}, // base Rs 303, GetOTP
-  {name:"Amazon", country:"Germany", code:"+49", base:182, price:330}, // base Rs 182, GetOTP
-  {name:"TikTok", country:"Germany", code:"+49", base:76, price:225}, // base Rs 76, GetOTP
-  {name:"WhatsApp", country:"Indonesia", code:"+62", base:353, price:505}, // base Rs 353, GetOTP
-  {name:"Google", country:"Indonesia", code:"+62", base:58, price:210} // base Rs 58, GetOTP
+  {name:"Google", country:"Germany", code:"+49", base:303, price:395}, // base Rs 303, GetOTP
+  {name:"Amazon", country:"Germany", code:"+49", base:182, price:235}, // base Rs 182, GetOTP
+  {name:"TikTok", country:"Germany", code:"+49", base:76, price:125}, // base Rs 76, GetOTP
+  {name:"WhatsApp", country:"Indonesia", code:"+62", base:353, price:460}, // base Rs 353, GetOTP
+  {name:"Google", country:"Indonesia", code:"+62", base:58, price:110} // base Rs 58, GetOTP
 ];
 var selOtp = OTP_OPTIONS[0];
 
@@ -1281,9 +1281,9 @@ function buildChips(el, items, getLabel, isActive, onPick){
   });
 }
 function withCommission(cost){
-  if (cost < 500) return cost + 150;
-  if (cost <= 2000) return Math.round(cost * 1.3);
-  return Math.round(cost * 1.2);
+  var pct = cost <= 2000 ? 0.30 : 0.20;
+  var commission = Math.max(cost * pct, 50);
+  return Math.floor((cost + commission) / 5 + 0.5) * 5;
 }
 function otpPriceCalc(){ return selOtp.price; }
 function renderOtp(){
