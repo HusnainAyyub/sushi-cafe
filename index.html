@@ -1483,27 +1483,32 @@ function buildMessage(){
   var note = document.getElementById("fNote").value.trim();
   var info = discountInfo();
   var lines = [
-    "New Order, Sushi Cafe",
-    "Order ID: " + currentOrder.id,
-    "Item: " + currentOrder.title,
-    "Details: " + currentOrder.detail
+    "*New Order - Sushi Cafe*",
+    "",
+    "*Order ID:* " + currentOrder.id,
+    "*Item:* " + currentOrder.title,
+    "*Details:* " + currentOrder.detail,
+    "",
+    "*Payment*"
   ];
   if (info.applied){
-    lines.push("Original price: " + fmt(currentOrder.price) + " (" + fmtPKR(currentOrder.price) + ")");
-    lines.push("Discount code: " + info.code + " (" + info.pct + "% off)");
-    lines.push("Discount amount: - " + fmt(info.amount) + " (" + fmtPKR(info.amount) + ")");
-    lines.push("Final total: " + fmt(info.final) + " (" + fmtPKR(info.final) + ")");
+    lines.push("*Original price:* " + fmt(currentOrder.price) + " (" + fmtPKR(currentOrder.price) + ")");
+    lines.push("*Discount:* " + info.code + " -" + info.pct + "% (-" + fmt(info.amount) + " / -" + fmtPKR(info.amount) + ")");
+    lines.push("*Final total:* " + fmt(info.final) + " (" + fmtPKR(info.final) + ")");
   } else {
-    if (info.code) lines.push("Discount code entered: " + info.code + " (not applied)");
-    lines.push("Total: " + fmt(currentOrder.price) + " (" + fmtPKR(currentOrder.price) + ")");
+    if (info.code) lines.push("*Discount code entered:* " + info.code + " (not applied)");
+    lines.push("*Total:* " + fmt(currentOrder.price) + " (" + fmtPKR(currentOrder.price) + ")");
   }
-  if (window.SCAuth && window.SCAuth.userDoc && window.SCAuth.userDoc.referralCode) lines.push("My referral code: " + window.SCAuth.userDoc.referralCode);
-  lines.push("Name: " + name);
-  lines.push("My WhatsApp: " + phone);
-  if (email) lines.push("Email: " + email);
-  lines.push("Payment method: " + pay);
-  if (note) lines.push("Note: " + note);
-  lines.push("Please confirm my order and share the payment details.");
+  lines.push("*Payment method:* " + pay);
+  lines.push("");
+  lines.push("*Customer*");
+  if (window.SCAuth && window.SCAuth.userDoc && window.SCAuth.userDoc.referralCode) lines.push("*My referral code:* " + window.SCAuth.userDoc.referralCode);
+  lines.push("*Name:* " + name);
+  lines.push("*WhatsApp:* " + phone);
+  if (email) lines.push("*Email:* " + email);
+  if (note) lines.push("*Note:* " + note);
+  lines.push("");
+  lines.push("Please confirm my order and share the payment details. Thank you.");
   return lines.join("\n");
 }
 function validate(){
@@ -2066,7 +2071,7 @@ document.getElementById("copyReferBtn").addEventListener("click", function(){
 document.getElementById("shareReferBtn").addEventListener("click", function(){
   var code = (SCAuth.userDoc && SCAuth.userDoc.referralCode) || "";
   if (!code) return;
-  var msg = "Join Sushi Cafe with my code " + code + " and get 5% off your first order: https://sushi-cafe-chi.vercel.app/?ref=" + code;
+  var msg = "Join Sushi Cafe and get 5% off your first order with my code *" + code + "*: https://sushi-cafe-chi.vercel.app/?ref=" + code;
   window.open("https://wa.me/?text=" + encodeURIComponent(msg), "_blank");
 });
 document.getElementById("createCouponBtn").addEventListener("click", async function(){
