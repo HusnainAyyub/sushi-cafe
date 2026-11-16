@@ -423,7 +423,7 @@ html[data-theme="dark"] .badge.failed{color:#fca5a5;background:#450a0a}
   <div class="wrap">
     <span class="hero-badge">Subscriptions · AI Tools · OTP Numbers</span>
     <h1>Every subscription you need. <span class="red">Served fresh.</span></h1>
-    <p>ChatGPT Plus, Netflix, Spotify, VPNs, design tools and private OTP numbers from Germany, the USA, Canada and the UK, ordered in under a minute on WhatsApp, activated by a real person.</p>
+    <p>ChatGPT Plus, Netflix, Spotify, VPNs, design tools and private OTP numbers from Pakistan, India, the USA, Canada, the UK, Germany and Indonesia, ordered in under a minute on WhatsApp, activated by a real person.</p>
     <div class="hero-ctas">
       <a class="btn btn-dark" href="#catalog">Browse the menu</a>
       <a class="btn btn-wa" href="https://wa.me/966593140752?text=Hi%20Sushi%20Cafe%2C%20I%20want%20to%20place%20an%20order." target="_blank" rel="noopener">Order on WhatsApp</a>
@@ -454,8 +454,8 @@ html[data-theme="dark"] .badge.failed{color:#fca5a5;background:#450a0a}
 <div class="stats">
   <div class="wrap stats-in">
     <div class="stat"><b>56</b><span>Subscriptions and tools listed</span></div>
-    <div class="stat"><b>4</b><span>Countries for OTP and rental numbers</span></div>
-    <div class="stat"><b>2</b><span>Premium OTP numbers, Germany only</span></div>
+    <div class="stat"><b>7</b><span>Countries for OTP numbers</span></div>
+    <div class="stat"><b>24</b><span>OTP numbers, 8 apps, 7 countries</span></div>
     <div class="stat"><b>25-day</b><span>Replacement on monthly plans</span></div>
   </div>
 </div>
@@ -527,14 +527,14 @@ html[data-theme="dark"] .badge.failed{color:#fca5a5;background:#450a0a}
   <div class="wrap">
     <div class="sec-head">
       <h2>OTP numbers, served private</h2>
-      <p>Premium international numbers, Germany only. OTPs from Rs 1,770. The number is yours alone for the session, nobody else sees your code. If no code arrives in 15 minutes, you pay nothing.</p>
+      <p>Premium international numbers, 8 apps, 7 countries. OTPs from Rs 190. The number is yours alone for the session, nobody else sees your code. If no code arrives in 15 minutes, you pay nothing.</p>
     </div>
 
     <div class="otp-panel">
       <div class="otp-left">
         <h3>Build your OTP order</h3>
-        <p>Pick one of the two premium German numbers below. Your private number is assigned the moment your order is confirmed on WhatsApp.</p>
-        <div class="field-label">OTP, Germany only</div>
+        <p>Pick an app and a country below. 24 OTP numbers listed, your private number is assigned the moment your order is confirmed on WhatsApp.</p>
+        <div class="field-label">OTP, app and country</div>
         <div class="chip-grid" id="otpChips"></div>
         <p style="font-size:14px;color:var(--text-2);margin-top:18px;line-height:1.55">Need another app or country? <a href="https://wa.me/966593140752?text=Hi%20Sushi%20Cafe%2C%20I%20need%20an%20OTP%20number%20for%20an%20app%2Fcountry%20not%20listed." target="_blank" rel="noopener">Ask on WhatsApp</a> and we'll quote it on the spot.</p>
       </div>
@@ -1241,10 +1241,32 @@ renderRentPrices();
 /* ---------------- OTP builder ---------------- */
 /* OTP pricing, PKR, final selling price only. Base prices checked live 16 Nov 2026 on GetOTP.
    Commission is the agreed tiered rate: base under Rs 500 plus Rs 150, base Rs 500 to 2,000 plus 30 percent,
-   base over Rs 2,000 plus 20 percent, rounded to the nearest Rs 5. Only the two most expensive OTPs are listed. */
+   base over Rs 2,000 plus 20 percent, rounded to the nearest Rs 5. 24 OTP options, 8 apps, 7 countries. */
 var OTP_OPTIONS = [
+  {name:"WhatsApp", country:"Pakistan", code:"+92", base:567, price:735}, // base Rs 567, GetOTP
+  {name:"Telegram", country:"Pakistan", code:"+92", base:211, price:360}, // base Rs 211, GetOTP
+  {name:"Google", country:"Pakistan", code:"+92", base:65, price:215}, // base Rs 65, GetOTP
+  {name:"TikTok", country:"Pakistan", code:"+92", base:71, price:220}, // base Rs 71, GetOTP
+  {name:"Instagram", country:"Pakistan", code:"+92", base:39, price:190}, // base Rs 39, GetOTP
+  {name:"Facebook", country:"Pakistan", code:"+92", base:70, price:220}, // base Rs 70, GetOTP
+  {name:"Discord", country:"Pakistan", code:"+92", base:71, price:220}, // base Rs 71, GetOTP
+  {name:"Amazon", country:"Pakistan", code:"+92", base:104, price:255}, // base Rs 104, GetOTP
+  {name:"WhatsApp", country:"India", code:"+91", base:661, price:860}, // base Rs 661, GetOTP
+  {name:"Google", country:"India", code:"+91", base:97, price:245}, // base Rs 97, GetOTP
+  {name:"Amazon", country:"India", code:"+91", base:58, price:210}, // base Rs 58, GetOTP
+  {name:"WhatsApp", country:"United States", code:"+1", base:726, price:945}, // base Rs 726, GetOTP
+  {name:"Google", country:"United States", code:"+1", base:146, price:295}, // base Rs 146, GetOTP
+  {name:"WhatsApp", country:"United Kingdom", code:"+44", base:672, price:875}, // base Rs 672, GetOTP
+  {name:"Google", country:"United Kingdom", code:"+44", base:135, price:285}, // base Rs 135, GetOTP
+  {name:"WhatsApp", country:"Canada", code:"+1", base:650, price:845}, // base Rs 650, GetOTP
+  {name:"Google", country:"Canada", code:"+1", base:95, price:245}, // base Rs 95, GetOTP
   {name:"WhatsApp", country:"Germany", code:"+49", base:1888, price:2455}, // base Rs 1888, GetOTP
-  {name:"Telegram", country:"Germany", code:"+49", base:1360, price:1770}  // base Rs 1360, GetOTP
+  {name:"Telegram", country:"Germany", code:"+49", base:1360, price:1770}, // base Rs 1360, GetOTP
+  {name:"Google", country:"Germany", code:"+49", base:303, price:455}, // base Rs 303, GetOTP
+  {name:"Amazon", country:"Germany", code:"+49", base:182, price:330}, // base Rs 182, GetOTP
+  {name:"TikTok", country:"Germany", code:"+49", base:76, price:225}, // base Rs 76, GetOTP
+  {name:"WhatsApp", country:"Indonesia", code:"+62", base:353, price:505}, // base Rs 353, GetOTP
+  {name:"Google", country:"Indonesia", code:"+62", base:58, price:210} // base Rs 58, GetOTP
 ];
 var selOtp = OTP_OPTIONS[0];
 
